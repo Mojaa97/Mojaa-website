@@ -45,7 +45,7 @@ export default function Home({ allPostsData }) {
     <>
       <Head>
         <title>Mayank Om Jain & Associates | Chartered Accountants</title>
-        <meta name="description" content="Mayank Om Jain & Associates — Chartered Accountants based in Raipur, India. Startup advisory, Virtual CFO, Tax, GST, FEMA/NRI. Strategic financial partner for founders, HNIs, and growing businesses." />
+        <meta name="description" content="Mayank Om Jain & Associates — Chartered Accountants, India. Startup advisory, Virtual CFO, Tax, GST, FEMA/NRI. Strategic financial partner for founders, HNIs, and growing businesses." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -57,7 +57,7 @@ export default function Home({ allPostsData }) {
         <div className="hero-grid-bg" />
         <div className="hero-glow" />
         <div className="hero-content">
-          <div className="hero-eyebrow">Chartered Accountants · Raipur, India</div>
+          <div className="hero-eyebrow">Chartered Accountants · India</div>
           <h1>Not Just Compliance.<br /><em>Strategic Financial</em><br />Partnership.</h1>
           <p className="hero-desc">We work with startup founders, HNIs, NRIs, and growing businesses — building the financial foundation that enables confident decisions, clean compliance, and investment-ready growth.</p>
           <div className="hero-actions">
@@ -124,7 +124,7 @@ export default function Home({ allPostsData }) {
           <div className="team-card fade-up">
             <Image src="/mayank.jpeg" alt="CA Mayank Jain" width={600} height={340} className="team-photo" style={{objectPosition:'top center'}} />
             <div className="team-info">
-              <div className="team-tag">Founder & Proprietor</div>
+              <div className="team-tag">Founder</div>
               <div className="team-name">CA Mayank Jain</div>
               <div className="team-title">Chartered Accountant · ICAI, November 2022</div>
               <p className="team-bio">Chartered Accountant with 7+ years of experience spanning financial analysis, due diligence, startup advisory, and Virtual CFO-style engagements across 13+ sectors. Also serves as a consultant at Alchemy Business Intelligence & Insights, bringing institutional-grade financial thinking to growing businesses.</p>
@@ -217,7 +217,7 @@ export default function Home({ allPostsData }) {
             </div>
             <div className="contact-item">
               <div className="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-              <div><div className="contact-label">Location</div><div className="contact-value">Raipur, Chhattisgarh<br />India</div></div>
+              <div><div className="contact-label">Location</div><div className="contact-value">Chhattisgarh, India</div></div>
             </div>
             <div className="contact-item">
               <div className="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
