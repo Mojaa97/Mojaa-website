@@ -122,7 +122,7 @@ export default function Home({ allPostsData }) {
         <div className="team-grid">
           {/* Mayank */}
           <div className="team-card fade-up">
-            <Image src="/mayank.jpeg" alt="CA Mayank Jain" width={600} height={340} className="team-photo" style={{objectPosition:'top center'}} />
+            <Image src="/mayank.jpeg" alt="CA Mayank Jain" width={600} height={340} className="team-photo" />
             <div className="team-info">
               <div className="team-tag">Founder</div>
               <div className="team-name">CA Mayank Jain</div>
@@ -137,7 +137,7 @@ export default function Home({ allPostsData }) {
           </div>
           {/* Vivek */}
           <div className="team-card fade-up">
-            <Image src="/vivek.jpeg" alt="CA Vivek Jain" width={600} height={340} className="team-photo" style={{objectPosition:'top center'}} />
+            <Image src="/vivek.jpeg" alt="CA Vivek Jain" width={600} height={340} className="team-photo" />
             <div className="team-info">
               <div className="team-tag">Associate</div>
               <div className="team-name">CA Vivek Jain</div>
