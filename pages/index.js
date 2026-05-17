@@ -225,15 +225,18 @@ export default function Home({ allPostsData }) {
             </div>
           </div>
           <div>
-            <form className="contact-form" onSubmit={e => { e.preventDefault(); const b = e.target.querySelector('.btn-submit'); b.textContent='Message Sent ✓'; b.style.background='#2d9087'; setTimeout(()=>{b.textContent='Send Message';b.style.background=''},3000); }}>
+            <form className="contact-form" action="https://formsubmit.co/mayank@mojaa.in" method="POST">
+              <input type="hidden" name="_subject" value="New Inquiry - MOJAA Website" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_next" value="https://www.mojaa.in" />
               <div className="form-row">
-                <div className="form-group"><label>Full Name</label><input type="text" placeholder="Your name" required /></div>
-                <div className="form-group"><label>Mobile Number</label><input type="tel" placeholder="+91 XXXXX XXXXX" required /></div>
+                <div className="form-group"><label>Full Name</label><input type="text" name="name" placeholder="Your name" required /></div>
+                <div className="form-group"><label>Mobile Number</label><input type="tel" name="mobile" placeholder="+91 XXXXX XXXXX" required /></div>
               </div>
-              <div className="form-group"><label>Email Address</label><input type="email" placeholder="you@company.com" required /></div>
+              <div className="form-group"><label>Email Address</label><input type="email" name="email" placeholder="you@company.com" required /></div>
               <div className="form-group">
                 <label>I Need Help With</label>
-                <select required defaultValue="">
+                <select name="service" required defaultValue="">
                   <option value="" disabled>Select a service area</option>
                   <option>Startup Advisory & Incorporation</option>
                   <option>Virtual CFO Services</option>
@@ -247,7 +250,7 @@ export default function Home({ allPostsData }) {
                   <option>Other — I will explain below</option>
                 </select>
               </div>
-              <div className="form-group"><label>Brief Description (optional)</label><textarea placeholder="Tell us a bit about your requirement..."/></div>
+              <div className="form-group"><label>Brief Description (optional)</label><textarea name="message" placeholder="Tell us a bit about your requirement..."/></div>
               <div className="form-submit">
                 <button type="submit" className="btn-submit">Send Message</button>
                 <a href="https://wa.me/919131325035?text=Hello%20CA%20Mayank%2C%20I%20would%20like%20to%20discuss%20a%20financial%20matter." target="_blank" rel="noreferrer" className="whatsapp-btn">
