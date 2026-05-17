@@ -13,6 +13,7 @@ export async function getStaticProps() {
 
 export default function Home({ allPostsData }) {
   const [activeService, setActiveService] = useState(0)
+  const [formState, setFormState] = useState('idle') // idle | submitting | success | error
 
   useEffect(() => {
     const els = document.querySelectorAll('.fade-up')
@@ -225,40 +226,71 @@ export default function Home({ allPostsData }) {
             </div>
           </div>
           <div>
-            <form className="contact-form" action="https://formsubmit.co/mayank@mojaa.in" method="POST">
-              <input type="hidden" name="_subject" value="New Inquiry - MOJAA Website" />
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_next" value="https://www.mojaa.in" />
-              <div className="form-row">
-                <div className="form-group"><label>Full Name</label><input type="text" name="name" placeholder="Your name" required /></div>
-                <div className="form-group"><label>Mobile Number</label><input type="tel" name="mobile" placeholder="+91 XXXXX XXXXX" required /></div>
+            {formState === 'success' ? (
+              <div className="contact-success">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="48" height="48"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+                <h3>Message Sent!</h3>
+                <p>Thank you for reaching out. We&apos;ll get back to you within 24 business hours.</p>
               </div>
-              <div className="form-group"><label>Email Address</label><input type="email" name="email" placeholder="you@company.com" required /></div>
-              <div className="form-group">
-                <label>I Need Help With</label>
-                <select name="service" required defaultValue="">
-                  <option value="" disabled>Select a service area</option>
-                  <option>Startup Advisory & Incorporation</option>
-                  <option>Virtual CFO Services</option>
-                  <option>GST Registration & Compliance</option>
-                  <option>Income Tax & Tax Planning</option>
-                  <option>NRI / FEMA / International Tax</option>
-                  <option>Due Diligence & Valuation</option>
-                  <option>Audit & Assurance</option>
-                  <option>Corporate Secretarial</option>
-                  <option>Bookkeeping & Accounting</option>
-                  <option>Other — I will explain below</option>
-                </select>
-              </div>
-              <div className="form-group"><label>Brief Description (optional)</label><textarea name="message" placeholder="Tell us a bit about your requirement..."/></div>
-              <div className="form-submit">
-                <button type="submit" className="btn-submit">Send Message</button>
-                <a href="https://wa.me/919131325035?text=Hello%20CA%20Mayank%2C%20I%20would%20like%20to%20discuss%20a%20financial%20matter." target="_blank" rel="noreferrer" className="whatsapp-btn">
-                  <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.555 4.128 1.528 5.866L.057 23.428a.5.5 0 0 0 .515.572l5.687-1.49A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.9 9.9 0 0 1-5.031-1.372l-.361-.214-3.735.979.997-3.643-.235-.374A9.86 9.86 0 0 1 2.1 12c0-5.468 4.432-9.9 9.9-9.9 5.468 0 9.9 4.432 9.9 9.9 0 5.468-4.432 9.9-9.9 9.9z"/></svg>
-                  WhatsApp
-                </a>
-              </div>
-            </form>
+            ) : (
+              <form
+                className="contact-form"
+                onSubmit={async (e) => {
+                  e.preventDefault()
+                  setFormState('submitting')
+                  const data = Object.fromEntries(new FormData(e.target))
+                  try {
+                    const res = await fetch('/api/contact', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(data),
+                    })
+                    if (res.ok) {
+                      setFormState('success')
+                    } else {
+                      setFormState('error')
+                    }
+                  } catch {
+                    setFormState('error')
+                  }
+                }}
+              >
+                <div className="form-row">
+                  <div className="form-group"><label>Full Name</label><input type="text" name="name" placeholder="Your name" required /></div>
+                  <div className="form-group"><label>Mobile Number</label><input type="tel" name="mobile" placeholder="+91 XXXXX XXXXX" required /></div>
+                </div>
+                <div className="form-group"><label>Email Address</label><input type="email" name="email" placeholder="you@company.com" required /></div>
+                <div className="form-group">
+                  <label>I Need Help With</label>
+                  <select name="service" required defaultValue="">
+                    <option value="" disabled>Select a service area</option>
+                    <option>Startup Advisory &amp; Incorporation</option>
+                    <option>Virtual CFO Services</option>
+                    <option>GST Registration &amp; Compliance</option>
+                    <option>Income Tax &amp; Tax Planning</option>
+                    <option>NRI / FEMA / International Tax</option>
+                    <option>Due Diligence &amp; Valuation</option>
+                    <option>Audit &amp; Assurance</option>
+                    <option>Corporate Secretarial</option>
+                    <option>Bookkeeping &amp; Accounting</option>
+                    <option>Other — I will explain below</option>
+                  </select>
+                </div>
+                <div className="form-group"><label>Brief Description (optional)</label><textarea name="message" placeholder="Tell us a bit about your requirement..."/></div>
+                {formState === 'error' && (
+                  <p style={{color:'#f87171',marginBottom:'8px',fontSize:'14px'}}>Something went wrong. Please try WhatsApp or email us directly.</p>
+                )}
+                <div className="form-submit">
+                  <button type="submit" className="btn-submit" disabled={formState === 'submitting'}>
+                    {formState === 'submitting' ? 'Sending...' : 'Send Message'}
+                  </button>
+                  <a href="https://wa.me/919131325035?text=Hello%20CA%20Mayank%2C%20I%20would%20like%20to%20discuss%20a%20financial%20matter." target="_blank" rel="noreferrer" className="whatsapp-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.555 4.128 1.528 5.866L.057 23.428a.5.5 0 0 0 .515.572l5.687-1.49A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.9 9.9 0 0 1-5.031-1.372l-.361-.214-3.735.979.997-3.643-.235-.374A9.86 9.86 0 0 1 2.1 12c0-5.468 4.432-9.9 9.9-9.9 5.468 0 9.9 4.432 9.9 9.9 0 5.468-4.432 9.9-9.9 9.9z"/></svg>
+                    WhatsApp
+                  </a>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       </section>
