@@ -15,6 +15,63 @@ export default function Home({ allPostsData }) {
   const [activeService, setActiveService] = useState(0)
   const [formState, setFormState] = useState('idle') // idle | submitting | success | error
 
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': 'https://mojaa.in/#organization',
+        name: 'Mayank Om Jain & Associates',
+        url: 'https://mojaa.in',
+        logo: 'https://mojaa.in/favicon.ico',
+        telephone: '+919131325035',
+        email: 'mayank@mojaa.in',
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            telephone: '+919131325035',
+            email: 'mayank@mojaa.in',
+            contactType: 'customer support',
+            areaServed: 'India',
+            availableLanguage: 'English',
+          },
+        ],
+        areaServed: 'India',
+        sameAs: ['https://www.linkedin.com/in/jainmayank13/'],
+      },
+      {
+        '@type': 'Person',
+        '@id': 'https://mojaa.in/#mayank-jain',
+        name: 'CA Mayank Jain',
+        jobTitle: 'Chartered Accountant',
+        alumniOf: {
+          '@type': 'CollegeOrUniversity',
+          name: 'ICAI',
+        },
+        sameAs: ['https://www.linkedin.com/in/jainmayank13/'],
+        knowsAbout: ['Startup Advisory', 'Virtual CFO', 'FEMA', 'GST', 'Income Tax'],
+        affiliation: {
+          '@id': 'https://mojaa.in/#organization',
+        },
+      },
+      {
+        '@type': 'Person',
+        '@id': 'https://mojaa.in/#vivek-jain',
+        name: 'CA Vivek Jain',
+        jobTitle: 'Chartered Accountant',
+        alumniOf: {
+          '@type': 'CollegeOrUniversity',
+          name: 'ICAI',
+        },
+        sameAs: ['https://www.linkedin.com/in/jainmayank13/'],
+        knowsAbout: ['M&A', 'Due Diligence', 'IPO', 'Capital Markets'],
+        affiliation: {
+          '@id': 'https://mojaa.in/#organization',
+        },
+      },
+    ],
+  }
+FileList
   useEffect(() => {
     const els = document.querySelectorAll('.fade-up')
     const obs = new IntersectionObserver((entries) => {
@@ -49,6 +106,10 @@ export default function Home({ allPostsData }) {
         <meta name="description" content="Mayank Om Jain & Associates — Chartered Accountants, India. Startup advisory, Virtual CFO, Tax, GST, FEMA/NRI. Strategic financial partner for founders, HNIs, and growing businesses." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
       </Head>
 
       <Nav />
