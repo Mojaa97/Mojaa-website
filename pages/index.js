@@ -71,7 +71,7 @@ export default function Home({ allPostsData }) {
       },
     ],
   }
-FileList
+
   useEffect(() => {
     const els = document.querySelectorAll('.fade-up')
     const obs = new IntersectionObserver((entries) => {
