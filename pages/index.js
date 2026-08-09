@@ -20,10 +20,10 @@ export default function Home({ allPostsData }) {
     '@graph': [
       {
         '@type': 'Organization',
-        '@id': 'https://mojaa.in/#organization',
+        '@id': 'https://www.mojaa.in/#organization',
         name: 'Mayank Om Jain & Associates',
-        url: 'https://mojaa.in',
-        logo: 'https://mojaa.in/favicon.ico',
+        url: 'https://www.mojaa.in',
+        logo: 'https://www.mojaa.in/favicon.ico',
         telephone: '+919131325035',
         email: 'mayank@mojaa.in',
         contactPoint: [
@@ -41,7 +41,7 @@ export default function Home({ allPostsData }) {
       },
       {
         '@type': 'Person',
-        '@id': 'https://mojaa.in/#mayank-jain',
+        '@id': 'https://www.mojaa.in/#mayank-jain',
         name: 'CA Mayank Jain',
         jobTitle: 'Chartered Accountant',
         alumniOf: {
@@ -51,12 +51,12 @@ export default function Home({ allPostsData }) {
         sameAs: ['https://www.linkedin.com/in/jainmayank13/'],
         knowsAbout: ['Startup Advisory', 'Virtual CFO', 'FEMA', 'GST', 'Income Tax'],
         affiliation: {
-          '@id': 'https://mojaa.in/#organization',
+          '@id': 'https://www.mojaa.in/#organization',
         },
       },
       {
         '@type': 'Person',
-        '@id': 'https://mojaa.in/#vivek-jain',
+        '@id': 'https://www.mojaa.in/#vivek-jain',
         name: 'CA Vivek Jain',
         jobTitle: 'Chartered Accountant',
         alumniOf: {
@@ -66,7 +66,7 @@ export default function Home({ allPostsData }) {
         sameAs: ['https://www.linkedin.com/in/jainmayank13/'],
         knowsAbout: ['M&A', 'Due Diligence', 'IPO', 'Capital Markets'],
         affiliation: {
-          '@id': 'https://mojaa.in/#organization',
+          '@id': 'https://www.mojaa.in/#organization',
         },
       },
     ],
