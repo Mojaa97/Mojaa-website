@@ -38,30 +38,41 @@ const faqs = [
   },
 ]
 
-const faqSchema = {
+const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  '@id': 'https://www.mojaa.in/nri-fema#faq',
-  isPartOf: { '@id': 'https://www.mojaa.in/nri-fema#webpage' },
-  mainEntity: faqs.map(({ q, a }) => ({
-    '@type': 'Question',
-    name: q,
-    acceptedAnswer: { '@type': 'Answer', text: a },
-  })),
-}
-
-const speakableSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': 'https://www.mojaa.in/nri-fema#webpage',
-  name: 'NRI and FEMA Advisory | MOJAA',
-  url: 'https://www.mojaa.in/nri-fema',
-  description: 'NRI and FEMA advisory for cross-border tax, property transactions, DTAA, and compliance planning.',
-  inLanguage: 'en',
-  speakable: {
-    '@type': 'SpeakableSpecification',
-    xpath: ['//section[@id="quick-answer"]'],
-  },
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://www.mojaa.in/#organization',
+      name: 'Mayank Om Jain & Associates',
+      url: 'https://www.mojaa.in',
+      logo: 'https://www.mojaa.in/favicon.ico',
+      sameAs: ['https://www.linkedin.com/in/jainmayank13/'],
+    },
+    {
+      '@type': 'WebPage',
+      '@id': 'https://www.mojaa.in/nri-fema#webpage',
+      name: 'NRI and FEMA Advisory | MOJAA',
+      url: 'https://www.mojaa.in/nri-fema',
+      description: 'NRI and FEMA advisory for cross-border tax, property transactions, DTAA, and compliance planning.',
+      inLanguage: 'en',
+      publisher: { '@id': 'https://www.mojaa.in/#organization' },
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        xpath: ['//section[@id="quick-answer"]'],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': 'https://www.mojaa.in/nri-fema#faq',
+      isPartOf: { '@id': 'https://www.mojaa.in/nri-fema#webpage' },
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
 }
 
 export default function NRIFEMA() {
@@ -71,8 +82,7 @@ export default function NRIFEMA() {
         <title>NRI and FEMA Advisory | Mayank Om Jain & Associates</title>
         <meta name="description" content="NRI and FEMA advisory for cross-border taxation, property transactions, DTAA, and compliance planning for Indians abroad." />
         <link rel="canonical" href="https://www.mojaa.in/nri-fema" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </Head>
       <Nav />
       <main style={{ maxWidth: '900px', margin: '0 auto', padding: '80px 20px 60px' }}>

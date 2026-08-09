@@ -38,30 +38,41 @@ const faqs = [
   },
 ]
 
-const faqSchema = {
+const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  '@id': 'https://www.mojaa.in/virtual-cfo#faq',
-  isPartOf: { '@id': 'https://www.mojaa.in/virtual-cfo#webpage' },
-  mainEntity: faqs.map(({ q, a }) => ({
-    '@type': 'Question',
-    name: q,
-    acceptedAnswer: { '@type': 'Answer', text: a },
-  })),
-}
-
-const speakableSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': 'https://www.mojaa.in/virtual-cfo#webpage',
-  name: 'Virtual CFO Services | MOJAA',
-  url: 'https://www.mojaa.in/virtual-cfo',
-  description: 'Virtual CFO services for founders and growing businesses, covering MIS, cash flow, budgeting, board reporting, and financial control.',
-  inLanguage: 'en',
-  speakable: {
-    '@type': 'SpeakableSpecification',
-    xpath: ['//section[@id="quick-answer"]'],
-  },
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://www.mojaa.in/#organization',
+      name: 'Mayank Om Jain & Associates',
+      url: 'https://www.mojaa.in',
+      logo: 'https://www.mojaa.in/favicon.ico',
+      sameAs: ['https://www.linkedin.com/in/jainmayank13/'],
+    },
+    {
+      '@type': 'WebPage',
+      '@id': 'https://www.mojaa.in/virtual-cfo#webpage',
+      name: 'Virtual CFO Services | MOJAA',
+      url: 'https://www.mojaa.in/virtual-cfo',
+      description: 'Virtual CFO services for founders and growing businesses, covering MIS, cash flow, budgeting, board reporting, and financial control.',
+      inLanguage: 'en',
+      publisher: { '@id': 'https://www.mojaa.in/#organization' },
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        xpath: ['//section[@id="quick-answer"]'],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': 'https://www.mojaa.in/virtual-cfo#faq',
+      isPartOf: { '@id': 'https://www.mojaa.in/virtual-cfo#webpage' },
+      mainEntity: faqs.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
 }
 
 export default function VirtualCFO() {
@@ -71,8 +82,7 @@ export default function VirtualCFO() {
         <title>Virtual CFO Services | Mayank Om Jain & Associates</title>
         <meta name="description" content="Virtual CFO services for founders and growing businesses covering MIS, cash flow, budgeting, board reporting, and financial controls." />
         <link rel="canonical" href="https://www.mojaa.in/virtual-cfo" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </Head>
       <Nav />
       <main style={{ maxWidth: '900px', margin: '0 auto', padding: '80px 20px 60px' }}>
