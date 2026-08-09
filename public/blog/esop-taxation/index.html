@@ -25,115 +25,142 @@
 <meta name="twitter:description" content="Two tax events, not one. Perquisite tax on exercise, capital gains on sale, and the Section 80-IAC deferral explained with a worked example.">
 <meta name="twitter:image" content="https://www.mojaa.in/mayank.jpeg">
 
-<!-- ============ ARTICLE SCHEMA (GEO + SEO) ============ -->
+<!-- ============ KNOWLEDGE GRAPH: Organization + Person + Article + FAQ + Breadcrumb, linked by @id ============ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "How Is ESOP Taxed in India? Perquisite Tax, Capital Gains and the 80-IAC Deferral",
-  "description": "ESOPs are taxed twice in India: as a perquisite on exercise and as capital gains on sale. How FMV, TDS, and the Section 80-IAC deferral work, with a worked example.",
-  "image": "https://www.mojaa.in/mayank.jpeg",
-  "datePublished": "2026-06-18",
-  "dateModified": "2026-08-09",
-  "inLanguage": "en-IN",
-  "author": {
-    "@type": "Person",
-    "name": "Mayank Jain",
-    "jobTitle": "Chartered Accountant",
-    "url": "https://www.mojaa.in",
-    "sameAs": "https://www.linkedin.com/in/jainmayank13",
-    "worksFor": {
-      "@type": "Accounting Service",
-      "name": "Mayank Om Jain & Associates (MOJAA)"
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.mojaa.in/#organization",
+      "name": "Mayank Om Jain & Associates",
+      "url": "https://www.mojaa.in",
+      "logo": "https://www.mojaa.in/favicon.ico",
+      "sameAs": [
+        "https://www.linkedin.com/in/jainmayank13/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.mojaa.in/#mayank-jain",
+      "name": "CA Mayank Jain",
+      "jobTitle": "Chartered Accountant",
+      "url": "https://www.mojaa.in",
+      "sameAs": [
+        "https://www.linkedin.com/in/jainmayank13/"
+      ],
+      "worksFor": {
+        "@id": "https://www.mojaa.in/#organization"
+      }
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://www.mojaa.in/blog/esop-taxation#article",
+      "headline": "How Is ESOP Taxed in India? Perquisite Tax, Capital Gains and the 80-IAC Deferral",
+      "description": "ESOPs are taxed twice in India: as a perquisite on exercise and as capital gains on sale. How FMV, TDS, and the Section 80-IAC deferral work, with a worked example.",
+      "image": "https://www.mojaa.in/mayank.jpeg",
+      "datePublished": "2026-06-18",
+      "dateModified": "2026-08-09",
+      "inLanguage": "en-IN",
+      "author": {
+        "@id": "https://www.mojaa.in/#mayank-jain"
+      },
+      "publisher": {
+        "@id": "https://www.mojaa.in/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.mojaa.in/blog/esop-taxation"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".quick-answer",
+          ".tldr",
+          ".faq-section"
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.mojaa.in/blog/esop-taxation#faq",
+      "isPartOf": {
+        "@id": "https://www.mojaa.in/blog/esop-taxation#article"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do I pay tax on ESOPs even if I don't sell the shares?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Perquisite tax is triggered the moment you exercise your options, calculated on the difference between fair market value and your exercise price. This applies whether you hold the shares or sell them immediately. Your employer deducts TDS on this perquisite through payroll."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if my company's share value falls after I exercise?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The perquisite tax is fixed at the fair market value on your exercise date and does not adjust if the value falls afterward. If you later sell at a lower price, you may book a capital loss, but that only offsets other capital gains — it does not reduce the perquisite tax already paid."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is ESOP tax deferral automatic for DPIIT-recognised startups?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. DPIIT recognition alone does not qualify a startup for the Section 80-IAC TDS deferral. The company must separately hold a Section 80-IAC Inter-Ministerial Board certificate. Only around 3,700 of India's 190,000-plus DPIIT-recognised startups hold this certification."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to deferred ESOP TDS if I resign?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Resignation is one of the three trigger events that ends deferral. Your employer must deduct and deposit the deferred TDS within 14 days of your last working day, even if you have not sold any shares and the company has not gone public."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is fair market value determined for unlisted ESOP shares?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By a SEBI-registered Category I Merchant Banker under Rule 3(8)(i) of the Income Tax Rules, valued as close as possible to the exercise date. If a valuation on the exact exercise date is not available, the rules permit using the nearest available valuation date."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the ESOP holding period for capital gains start from grant, vesting, or exercise?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "From the exercise date, when shares are actually allotted to you. Grant and vesting dates are irrelevant for the capital gains holding period. For unlisted shares, 24 months from exercise is the threshold between short-term and long-term treatment."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.mojaa.in"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://www.mojaa.in/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How Is ESOP Taxed in India",
+          "item": "https://www.mojaa.in/blog/esop-taxation"
+        }
+      ]
     }
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Mayank Om Jain & Associates (MOJAA)",
-    "url": "https://www.mojaa.in",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.mojaa.in/mayank.jpeg"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.mojaa.in/blog/esop-taxation"
-  },
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": [".quick-answer", ".tldr", ".faq-section"]
-  }
-}
-</script>
-
-<!-- ============ FAQ SCHEMA (AEO — rich results) ============ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Do I pay tax on ESOPs even if I don't sell the shares?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Perquisite tax is triggered the moment you exercise your options, calculated on the difference between fair market value and your exercise price. This applies whether you hold the shares or sell them immediately. Your employer deducts TDS on this perquisite through payroll."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What if my company's share value falls after I exercise?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The perquisite tax is fixed at the fair market value on your exercise date and does not adjust if the value falls afterward. If you later sell at a lower price, you may book a capital loss, but that only offsets other capital gains — it does not reduce the perquisite tax already paid."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is ESOP tax deferral automatic for DPIIT-recognised startups?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. DPIIT recognition alone does not qualify a startup for the Section 80-IAC TDS deferral. The company must separately hold a Section 80-IAC Inter-Ministerial Board certificate. Only around 3,700 of India's 190,000-plus DPIIT-recognised startups hold this certification."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What happens to deferred ESOP TDS if I resign?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Resignation is one of the three trigger events that ends deferral. Your employer must deduct and deposit the deferred TDS within 14 days of your last working day, even if you have not sold any shares and the company has not gone public."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How is fair market value determined for unlisted ESOP shares?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "By a SEBI-registered Category I Merchant Banker under Rule 3(8)(i) of the Income Tax Rules, valued as close as possible to the exercise date. If a valuation on the exact exercise date is not available, the rules permit using the nearest available valuation date."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does the ESOP holding period for capital gains start from grant, vesting, or exercise?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "From the exercise date, when shares are actually allotted to you. Grant and vesting dates are irrelevant for the capital gains holding period. For unlisted shares, 24 months from exercise is the threshold between short-term and long-term treatment."
-      }
-    }
-  ]
-}
-</script>
-
-<!-- ============ BREADCRUMB SCHEMA ============ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.mojaa.in"},
-    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.mojaa.in/blog"},
-    {"@type": "ListItem", "position": 3, "name": "How Is ESOP Taxed in India", "item": "https://www.mojaa.in/blog/esop-taxation"}
   ]
 }
 </script>

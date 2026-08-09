@@ -25,157 +25,183 @@
 <meta name="twitter:description" content="Tag along rights protect minority shareholders when a founder sells. What the clause does, tag along vs drag along, and how to add it to your SHA.">
 <meta name="twitter:image" content="https://www.mojaa.in/mayank.jpeg">
 
-<!-- ============ ARTICLE SCHEMA (GEO + SEO) ============ -->
+<!-- ============ KNOWLEDGE GRAPH: Organization + Person + Article + FAQ + Breadcrumb, linked by @id ============ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Tag Along Rights: What Every Startup Founder Must Know Before Signing an SHA",
-  "description": "Tag along rights let minority shareholders join a sale when a majority shareholder exits, on the same terms. How the clause works, tag along vs drag along, and how to add it to your SHA.",
-  "image": "https://www.mojaa.in/mayank.jpeg",
-  "datePublished": "2026-06-20",
-  "dateModified": "2026-08-09",
-  "inLanguage": "en-IN",
-  "author": {
-    "@type": "Person",
-    "name": "Mayank Jain",
-    "jobTitle": "Chartered Accountant",
-    "url": "https://www.mojaa.in",
-    "sameAs": "https://www.linkedin.com/in/jainmayank13",
-    "worksFor": {
-      "@type": "Accounting Service",
-      "name": "Mayank Om Jain & Associates (MOJAA)"
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.mojaa.in/#organization",
+      "name": "Mayank Om Jain & Associates",
+      "url": "https://www.mojaa.in",
+      "logo": "https://www.mojaa.in/favicon.ico",
+      "sameAs": [
+        "https://www.linkedin.com/in/jainmayank13/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.mojaa.in/#mayank-jain",
+      "name": "CA Mayank Jain",
+      "jobTitle": "Chartered Accountant",
+      "url": "https://www.mojaa.in",
+      "sameAs": [
+        "https://www.linkedin.com/in/jainmayank13/"
+      ],
+      "worksFor": {
+        "@id": "https://www.mojaa.in/#organization"
+      }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Tag Along Rights: What Every Startup Founder Must Know Before Signing an SHA",
+      "description": "Tag along rights let minority shareholders join a sale when a majority shareholder exits, on the same terms. How the clause works, tag along vs drag along, and how to add it to your SHA.",
+      "image": "https://www.mojaa.in/mayank.jpeg",
+      "datePublished": "2026-06-20",
+      "dateModified": "2026-08-09",
+      "inLanguage": "en-IN",
+      "author": {
+        "@id": "https://www.mojaa.in/#mayank-jain"
+      },
+      "publisher": {
+        "@id": "https://www.mojaa.in/#organization"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.mojaa.in/blog/tag-along-rights"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".quick-answer",
+          ".tldr",
+          ".faq-section"
+        ]
+      },
+      "@id": "https://www.mojaa.in/blog/tag-along-rights#article"
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to add tag along rights to a shareholders' agreement",
+      "description": "Steps to draft an enforceable tag along (co-sale) clause into a startup's SHA, so minority shareholders can join a sale by a majority shareholder on the same terms.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Define the trigger event",
+          "text": "Specify exactly what kind of transfer activates the tag along right — for example, any sale by a founder or majority shareholder above a set percentage of total shares."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Set the notice requirement",
+          "text": "Require the selling shareholder to notify minority shareholders of the proposed deal, including price, terms, and timeline, typically 15 to 30 days before closing."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Define the exercise window",
+          "text": "Give minority shareholders a fixed window, usually 15 days from notice, to elect whether they will participate in the sale."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Specify pro-rata participation",
+          "text": "State that a participating minority shareholder can sell in proportion to their existing holding relative to the total shares being sold in the transaction."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Lock in same-terms language",
+          "text": "Make clear that tagging shareholders receive the same price per share, same payment structure, and same closing date as the selling shareholder, with no inferior terms."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Get the clause reviewed and signed",
+          "text": "Have the clause reviewed against the company's existing share classes and FEMA pricing rules for any non-resident shareholders, then have it executed as part of the SHA by all parties."
+        }
+      ],
+      "@id": "https://www.mojaa.in/blog/tag-along-rights#howto",
+      "isPartOf": {
+        "@id": "https://www.mojaa.in/blog/tag-along-rights#article"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does every shareholders' agreement automatically include tag along rights?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Many early-stage SHAs, especially those drafted quickly around a small angel round, skip tag along rights entirely. It has to be negotiated and drafted in explicitly — it is not a default protection under Indian company law."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What ownership percentage triggers tag along rights?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There is no fixed statutory percentage. The SHA itself defines the trigger threshold — some clauses activate on any founder sale, others only above a specified percentage of total shares. This threshold should be checked carefully, since a narrowly defined trigger can leave minority shareholders unprotected in smaller sales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a founder sell shares without triggering tag along rights?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, if the sale falls below the trigger threshold defined in the SHA, or if the transfer type is expressly excluded, such as transfers to an affiliate or family trust. This is why the trigger definition needs to be reviewed clause by clause, not assumed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if a minority shareholder misses the exercise window?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The right lapses for that transaction. Once the exercise window defined in the SHA closes without an election to participate, the selling shareholder can proceed with the sale without including the minority shareholder's shares."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do ESOP holders get tag along rights?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only once their options are exercised and they hold actual shares, and only if the SHA or a deed of adherence extends tag along rights to that share class. Unexercised options do not carry tag along rights, since the holder is not yet a shareholder."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a 15-day notice period standard for tag along clauses?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fifteen days is the minimum period generally recommended in practice, not a legal requirement. SHAs can specify a shorter or longer notice and exercise period — but anything under 15 days leaves minority shareholders little real time to arrange financing or decide to participate."
+          }
+        }
+      ],
+      "@id": "https://www.mojaa.in/blog/tag-along-rights#faq",
+      "isPartOf": {
+        "@id": "https://www.mojaa.in/blog/tag-along-rights#article"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.mojaa.in"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://www.mojaa.in/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Tag Along Rights",
+          "item": "https://www.mojaa.in/blog/tag-along-rights"
+        }
+      ]
     }
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Mayank Om Jain & Associates (MOJAA)",
-    "url": "https://www.mojaa.in",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://www.mojaa.in/mayank.jpeg"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.mojaa.in/blog/tag-along-rights"
-  },
-  "speakable": {
-    "@type": "SpeakableSpecification",
-    "cssSelector": [".quick-answer", ".tldr", ".faq-section"]
-  }
-}
-</script>
-
-<!-- ============ HOWTO SCHEMA ============ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to add tag along rights to a shareholders' agreement",
-  "description": "Steps to draft an enforceable tag along (co-sale) clause into a startup's SHA, so minority shareholders can join a sale by a majority shareholder on the same terms.",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "name": "Define the trigger event",
-      "text": "Specify exactly what kind of transfer activates the tag along right — for example, any sale by a founder or majority shareholder above a set percentage of total shares."
-    },
-    {
-      "@type": "HowToStep",
-      "name": "Set the notice requirement",
-      "text": "Require the selling shareholder to notify minority shareholders of the proposed deal, including price, terms, and timeline, typically 15 to 30 days before closing."
-    },
-    {
-      "@type": "HowToStep",
-      "name": "Define the exercise window",
-      "text": "Give minority shareholders a fixed window, usually 15 days from notice, to elect whether they will participate in the sale."
-    },
-    {
-      "@type": "HowToStep",
-      "name": "Specify pro-rata participation",
-      "text": "State that a participating minority shareholder can sell in proportion to their existing holding relative to the total shares being sold in the transaction."
-    },
-    {
-      "@type": "HowToStep",
-      "name": "Lock in same-terms language",
-      "text": "Make clear that tagging shareholders receive the same price per share, same payment structure, and same closing date as the selling shareholder, with no inferior terms."
-    },
-    {
-      "@type": "HowToStep",
-      "name": "Get the clause reviewed and signed",
-      "text": "Have the clause reviewed against the company's existing share classes and FEMA pricing rules for any non-resident shareholders, then have it executed as part of the SHA by all parties."
-    }
-  ]
-}
-</script>
-
-<!-- ============ FAQ SCHEMA (AEO — rich results) ============ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Does every shareholders' agreement automatically include tag along rights?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Many early-stage SHAs, especially those drafted quickly around a small angel round, skip tag along rights entirely. It has to be negotiated and drafted in explicitly — it is not a default protection under Indian company law."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What ownership percentage triggers tag along rights?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "There is no fixed statutory percentage. The SHA itself defines the trigger threshold — some clauses activate on any founder sale, others only above a specified percentage of total shares. This threshold should be checked carefully, since a narrowly defined trigger can leave minority shareholders unprotected in smaller sales."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can a founder sell shares without triggering tag along rights?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, if the sale falls below the trigger threshold defined in the SHA, or if the transfer type is expressly excluded, such as transfers to an affiliate or family trust. This is why the trigger definition needs to be reviewed clause by clause, not assumed."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What happens if a minority shareholder misses the exercise window?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The right lapses for that transaction. Once the exercise window defined in the SHA closes without an election to participate, the selling shareholder can proceed with the sale without including the minority shareholder's shares."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do ESOP holders get tag along rights?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Only once their options are exercised and they hold actual shares, and only if the SHA or a deed of adherence extends tag along rights to that share class. Unexercised options do not carry tag along rights, since the holder is not yet a shareholder."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is a 15-day notice period standard for tag along clauses?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Fifteen days is the minimum period generally recommended in practice, not a legal requirement. SHAs can specify a shorter or longer notice and exercise period — but anything under 15 days leaves minority shareholders little real time to arrange financing or decide to participate."
-      }
-    }
-  ]
-}
-</script>
-
-<!-- ============ BREADCRUMB SCHEMA ============ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.mojaa.in"},
-    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.mojaa.in/blog"},
-    {"@type": "ListItem", "position": 3, "name": "Tag Along Rights", "item": "https://www.mojaa.in/blog/tag-along-rights"}
   ]
 }
 </script>
