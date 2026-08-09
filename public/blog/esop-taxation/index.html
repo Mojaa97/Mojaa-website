@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ============ SEO META ============ -->
+<title>How Is ESOP Taxed in India? Perquisite Tax, Capital Gains & Deferral</title>
+<meta name="description" content="ESOPs are taxed twice in India: as a perquisite on exercise and as capital gains on sale. How the FMV, TDS, and Section 80-IAC deferral actually work, with a worked example."><meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Mayank Jain, CA">
+<link rel="canonical" href="https://www.mojaa.in/blog/esop-taxation">
+
+<!-- ============ OPEN GRAPH / SOCIAL ============ -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="How Is ESOP Taxed in India? Perquisite Tax, Capital Gains & Deferral">
+<meta property="og:description" content="Two tax events, not one. How ESOP perquisite tax, capital gains, and the Section 80-IAC deferral actually work for Indian startup employees.">
+<meta property="og:url" content="https://www.mojaa.in/blog/esop-taxation">
+<meta property="og:site_name" content="Mayank Om Jain & Associates (MOJAA)">
+<meta property="og:image" content="https://www.mojaa.in/mayank.jpeg">
+<meta property="article:published_time" content="2026-06-18">
+<meta property="article:modified_time" content="2026-08-09">
+<meta property="article:author" content="Mayank Jain">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How Is ESOP Taxed in India? Perquisite Tax, Capital Gains & Deferral">
+<meta name="twitter:description" content="Two tax events, not one. Perquisite tax on exercise, capital gains on sale, and the Section 80-IAC deferral explained with a worked example.">
+<meta name="twitter:image" content="https://www.mojaa.in/mayank.jpeg">
+
+<!-- ============ ARTICLE SCHEMA (GEO + SEO) ============ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How Is ESOP Taxed in India? Perquisite Tax, Capital Gains and the 80-IAC Deferral",
+  "description": "ESOPs are taxed twice in India: as a perquisite on exercise and as capital gains on sale. How FMV, TDS, and the Section 80-IAC deferral work, with a worked example.",
+  "image": "https://www.mojaa.in/mayank.jpeg",
+  "datePublished": "2026-06-18",
+  "dateModified": "2026-08-09",
+  "inLanguage": "en-IN",
+  "author": {
+    "@type": "Person",
+    "name": "Mayank Jain",
+    "jobTitle": "Chartered Accountant",
+    "url": "https://www.mojaa.in",
+    "sameAs": "https://www.linkedin.com/in/jainmayank13",
+    "worksFor": {
+      "@type": "Accounting Service",
+      "name": "Mayank Om Jain & Associates (MOJAA)"
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Mayank Om Jain & Associates (MOJAA)",
+    "url": "https://www.mojaa.in",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.mojaa.in/mayank.jpeg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.mojaa.in/blog/esop-taxation"
+  },
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".quick-answer", ".tldr", ".faq-section"]
+  }
+}
+</script>
+
+<!-- ============ FAQ SCHEMA (AEO — rich results) ============ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I pay tax on ESOPs even if I don't sell the shares?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Perquisite tax is triggered the moment you exercise your options, calculated on the difference between fair market value and your exercise price. This applies whether you hold the shares or sell them immediately. Your employer deducts TDS on this perquisite through payroll."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my company's share value falls after I exercise?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The perquisite tax is fixed at the fair market value on your exercise date and does not adjust if the value falls afterward. If you later sell at a lower price, you may book a capital loss, but that only offsets other capital gains — it does not reduce the perquisite tax already paid."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is ESOP tax deferral automatic for DPIIT-recognised startups?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. DPIIT recognition alone does not qualify a startup for the Section 80-IAC TDS deferral. The company must separately hold a Section 80-IAC Inter-Ministerial Board certificate. Only around 3,700 of India's 190,000-plus DPIIT-recognised startups hold this certification."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to deferred ESOP TDS if I resign?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Resignation is one of the three trigger events that ends deferral. Your employer must deduct and deposit the deferred TDS within 14 days of your last working day, even if you have not sold any shares and the company has not gone public."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is fair market value determined for unlisted ESOP shares?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "By a SEBI-registered Category I Merchant Banker under Rule 3(8)(i) of the Income Tax Rules, valued as close as possible to the exercise date. If a valuation on the exact exercise date is not available, the rules permit using the nearest available valuation date."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the ESOP holding period for capital gains start from grant, vesting, or exercise?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "From the exercise date, when shares are actually allotted to you. Grant and vesting dates are irrelevant for the capital gains holding period. For unlisted shares, 24 months from exercise is the threshold between short-term and long-term treatment."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ============ BREADCRUMB SCHEMA ============ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.mojaa.in"},
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.mojaa.in/blog"},
+    {"@type": "ListItem", "position": 3, "name": "How Is ESOP Taxed in India", "item": "https://www.mojaa.in/blog/esop-taxation"}
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --ink:#0F172A; --steel:#156082; --steel-dk:#0E4A63;
+    --paper:#FFFFFF; --mist:#F1F5F9; --line:#E2E8F0;
+    --muted:#64748B; --body:#1E293B; --warn:#8B0000; --warn-bg:#FBEAEA;
+    --maxw:740px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--body);
+    font-family:Georgia,"Book Antiqua",Palatino,"Palatino Linotype",serif;
+    font-size:18px; line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sans{font-family:Calibri,"Segoe UI",system-ui,-apple-system,sans-serif;}
+  a{color:var(--steel); text-decoration:underline; text-underline-offset:2px;}
+  a:focus-visible{outline:2px solid var(--steel); outline-offset:2px;}
+
+  .topband{background:var(--ink); color:#fff; padding:18px 0;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px;}
+  .brand{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:15px; letter-spacing:.02em;}
+  .brand small{display:block; color:#7FB3C9; font-weight:700; font-size:10px; letter-spacing:.22em; margin-top:2px;}
+
+  main{padding:38px 0 60px;}
+  .eyebrow{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--steel); margin:0 0 14px;}
+  h1{font-family:Georgia,"Book Antiqua",serif; font-weight:700; font-size:36px; line-height:1.18; color:var(--ink); margin:0 0 16px;}
+  .lede{font-size:19px; color:#334155; margin:0 0 22px;}
+  .meta{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-size:14px; color:var(--muted); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:12px 0; margin:0 0 30px; display:flex; gap:18px; flex-wrap:wrap;}
+  .meta b{color:var(--body);}
+
+  h2{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:25px; line-height:1.3; color:var(--ink); margin:42px 0 12px; padding-top:6px;}
+  h3{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:19px; color:var(--ink); margin:26px 0 6px;}
+  p{margin:0 0 16px; text-align:justify; text-justify:inter-word; hyphens:auto;}
+  .notes-section dd{text-align:justify; text-justify:inter-word; hyphens:auto;}
+
+  .quick-answer{
+    background:var(--ink); color:#fff; border-radius:14px;
+    padding:26px 28px; margin:6px 0 22px;
+    border-left:6px solid var(--steel);
+  }
+  .quick-answer .qa-label{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#7FB3C9; margin:0 0 12px;}
+  .quick-answer p{font-size:17px; line-height:1.6; margin:0; color:#E2E8F0;}
+
+  .tldr{background:var(--mist); border-radius:14px; padding:22px 26px; margin:0 0 34px; border-left:6px solid var(--ink);}
+  .tldr .qa-label{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--steel); margin:0 0 10px;}
+  .tldr ul{margin:0; padding-left:20px;}
+  .tldr li{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-size:16px; line-height:1.55; margin-bottom:8px; color:var(--body);}
+  .tldr li:last-child{margin-bottom:0;}
+
+  table{width:100%; border-collapse:collapse; margin:14px 0 22px; font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-size:16px;}
+  caption{caption-side:top; text-align:left; font-size:13px; color:var(--muted); margin-bottom:8px;}
+  th,td{text-align:left; padding:12px 14px; border-bottom:1px solid var(--line);}
+  thead th{background:var(--mist); color:var(--ink); font-weight:700; font-size:13px; letter-spacing:.04em; text-transform:uppercase;}
+  td.hl{color:var(--steel); font-weight:700; white-space:nowrap;}
+
+  .form{background:var(--mist); border-radius:10px; padding:16px 18px; margin:12px 0; border-left:4px solid var(--steel);}
+  .form .name{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; color:var(--steel); font-size:17px;}
+  .form p{font-size:16px; margin:6px 0 0; line-height:1.55;}
+
+  .note{background:var(--mist); border-radius:10px; padding:16px 18px; margin:18px 0; font-size:16px; font-family:Calibri,"Segoe UI",system-ui,sans-serif;}
+  .warn{background:var(--warn-bg); border-left:4px solid var(--warn); border-radius:10px; padding:16px 18px; margin:18px 0; font-size:16px; font-family:Calibri,"Segoe UI",system-ui,sans-serif;}
+  .warn b{color:var(--warn);}
+
+  .notes-section{background:var(--mist); border-radius:14px; padding:24px 26px; margin:22px 0;}
+  .notes-section h2{margin-top:0;}
+  .notes-section dt{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; color:var(--ink); font-size:16px; margin-top:16px;}
+  .notes-section dt:first-child{margin-top:0;}
+  .notes-section dd{margin:4px 0 0; font-size:16px; color:var(--body); font-family:Calibri,"Segoe UI",system-ui,sans-serif; line-height:1.6;}
+
+  .faq-section{margin-top:22px;}
+  .faq-item{border-bottom:1px solid var(--line); padding:16px 0;}
+  .faq-item:first-of-type{border-top:1px solid var(--line);}
+  .faq-item summary{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:18px; color:var(--ink); cursor:pointer; list-style:none; padding-right:34px; position:relative;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+"; position:absolute; right:0; top:0; font-size:22px; line-height:1; color:var(--steel); font-weight:400;}
+  .faq-item[open] summary::after{content:"\2212";}
+  .faq-item summary:focus-visible{outline:2px solid var(--steel); outline-offset:4px; border-radius:4px;}
+  .faq-item p{font-size:16px; margin:12px 0 0;}
+
+  .author{display:flex; gap:18px; align-items:flex-start; background:var(--ink); color:#fff; border-radius:14px; padding:24px 26px; margin:40px 0 22px;}
+  .author .avatar{width:54px; height:54px; border-radius:50%; background:var(--steel); flex:0 0 54px; display:flex; align-items:center; justify-content:center; font-family:Calibri,sans-serif; font-weight:700; font-size:20px; color:#fff;}
+  .author .who{font-family:Calibri,"Segoe UI",system-ui,sans-serif;}
+  .author .who b{font-size:17px;}
+  .author .who p{color:#CBD5E1; font-size:15px; margin:6px 0 0; line-height:1.55;}
+  .author .who .contact{color:#7FB3C9; font-size:14px; margin-top:10px;}
+  .cta{display:inline-block; margin-top:14px; background:var(--steel); color:#fff; text-decoration:none; font-family:Calibri,sans-serif; font-weight:700; font-size:15px; padding:11px 20px; border-radius:8px;}
+  .cta:focus-visible{outline:2px solid #fff; outline-offset:2px;}
+
+  .sources{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-size:13px; color:var(--muted); border-top:1px solid var(--line); padding-top:16px; margin-top:30px;}
+
+  @media (max-width:560px){
+    body{font-size:17px;}
+    h1{font-size:28px;}
+    h2{font-size:21px;}
+    .author{flex-direction:column;}
+    p, .notes-section dd{text-align:left;}
+  }
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+</style>
+</head>
+
+<body>
+
+<header class="topband">
+  <div class="wrap">
+    <div class="brand">MAYANK OM JAIN &amp; ASSOCIATES<small>CHARTERED ACCOUNTANTS</small></div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+<article>
+
+  <p class="eyebrow">ESOP &middot; Startup Taxation</p>
+  <h1>ESOPs Are Taxed Twice. Most Employees Only Know About One.</h1>
+
+  <p class="lede">The tax bill on your ESOPs does not wait for you to sell. Here is exactly when it hits, how the amount is calculated, and the one deferral route that actually works — with a worked example.</p>
+
+  <div class="meta sans">
+    <span>By <b>Mayank Jain, CA</b></span>
+    <span>Updated <b>9 August 2026</b></span>
+    <span><b>5 min</b> read</span>
+  </div>
+
+  <!-- QUICK ANSWER — Speakable + featured-snippet target -->
+  <section class="quick-answer" aria-label="Quick answer">
+    <p class="qa-label">Quick answer</p>
+    <p>ESOPs in India are taxed twice. First, on exercise: the gap between fair market value (FMV) and your exercise price is a "perquisite," taxed as salary income at your slab rate, with employer TDS deducted even if you sell nothing. Second, on sale: the gain over that FMV is a capital gain, taxed at slab rate if sold within 24 months or 12.5% if held longer.</p>
+  </section>
+
+  <div class="tldr" aria-label="Summary">
+    <p class="qa-label">Summary</p>
+    <ul>
+      <li>Tax Hit 1 happens on <b>exercise</b>, not sale — perquisite = (FMV − exercise price) × shares, taxed at your slab rate through payroll TDS.</li>
+      <li>Tax Hit 2 happens on <b>sale</b> — capital gains, calculated from the exercise-date FMV, not the original exercise price.</li>
+      <li>Only startups holding a <b>Section 80-IAC certificate</b> (not just DPIIT recognition) can defer the TDS payment — and even then, only the payment timing, not the tax amount.</li>
+    </ul>
+  </div>
+
+  <h2>When exactly does ESOP get taxed in India?</h2>
+  <p>An ESOP moves through four stages, but only two of them create a tax liability.</p>
+  <table>
+    <caption>ESOP lifecycle and tax treatment</caption>
+    <thead>
+      <tr><th scope="col">Stage</th><th scope="col">What happens</th><th scope="col">Tax event</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1. Grant</td><td>Company gives you the option</td><td class="hl">None</td></tr>
+      <tr><td>2. Vesting</td><td>Options become exercisable over time</td><td class="hl">None</td></tr>
+      <tr><td>3. Exercise</td><td>You buy shares at the exercise price</td><td class="hl">Tax Hit 1 — perquisite</td></tr>
+      <tr><td>4. Sale</td><td>You sell the shares</td><td class="hl">Tax Hit 2 — capital gains</td></tr>
+    </tbody>
+  </table>
+  <p>Most employees track only stage 4. That is why the tax bill at stage 3 arrives without warning — often as a smaller-than-expected salary credit the month they exercise, since the employer has already withheld TDS on a perquisite that never touched their bank account.</p>
+
+  <h2>How is the perquisite value calculated on exercise?</h2>
+  <p>The formula is straightforward: <b>Perquisite = (FMV on exercise date − exercise price) × number of shares exercised.</b> This amount is added to your salary income for the year and taxed at your slab rate, plus applicable surcharge and cess. Your employer deducts TDS on it through payroll, the same way as any other salary component.</p>
+  <p>For unlisted shares, FMV is not something you or your employer can decide informally — it must be certified by a SEBI-registered Category I Merchant Banker under Rule 3(8)(i) of the Income Tax Rules, valued as close as possible to the exercise date.</p>
+
+  <div class="form">
+    <span class="name">Worked example</span>
+    <p>Arham works at an unlisted startup on an annual cash salary of ₹18 lakh. He exercises 2,000 ESOPs. FMV on the exercise date is ₹400 per share; his exercise price is ₹50 per share.</p>
+    <p><b>Perquisite per share:</b> ₹400 − ₹50 = ₹350. <b>Total perquisite:</b> 2,000 × ₹350 = ₹7,00,000. <b>Tax at the 30% slab:</b> roughly ₹2,10,000. Arham's net cash salary after this TDS drops to about ₹15.9 lakh for the year — even though he has not sold a single share.</p>
+  </div>
+
+  <h2>How is capital gains tax calculated when you sell ESOP shares?</h2>
+  <p>When you eventually sell, the FMV on your exercise date becomes your cost of acquisition — not the exercise price you actually paid. <b>Capital gain = sale price − FMV on exercise date, per share sold.</b> The holding period is also counted from the exercise date, not from grant or vesting.</p>
+  <table>
+    <caption>Capital gains treatment on ESOP shares</caption>
+    <thead>
+      <tr><th scope="col">Share status at sale</th><th scope="col">Short-term</th><th scope="col">Long-term</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Unlisted shares</td><td>Held under 24 months — taxed at slab rate</td><td class="hl">Held 24+ months — 12.5%, no indexation</td></tr>
+      <tr><td>Listed shares (e.g. post-IPO)</td><td>Held under 12 months — taxed at 20% under Section 111A</td><td class="hl">Held 12+ months — 12.5% above ₹1.25 lakh exemption, Section 112A</td></tr>
+    </tbody>
+  </table>
+  <p>The listed-versus-unlisted distinction matters more than most employees realise. If you exercise pre-IPO and sell after the company lists, the classification and holding-period threshold that apply are the ones in force <i>at the time of sale</i> — not at exercise. Employees who assume the 24-month unlisted rule still applies post-listing frequently miscalculate their tax.</p>
+
+  <h2>Can startup employees defer ESOP tax?</h2>
+  <p>Yes, but the eligibility bar is narrower than most people assume. If your employer is <b>DPIIT-recognised AND separately holds a Section 80-IAC certificate</b> from the Inter-Ministerial Board, TDS on the perquisite is deferred to the earliest of: 48 months from the end of the assessment year of allotment, the date you sell the shares, or the date you cease to be an employee.</p>
+  <div class="warn"><b>Only around 3,700 startups</b> hold an 80-IAC certificate, out of more than 190,000 DPIIT-recognised startups in India. DPIIT recognition and 80-IAC certification are frequently confused — they are not the same thing, and only the latter unlocks deferral.</div>
+  <p>Deferral changes <i>when</i> you pay, not <i>how much</i>. The perquisite amount is still fixed at the exercise-date FMV. If the company's valuation falls during the deferral window, you still owe tax on the original, higher figure — deferral is a timing benefit, not a tax waiver.</p>
+
+  <h2>What mistakes do employees and founders make with ESOP taxation?</h2>
+  <p><b>On the employee side:</b> exercising without setting aside cash for the TDS; assuming DPIIT recognition alone means deferral applies; selling before the 24-month mark and getting taxed at slab rate instead of 12.5%; and forgetting that resignation ends deferral immediately, with deferred TDS due within 14 days of the last working day.</p>
+  <p><b>On the founder side:</b> verify your 80-IAC status separately from DPIIT recognition before telling employees deferral is available; disclose both tax events in the grant letter, not just the exercise price; reference the correct section numbers under the Income Tax Act, 2025, effective from 1 April 2026; and model the net cash-in-hand impact before any mass exercise event, such as a pre-IPO or acquisition-triggered exercise window.</p>
+
+  <!-- NOTES — edge cases -->
+  <section class="notes-section" aria-label="Edge cases">
+    <h2>Notes on edge cases</h2>
+    <dl>
+      <dt>Cliff vesting</dt>
+      <dd>No tax arises at the cliff or during vesting — the first tax event is still exercise. If an employee leaves before the cliff, the unvested options simply lapse; there is nothing to tax.</dd>
+
+      <dt>Employees who leave (leavers)</dt>
+      <dd>Unvested options lapse on exit with no tax consequence. Vested-but-unexercised options usually carry a short post-employment exercise window set by the ESOP scheme (commonly 90 days) — miss it, and those options lapse too, unexercised and untaxed.</dd>
+
+      <dt>Death or disability</dt>
+      <dd>Most ESOP schemes provide for accelerated vesting on death or permanent disability, allowing legal heirs to exercise. The perquisite tax still applies on exercise, computed in the hands of the estate or heir per the scheme's specific terms — check the scheme document, as treatment is not uniform across companies.</dd>
+
+      <dt>Company buyback instead of open-market sale</dt>
+      <dd>A company buyback of ESOP shares is still a transfer for tax purposes. Capital gains rules apply exactly as they would for a sale to a third party, with the exercise-date FMV as cost of acquisition.</dd>
+
+      <dt>Resignation during an 80-IAC deferral period</dt>
+      <dd>Resignation is one of the three deferral-ending triggers. The employer must deduct and deposit the deferred TDS within 14 days of the employee's last working day — regardless of whether the shares have been sold or the company has gone public.</dd>
+
+      <dt>ESOPs in a foreign listed parent</dt>
+      <dd>Employees of an Indian subsidiary who receive options in a foreign (often US-listed) parent company are taxed on the same two-event structure, but FMV is the listed market price abroad, not a merchant banker valuation — and the Section 80-IAC deferral does not apply, since it is only available to eligible Indian domestic startups. Foreign shareholding also triggers separate reporting under Schedule FA in the ITR.</dd>
+    </dl>
+  </section>
+
+  <!-- FAQ — AEO rich-result target -->
+  <section class="faq-section" aria-label="Frequently asked questions">
+  <h2>Frequently asked questions</h2>
+
+  <details class="faq-item">
+    <summary>Do I pay tax on ESOPs even if I don't sell the shares?</summary>
+    <p>Yes. Perquisite tax is triggered the moment you exercise, calculated on FMV minus your exercise price. It applies whether you hold the shares or sell immediately, and your employer deducts TDS on it through payroll.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>What if my company's share value falls after I exercise?</summary>
+    <p>The perquisite tax is fixed at the exercise-date FMV and does not adjust downward later. If you sell at a lower price afterward, you may book a capital loss, but that only offsets other capital gains — it does not reduce the perquisite tax already paid.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Is ESOP tax deferral automatic for DPIIT-recognised startups?</summary>
+    <p>No. The company must separately hold a Section 80-IAC Inter-Ministerial Board certificate. Only around 3,700 of India's 190,000-plus DPIIT-recognised startups hold this certification.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>What happens to deferred ESOP TDS if I resign?</summary>
+    <p>Resignation ends deferral. Your employer must deduct and deposit the deferred TDS within 14 days of your last working day, even if you haven't sold any shares.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>How is fair market value determined for unlisted ESOP shares?</summary>
+    <p>By a SEBI-registered Category I Merchant Banker under Rule 3(8)(i) of the Income Tax Rules, valued as close as possible to the exercise date.</p>
+  </details>
+
+  <details class="faq-item">
+    <summary>Does the ESOP holding period start from grant, vesting, or exercise?</summary>
+    <p>From the exercise date, when shares are actually allotted to you. For unlisted shares, 24 months from exercise is the threshold between short-term and long-term capital gains treatment.</p>
+  </details>
+  </section>
+
+  <!-- AUTHOR + CTA -->
+  <aside class="author">
+    <div class="avatar" aria-hidden="true">MJ</div>
+    <div class="who">
+      <b>Mayank Jain, CA</b>
+      <p>Chartered Accountant and founder of Mayank Om Jain &amp; Associates (MOJAA). He structures ESOP pools, models exercise-event tax impact, and advises founders and employees on startup equity compensation.</p>
+      <p class="contact">www.mojaa.in &middot; mayank@mojaa.in &middot; +91 9131325035</p>
+      <a class="cta" href="https://www.mojaa.in/#contact">Get your ESOP tax structured right</a>
+    </div>
+  </aside>
+
+  <p class="sources">Sources: Income Tax Act provisions on perquisite taxation (Section 17(2)(vi)) and Section 80-IAC deferral (Section 192(1C)); Rule 3(8)(i), Income Tax Rules; DPIIT Startup India recognition data. This article is for general awareness and is not a substitute for advice on your specific situation.</p>
+
+</article>
+</div>
+</main>
+
+</body>
+</html>
