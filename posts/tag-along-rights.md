@@ -1,6 +1,6 @@
 ---
 title: "Tag Along Rights: What Every Startup Founder Must Know Before Signing an SHA"
-date: "2026-05-16"
+date: "2026-06-20"
 excerpt: "Tag Along protects minority shareholders when founders sell. If it is missing from your SHA, early investors can be left behind. Here is what the clause actually does."
 author: "CA Mayank Jain"
 ---

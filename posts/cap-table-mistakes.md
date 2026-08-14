@@ -1,6 +1,6 @@
 ---
 title: "Investors Don't Kill Deals. Dirty Cap Tables Do."
-date: "2026-05-16"
+date: "2026-06-19"
 excerpt: "Three cap table mistakes that show up in every diligence and how to fix them before your next raise."
 author: "CA Mayank Jain"
 ---

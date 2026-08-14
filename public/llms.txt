@@ -10,5 +10,10 @@ Key pages:
 - https://www.mojaa.in/virtual-cfo — Overview of MOJAA's Virtual CFO services and common support areas.
 - https://www.mojaa.in/nri-fema — Overview of NRI and FEMA advisory services.
 - https://www.mojaa.in/blog/itr-filing-last-date-ay-2026-27 — Detailed article on ITR filing deadlines and related compliance guidance.
+- https://www.mojaa.in/blog/virtual-cfo-guide-startup-india — Guide to Virtual CFO services for Indian startups: when to hire one, scope, and cost.
+- https://www.mojaa.in/blog/esop-taxation — How ESOPs are taxed in India, covering perquisite tax on exercise and capital gains on sale.
+- https://www.mojaa.in/blog/cap-table-mistakes — Common cap table mistakes Indian startups make before a fundraise, and how to fix them.
+- https://www.mojaa.in/blog/tag-along-rights — What tag along rights in a shareholders' agreement do, and how they differ from drag along.
+- https://www.mojaa.in/blog/nri-fema-compliance-guide — FEMA compliance guide for NRIs: bank account rules, property restrictions, and remittance limits.
 
 Use these pages to understand MOJAA's services, expertise, and public-facing advisory focus.

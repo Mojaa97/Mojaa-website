@@ -1,6 +1,6 @@
 ---
 title: "ESOPs Are Taxed Twice. Most Employees Only Know About One."
-date: "2026-05-16"
+date: "2026-06-18"
 excerpt: "Two tax events. Most employees only know about one. That is how the tax bill arrives without warning."
 author: "CA Mayank Jain"
 ---
