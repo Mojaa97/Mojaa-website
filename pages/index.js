@@ -317,13 +317,13 @@ export default function Home({ allPostsData }) {
                 }}
               >
                 <div className="form-row">
-                  <div className="form-group"><label>Full Name</label><input type="text" name="name" placeholder="Your name" required /></div>
-                  <div className="form-group"><label>Mobile Number</label><input type="tel" name="mobile" placeholder="+91 XXXXX XXXXX" required /></div>
+                  <div className="form-group"><label htmlFor="contact-name">Full Name</label><input id="contact-name" type="text" name="name" placeholder="Your name" required /></div>
+                  <div className="form-group"><label htmlFor="contact-mobile">Mobile Number</label><input id="contact-mobile" type="tel" name="mobile" placeholder="+91 XXXXX XXXXX" required /></div>
                 </div>
-                <div className="form-group"><label>Email Address</label><input type="email" name="email" placeholder="you@company.com" required /></div>
+                <div className="form-group"><label htmlFor="contact-email">Email Address</label><input id="contact-email" type="email" name="email" placeholder="you@company.com" required /></div>
                 <div className="form-group">
-                  <label>I Need Help With</label>
-                  <select name="service" required defaultValue="">
+                  <label htmlFor="contact-service">I Need Help With</label>
+                  <select id="contact-service" name="service" required defaultValue="">
                     <option value="" disabled>Select a service area</option>
                     <option>Startup Advisory &amp; Incorporation</option>
                     <option>Virtual CFO Services</option>
@@ -337,7 +337,7 @@ export default function Home({ allPostsData }) {
                     <option>Other — I will explain below</option>
                   </select>
                 </div>
-                <div className="form-group"><label>Brief Description (optional)</label><textarea name="message" placeholder="Tell us a bit about your requirement..."/></div>
+                <div className="form-group"><label htmlFor="contact-message">Brief Description (optional)</label><textarea id="contact-message" name="message" placeholder="Tell us a bit about your requirement..."/></div>
                 {formState === 'error' && (
                   <p style={{color:'#f87171',marginBottom:'8px',fontSize:'14px'}}>Something went wrong. Please try WhatsApp or email us directly.</p>
                 )}

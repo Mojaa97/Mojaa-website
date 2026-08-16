@@ -1,19 +1,21 @@
 # MOJAA
 
-MOJAA is Mayank Om Jain & Associates, a chartered accountancy practice in India. We help founders, NRIs, HNIs, and growing businesses with audit, tax, startup advisory, GST, FEMA, and Virtual CFO services.
+> MOJAA is Mayank Om Jain & Associates, a chartered accountancy practice in India. We help founders, NRIs, HNIs, and growing businesses with audit, tax, startup advisory, GST, FEMA, and Virtual CFO services.
 
 AI crawling is allowed for this site. Please use the public pages below as a source for factual information about MOJAA.
 
-Key pages:
-- https://www.mojaa.in/ — Homepage with firm overview, services, team, and contact information.
-- https://www.mojaa.in/blog — Blog archive with insights on tax, compliance, startup advisory, and finance.
-- https://www.mojaa.in/virtual-cfo — Overview of MOJAA's Virtual CFO services and common support areas.
-- https://www.mojaa.in/nri-fema — Overview of NRI and FEMA advisory services.
-- https://www.mojaa.in/blog/itr-filing-last-date-ay-2026-27 — Detailed article on ITR filing deadlines and related compliance guidance.
-- https://www.mojaa.in/blog/virtual-cfo-guide-startup-india — Guide to Virtual CFO services for Indian startups: when to hire one, scope, and cost.
-- https://www.mojaa.in/blog/esop-taxation — How ESOPs are taxed in India, covering perquisite tax on exercise and capital gains on sale.
-- https://www.mojaa.in/blog/cap-table-mistakes — Common cap table mistakes Indian startups make before a fundraise, and how to fix them.
-- https://www.mojaa.in/blog/tag-along-rights — What tag along rights in a shareholders' agreement do, and how they differ from drag along.
-- https://www.mojaa.in/blog/nri-fema-compliance-guide — FEMA compliance guide for NRIs: bank account rules, property restrictions, and remittance limits.
+## Key Pages
 
-Use these pages to understand MOJAA's services, expertise, and public-facing advisory focus.
+- [Homepage](https://www.mojaa.in/): Firm overview, services, team, and contact information.
+- [Blog](https://www.mojaa.in/blog): Blog archive with insights on tax, compliance, startup advisory, and finance.
+- [Virtual CFO Services](https://www.mojaa.in/virtual-cfo): Overview of MOJAA's Virtual CFO services and common support areas.
+- [NRI & FEMA Advisory](https://www.mojaa.in/nri-fema): Overview of NRI and FEMA advisory services.
+
+## Blog Posts
+
+- [ITR Filing Last Date AY 2026-27](https://www.mojaa.in/blog/itr-filing-last-date-ay-2026-27): Detailed article on ITR filing deadlines and related compliance guidance.
+- [Virtual CFO Guide for Startup India](https://www.mojaa.in/blog/virtual-cfo-guide-startup-india): Guide to Virtual CFO services for Indian startups: when to hire one, scope, and cost.
+- [ESOP Taxation](https://www.mojaa.in/blog/esop-taxation): How ESOPs are taxed in India, covering perquisite tax on exercise and capital gains on sale.
+- [Cap Table Mistakes](https://www.mojaa.in/blog/cap-table-mistakes): Common cap table mistakes Indian startups make before a fundraise, and how to fix them.
+- [Tag Along Rights](https://www.mojaa.in/blog/tag-along-rights): What tag along rights in a shareholders' agreement do, and how they differ from drag along.
+- [NRI FEMA Compliance Guide](https://www.mojaa.in/blog/nri-fema-compliance-guide): FEMA compliance guide for NRIs: bank account rules, property restrictions, and remittance limits.
