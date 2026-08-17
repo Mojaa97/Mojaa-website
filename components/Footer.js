@@ -1,20 +1,53 @@
 import Link from 'next/link'
+import Icon from './Icon'
 
 export default function Footer() {
   return (
     <>
-      <footer>
-        <div className="footer-brand">Mayank Om Jain <span>&amp;</span> Associates · Chartered Accountants</div>
-        <div className="footer-copy">© 2026 MOJAA. All rights reserved.</div>
-        <div className="footer-links">
-          <Link href="/#services">Services</Link>
-          <Link href="/#team">Team</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/#contact">Contact</Link>
+      <footer className="bg-surface w-full py-xl border-t border-primary/10">
+        <div className="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-4 gap-lg">
+          <div className="md:col-span-2">
+            <h3 className="font-headline-sm text-headline-sm text-primary mb-md">
+              Mayank Om Jain &amp; Associates
+            </h3>
+            <p className="font-body-md text-body-md text-on-surface-variant max-w-md">
+              Chartered Accountants. Strategic financial advisory, Virtual CFO, tax, GST, and
+              FEMA/NRI compliance for founders, HNIs, and growing businesses.
+            </p>
+            <div className="mt-lg">
+              <p className="font-label-caps text-label-caps text-on-surface-variant mb-xs">Member of</p>
+              <p className="font-body-md text-body-md text-primary font-medium">
+                The Institute of Chartered Accountants of India (ICAI)
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col gap-sm">
+            <h4 className="font-label-caps text-label-caps text-primary mb-xs">Firm</h4>
+            <Link href="/#services" className="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200">Services</Link>
+            <Link href="/#team" className="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200">Team</Link>
+            <Link href="/blog" className="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200">Insights</Link>
+          </div>
+          <div className="flex flex-col gap-sm">
+            <h4 className="font-label-caps text-label-caps text-primary mb-xs">Practice Areas</h4>
+            <Link href="/nri-fema" className="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200">NRI &amp; FEMA Advisory</Link>
+            <Link href="/virtual-cfo" className="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200">Virtual CFO Services</Link>
+            <Link href="/contact" className="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors duration-200">Contact</Link>
+          </div>
+          <div className="md:col-span-4 mt-lg pt-md border-t border-primary/10 flex flex-col md:flex-row justify-between items-center gap-sm">
+            <p className="font-label-caps text-label-caps text-on-surface-variant">
+              © 2026 Mayank Om Jain &amp; Associates. Member of ICAI.
+            </p>
+          </div>
         </div>
       </footer>
-      <a href="https://wa.me/919131325035?text=Hello%20CA%20Mayank%2C%20I%20would%20like%20to%20discuss%20a%20financial%20matter." target="_blank" rel="noreferrer" className="float-wa" title="WhatsApp CA Mayank">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.555 4.128 1.528 5.866L.057 23.428a.5.5 0 0 0 .515.572l5.687-1.49A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.9 9.9 0 0 1-5.031-1.372l-.361-.214-3.735.979.997-3.643-.235-.374A9.86 9.86 0 0 1 2.1 12c0-5.468 4.432-9.9 9.9-9.9 5.468 0 9.9 4.432 9.9 9.9 0 5.468-4.432 9.9-9.9 9.9z"/></svg>
+      <a
+        href="https://wa.me/919131325035?text=Hello%20CA%20Mayank%2C%20I%20would%20like%20to%20discuss%20a%20financial%20matter."
+        target="_blank"
+        rel="noreferrer"
+        title="WhatsApp CA Mayank"
+        className="fixed bottom-7 right-7 z-50 w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-200"
+      >
+        <Icon name="chat" className="text-white" style={{ fontSize: '28px' }} />
       </a>
     </>
   )

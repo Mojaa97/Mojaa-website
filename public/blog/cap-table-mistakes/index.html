@@ -167,37 +167,37 @@
 
 <style>
   :root{
-    --ink:#0F172A; --steel:#156082; --steel-dk:#0E4A63;
-    --paper:#FFFFFF; --mist:#F1F5F9; --line:#E2E8F0;
-    --muted:#64748B; --body:#1E293B; --warn:#8B0000; --warn-bg:#FBEAEA;
+    --ink:#1a2634; --steel:#775a19; --steel-dk:#5d4201;
+    --paper:#fbf9fa; --mist:#f0edee; --line:#e4e2e3;
+    --muted:#44474c; --body:#1b1b1d; --warn:#ba1a1a; --warn-bg:#ffdad6;
     --maxw:740px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
     margin:0; background:var(--paper); color:var(--body);
-    font-family:Georgia,"Book Antiqua",Palatino,"Palatino Linotype",serif;
+    font-family:"Playfair Display",Georgia,serif;
     font-size:18px; line-height:1.7;
     -webkit-font-smoothing:antialiased;
   }
-  .sans{font-family:Calibri,"Segoe UI",system-ui,-apple-system,sans-serif;}
+  .sans{font-family:"Public Sans",sans-serif;}
   a{color:var(--steel); text-decoration:underline; text-underline-offset:2px;}
   a:focus-visible{outline:2px solid var(--steel); outline-offset:2px;}
 
   .topband{background:var(--ink); color:#fff; padding:18px 0;}
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px;}
-  .brand{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:15px; letter-spacing:.02em;}
-  .brand small{display:block; color:#7FB3C9; font-weight:700; font-size:10px; letter-spacing:.22em; margin-top:2px;}
+  .brand{font-family:"Public Sans",sans-serif; font-weight:700; font-size:15px; letter-spacing:.02em;}
+  .brand small{display:block; color:#e9c176; font-weight:700; font-size:10px; letter-spacing:.22em; margin-top:2px;}
 
   main{padding:38px 0 60px;}
-  .eyebrow{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--steel); margin:0 0 14px;}
-  h1{font-family:Georgia,"Book Antiqua",serif; font-weight:700; font-size:36px; line-height:1.18; color:var(--ink); margin:0 0 16px;}
-  .lede{font-size:19px; color:#334155; margin:0 0 22px;}
-  .meta{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-size:14px; color:var(--muted); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:12px 0; margin:0 0 30px; display:flex; gap:18px; flex-wrap:wrap;}
+  .eyebrow{font-family:"Public Sans",sans-serif; font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--steel); margin:0 0 14px;}
+  h1{font-family:"Playfair Display",Georgia,serif; font-weight:700; font-size:36px; line-height:1.18; color:var(--ink); margin:0 0 16px;}
+  .lede{font-size:19px; color:#44474c; margin:0 0 22px;}
+  .meta{font-family:"Public Sans",sans-serif; font-size:14px; color:var(--muted); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:12px 0; margin:0 0 30px; display:flex; gap:18px; flex-wrap:wrap;}
   .meta b{color:var(--body);}
 
-  h2{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:25px; line-height:1.3; color:var(--ink); margin:42px 0 12px; padding-top:6px;}
-  h3{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:19px; color:var(--ink); margin:26px 0 6px;}
+  h2{font-family:"Public Sans",sans-serif; font-weight:700; font-size:25px; line-height:1.3; color:var(--ink); margin:42px 0 12px; padding-top:6px;}
+  h3{font-family:"Public Sans",sans-serif; font-weight:700; font-size:19px; color:var(--ink); margin:26px 0 6px;}
   p{margin:0 0 16px; text-align:justify; text-justify:inter-word; hyphens:auto;}
   .notes-section dd{text-align:justify; text-justify:inter-word; hyphens:auto;}
 
@@ -206,37 +206,37 @@
     padding:26px 28px; margin:6px 0 22px;
     border-left:6px solid var(--steel);
   }
-  .quick-answer .qa-label{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#7FB3C9; margin:0 0 12px;}
+  .quick-answer .qa-label{font-family:"Public Sans",sans-serif; font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#e9c176; margin:0 0 12px;}
   .quick-answer p{font-size:17px; line-height:1.6; margin:0; color:#E2E8F0;}
 
   .tldr{background:var(--mist); border-radius:14px; padding:22px 26px; margin:0 0 34px; border-left:6px solid var(--ink);}
-  .tldr .qa-label{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--steel); margin:0 0 10px;}
+  .tldr .qa-label{font-family:"Public Sans",sans-serif; font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--steel); margin:0 0 10px;}
   .tldr ul{margin:0; padding-left:20px;}
-  .tldr li{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-size:16px; line-height:1.55; margin-bottom:8px; color:var(--body);}
+  .tldr li{font-family:"Public Sans",sans-serif; font-size:16px; line-height:1.55; margin-bottom:8px; color:var(--body);}
   .tldr li:last-child{margin-bottom:0;}
 
-  .stat{background:var(--steel); color:#fff; border-radius:14px; padding:22px 26px; margin:24px 0; font-family:Calibri,"Segoe UI",system-ui,sans-serif; display:flex; align-items:center; gap:18px;}
+  .stat{background:var(--steel); color:#fff; border-radius:14px; padding:22px 26px; margin:24px 0; font-family:"Public Sans",sans-serif; display:flex; align-items:center; gap:18px;}
   .stat b{font-size:15px; line-height:1.5; font-weight:700;}
   .stat span{font-size:11px; opacity:.85; display:block; margin-top:6px; font-weight:400; text-transform:uppercase; letter-spacing:.08em;}
 
   .case{background:var(--mist); border-radius:10px; padding:16px 18px; margin:12px 0; border-left:4px solid var(--steel);}
-  .case .name{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; color:var(--steel); font-size:17px;}
+  .case .name{font-family:"Public Sans",sans-serif; font-weight:700; color:var(--steel); font-size:17px;}
   .case p{font-size:16px; margin:6px 0 0; line-height:1.55;}
 
-  .note{background:var(--mist); border-radius:10px; padding:16px 18px; margin:18px 0; font-size:16px; font-family:Calibri,"Segoe UI",system-ui,sans-serif;}
-  .warn{background:var(--warn-bg); border-left:4px solid var(--warn); border-radius:10px; padding:16px 18px; margin:18px 0; font-size:16px; font-family:Calibri,"Segoe UI",system-ui,sans-serif;}
+  .note{background:var(--mist); border-radius:10px; padding:16px 18px; margin:18px 0; font-size:16px; font-family:"Public Sans",sans-serif;}
+  .warn{background:var(--warn-bg); border-left:4px solid var(--warn); border-radius:10px; padding:16px 18px; margin:18px 0; font-size:16px; font-family:"Public Sans",sans-serif;}
   .warn b{color:var(--warn);}
 
   .notes-section{background:var(--mist); border-radius:14px; padding:24px 26px; margin:22px 0;}
   .notes-section h2{margin-top:0;}
-  .notes-section dt{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; color:var(--ink); font-size:16px; margin-top:16px;}
+  .notes-section dt{font-family:"Public Sans",sans-serif; font-weight:700; color:var(--ink); font-size:16px; margin-top:16px;}
   .notes-section dt:first-child{margin-top:0;}
-  .notes-section dd{margin:4px 0 0; font-size:16px; color:var(--body); font-family:Calibri,"Segoe UI",system-ui,sans-serif; line-height:1.6;}
+  .notes-section dd{margin:4px 0 0; font-size:16px; color:var(--body); font-family:"Public Sans",sans-serif; line-height:1.6;}
 
   .faq-section{margin-top:22px;}
   .faq-item{border-bottom:1px solid var(--line); padding:16px 0;}
   .faq-item:first-of-type{border-top:1px solid var(--line);}
-  .faq-item summary{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-weight:700; font-size:18px; color:var(--ink); cursor:pointer; list-style:none; padding-right:34px; position:relative;}
+  .faq-item summary{font-family:"Public Sans",sans-serif; font-weight:700; font-size:18px; color:var(--ink); cursor:pointer; list-style:none; padding-right:34px; position:relative;}
   .faq-item summary::-webkit-details-marker{display:none;}
   .faq-item summary::after{content:"+"; position:absolute; right:0; top:0; font-size:22px; line-height:1; color:var(--steel); font-weight:400;}
   .faq-item[open] summary::after{content:"\2212";}
@@ -244,15 +244,15 @@
   .faq-item p{font-size:16px; margin:12px 0 0;}
 
   .author{display:flex; gap:18px; align-items:flex-start; background:var(--ink); color:#fff; border-radius:14px; padding:24px 26px; margin:40px 0 22px;}
-  .author .avatar{width:54px; height:54px; border-radius:50%; background:var(--steel); flex:0 0 54px; display:flex; align-items:center; justify-content:center; font-family:Calibri,sans-serif; font-weight:700; font-size:20px; color:#fff;}
-  .author .who{font-family:Calibri,"Segoe UI",system-ui,sans-serif;}
+  .author .avatar{width:54px; height:54px; border-radius:50%; background:var(--steel); flex:0 0 54px; display:flex; align-items:center; justify-content:center; font-family:"Public Sans",sans-serif; font-weight:700; font-size:20px; color:#fff;}
+  .author .who{font-family:"Public Sans",sans-serif;}
   .author .who b{font-size:17px;}
-  .author .who p{color:#CBD5E1; font-size:15px; margin:6px 0 0; line-height:1.55;}
-  .author .who .contact{color:#7FB3C9; font-size:14px; margin-top:10px;}
-  .cta{display:inline-block; margin-top:14px; background:var(--steel); color:#fff; text-decoration:none; font-family:Calibri,sans-serif; font-weight:700; font-size:15px; padding:11px 20px; border-radius:8px;}
+  .author .who p{color:#c4c6cc; font-size:15px; margin:6px 0 0; line-height:1.55;}
+  .author .who .contact{color:#e9c176; font-size:14px; margin-top:10px;}
+  .cta{display:inline-block; margin-top:14px; background:var(--steel); color:#fff; text-decoration:none; font-family:"Public Sans",sans-serif; font-weight:700; font-size:15px; padding:11px 20px; border-radius:8px;}
   .cta:focus-visible{outline:2px solid #fff; outline-offset:2px;}
 
-  .sources{font-family:Calibri,"Segoe UI",system-ui,sans-serif; font-size:13px; color:var(--muted); border-top:1px solid var(--line); padding-top:16px; margin-top:30px;}
+  .sources{font-family:"Public Sans",sans-serif; font-size:13px; color:var(--muted); border-top:1px solid var(--line); padding-top:16px; margin-top:30px;}
 
   @media (max-width:560px){
     body{font-size:17px;}
@@ -264,6 +264,9 @@
   }
   @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -402,7 +405,7 @@
       <b>Mayank Jain, CA</b>
       <p>Chartered Accountant and founder of Mayank Om Jain &amp; Associates (MOJAA). He runs cap table audits and fundraise-readiness reviews for founders before they go to market.</p>
       <p class="contact">www.mojaa.in &middot; mayank@mojaa.in &middot; +91 9131325035</p>
-      <a class="cta" href="https://www.mojaa.in/#contact">Get a cap table audit before your next raise</a>
+      <a class="cta" href="https://www.mojaa.in/contact">Get a cap table audit before your next raise</a>
     </div>
   </aside>
 

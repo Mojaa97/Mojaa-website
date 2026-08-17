@@ -2,10 +2,11 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import Icon from '../components/Icon'
 
 const faqs = [
   {
-    q: 'What does MOJAA’s Virtual CFO service actually include each month?',
+    q: "What does MOJAA's Virtual CFO service actually include each month?",
     a: 'A recurring cycle of closed and reconciled books, monthly MIS reporting, cash flow tracking, and a review call walking you through what moved and why. Budgeting, board decks, and fundraise support sit on top of that base cadence as needed.',
   },
   {
@@ -38,6 +39,15 @@ const faqs = [
   },
 ]
 
+const inclusions = [
+  'Monthly MIS & Management Reporting',
+  'Cash Flow & Working Capital',
+  'Budgeting & Variance Analysis',
+  'Board Deck & Investor Reporting',
+  'Financial Controls & Systems',
+  'Fundraise & Diligence Support',
+]
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -57,10 +67,7 @@ const structuredData = {
       description: 'Virtual CFO services for founders and growing businesses, covering MIS, cash flow, budgeting, board reporting, and financial control.',
       inLanguage: 'en',
       publisher: { '@id': 'https://www.mojaa.in/#organization' },
-      speakable: {
-        '@type': 'SpeakableSpecification',
-        xpath: ['//section[@id="quick-answer"]'],
-      },
+      speakable: { '@type': 'SpeakableSpecification', xpath: ['//section[@id="quick-answer"]'] },
     },
     {
       '@type': 'FAQPage',
@@ -85,48 +92,112 @@ export default function VirtualCFO() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </Head>
       <Nav />
-      <main style={{ maxWidth: '900px', margin: '0 auto', padding: '80px 20px 60px' }}>
-        <Link href="/" style={{ color: 'var(--teal)', fontWeight: 600 }}>← Back to Home</Link>
-        <h1 style={{ marginTop: '20px' }}>Virtual CFO Services</h1>
-        <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#334155' }}>
-          MOJAA helps founders and growing businesses bring structure to finance without building a full in-house team. Our Virtual CFO support covers reporting, controls, cashflow visibility, budgeting, investor readiness, and decision support.
-        </p>
-
-        <section id="quick-answer" style={{ marginTop: '32px', padding: '24px', background: '#f8fafc', borderRadius: '12px' }}>
-          <h2 style={{ marginTop: 0 }}>Quick Answer</h2>
-          <p style={{ margin: 0, lineHeight: 1.7 }}>
-            A Virtual CFO gives startups and SMEs strategic finance support, including MIS reporting, cash flow planning, budgeting, and board-ready insights, without the cost of a full-time finance leader.
-          </p>
+      <main className="pt-32 pb-xl">
+        {/* Hero */}
+        <section className="max-w-container-max mx-auto px-gutter mb-xl">
+          <div className="max-w-3xl">
+            <span className="flex items-center gap-sm font-label-caps text-label-caps text-secondary uppercase tracking-widest mb-md">
+              <span className="w-8 h-px bg-secondary" />
+              Service Offering
+            </span>
+            <h1 className="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary leading-tight mb-md">
+              Strategic financial leadership for scaling startups.
+            </h1>
+            <p className="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-md">
+              Elevate your enterprise with bespoke Virtual CFO services designed to instill
+              rigorous financial discipline, optimize capital allocation, and drive sustainable
+              growth without the overhead of a full-time executive.
+            </p>
+            <Link href="/contact" className="inline-flex items-center text-primary-container font-medium group">
+              <span className="border-b border-secondary pb-1 group-hover:border-b-2 transition-all duration-300">Consult our Advisory Team</span>
+              <Icon name="arrow_forward" className="ml-2 transition-transform duration-300 group-hover:translate-x-1" style={{ fontSize: '18px' }} />
+            </Link>
+          </div>
         </section>
 
-        <section style={{ marginTop: '32px' }}>
-          <h2>What we support</h2>
-          <ul style={{ lineHeight: 1.8 }}>
-            <li>Monthly MIS and management reporting</li>
-            <li>Cash flow forecasting and working capital planning</li>
-            <li>Budgeting and variance analysis</li>
-            <li>Financial controls and reporting discipline</li>
-            <li>Investor readiness and board-level support</li>
-          </ul>
+        {/* Scope */}
+        <section className="max-w-container-max mx-auto px-gutter py-xl border-t border-primary/10" id="services">
+          <h2 className="font-headline-md text-headline-md text-primary mb-lg">Comprehensive Scope</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-primary/[0.08] ghost-border">
+            {[
+              { icon: 'account_balance', title: 'Cash Flow Management', desc: 'Meticulous oversight of liquidity, ensuring optimal working capital and precise forecasting to navigate aggressive scaling phases seamlessly.' },
+              { icon: 'pie_chart', title: 'Budgeting & Allocation', desc: 'Strategic formulation of operating budgets, aligning departmental spend with top-level corporate objectives for maximum capital efficiency.' },
+              { icon: 'trending_up', title: 'Fundraising Support', desc: 'Development of institutional-grade financial models, data room preparation, and strategic advisory during equity or debt raising processes.' },
+              { icon: 'summarize', title: 'Board Reporting', desc: 'Curation of definitive board packs, translating complex financial data into actionable intelligence for stakeholders and investors.' },
+            ].map((cell) => (
+              <div key={cell.title} className="bg-surface-container-lowest p-lg hover:bg-surface transition-colors duration-500">
+                <div className="w-12 h-12 rounded-full border border-primary-container/20 flex items-center justify-center mb-sm text-primary-container">
+                  <Icon name={cell.icon} />
+                </div>
+                <h3 className="font-headline-sm text-headline-sm text-primary mb-2">{cell.title}</h3>
+                <p className="text-on-surface-variant font-body-md text-body-md">{cell.desc}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
-        <section style={{ marginTop: '48px' }}>
-          <h2>Frequently asked questions</h2>
-          {faqs.map(({ q, a }, i) => (
-            <details
-              key={i}
-              style={{
-                borderBottom: '1px solid var(--border)',
-                borderTop: i === 0 ? '1px solid var(--border)' : 'none',
-                padding: '16px 0',
-              }}
-            >
-              <summary style={{ fontWeight: 600, color: 'var(--navy)', cursor: 'pointer', fontSize: '1rem' }}>
-                {q}
-              </summary>
-              <p style={{ margin: '12px 0 0', color: '#334155', lineHeight: 1.7, fontSize: '0.95rem' }}>{a}</p>
-            </details>
-          ))}
+        {/* Audience & Inclusions */}
+        <section className="max-w-container-max mx-auto px-gutter py-xl">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-lg">
+            <div className="md:col-span-5 space-y-md">
+              <h2 className="font-headline-md text-headline-md text-primary">Who It&apos;s For</h2>
+              <div className="w-16 h-px bg-secondary" />
+              <p className="font-body-lg text-body-lg text-primary-container leading-relaxed">
+                Designed for founders and growing businesses who need structure without a
+                full-time finance hire.
+              </p>
+              <p className="text-on-surface-variant font-body-md text-body-md">
+                Our Virtual CFO framework provides the rigor and foresight of a seasoned
+                financial executive. It bridges the gap for scaling entities that require
+                senior-level oversight to navigate growth inflection points, without committing
+                to the cost of a full-time executive.
+              </p>
+            </div>
+            <div className="md:col-span-6 md:col-start-7">
+              <h3 className="font-label-caps text-label-caps uppercase tracking-widest text-secondary mb-md">Core Inclusions</h3>
+              <ul className="flex flex-col">
+                {inclusions.map((item) => (
+                  <li key={item} className="py-4 border-b border-primary/10 flex items-center justify-between group hover:bg-surface-container-lowest hover:px-2 transition-all duration-300">
+                    <span className="font-headline-sm text-headline-sm text-primary text-xl">{item}</span>
+                    <Icon name="check" className="text-outline group-hover:text-secondary transition-colors" />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="max-w-container-max mx-auto px-gutter py-lg">
+          <h2 className="font-headline-md text-headline-md text-primary mb-lg">Frequently Asked Questions</h2>
+          <div className="flex flex-col">
+            {faqs.map(({ q, a }, i) => (
+              <details key={q} className="faq-item border-b border-primary/10 py-md" open={i === 0}>
+                <summary className="flex items-center justify-between gap-md font-body-md text-body-md font-semibold text-primary">
+                  {q}
+                  <Icon name="expand_more" className="faq-chevron text-secondary flex-shrink-0" />
+                </summary>
+                <p className="font-body-md text-body-md text-on-surface-variant mt-sm leading-relaxed">{a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* Bottom CTA */}
+        <section className="max-w-container-max mx-auto px-gutter py-xl my-lg" id="consult">
+          <div className="bg-primary-container text-center py-20 px-8 relative overflow-hidden flex flex-col items-center justify-center rounded-lg">
+            <Icon name="assured_workload" className="absolute -right-20 -bottom-20 text-surface-container-lowest/[0.03] select-none pointer-events-none" style={{ fontSize: '300px' }} />
+            <h2 className="font-headline-md text-headline-md text-on-primary mb-sm relative z-10 max-w-2xl">
+              Ready to formalize your financial architecture?
+            </h2>
+            <p className="font-body-md text-body-md text-primary-fixed-dim mb-lg relative z-10 max-w-lg">
+              Engage in a confidential consultation to explore how our Virtual CFO services align
+              with your strategic trajectory.
+            </p>
+            <Link href="/contact" className="relative z-10 bg-secondary text-on-secondary px-8 py-4 rounded-sm font-label-caps text-label-caps tracking-widest hover:bg-surface-container-lowest hover:text-primary transition-colors duration-300">
+              Consult our Virtual CFO Team
+            </Link>
+          </div>
         </section>
       </main>
       <Footer />
