@@ -235,7 +235,7 @@ export default function Home({ allPostsData }) {
         <div className="wrap hero-grid">
           <span className="hero-eyebrow">Chartered Accountants · Strategic Advisors</span>
           <h1>Your business doesn&rsquo;t make decisions <em>only at year&#8209;end.</em></h1>
-          <div className="sub-h">So why should your CA only show up at year-end? Mayank Om Jain &amp; Associates works with founders, businesses, NRIs and professionals throughout the year — across tax, funding, compliance and finance.</div>
+          <div className="sub-h">So why should your CA only show up at year-end? Mayank Om Jain &amp; Associates works with founders, businesses, NRIs and professionals throughout the year across tax, funding, compliance and finance.</div>
           <div className="hero-ctas">
             <Link href="#contact" className="btn btn-primary">Talk to an Expert</Link>
             <Link href="#services" className="btn btn-ghost">See what we handle</Link>
