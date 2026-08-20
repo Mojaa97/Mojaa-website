@@ -4,13 +4,17 @@ export default function Footer() {
   return (
     <>
       <footer>
-        <div className="footer-brand">Mayank Om Jain <span>&amp;</span> Associates · Chartered Accountants</div>
-        <div className="footer-copy">© 2026 MOJAA. All rights reserved.</div>
-        <div className="footer-links">
-          <Link href="/#services">Services</Link>
-          <Link href="/#team">Team</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/#contact">Contact</Link>
+        <div className="footer-inner">
+          <div>
+            <div className="footer-brand">Mayank Om Jain <span>&amp;</span> Associates · Chartered Accountants</div>
+            <div className="footer-copy">© 2026 Mayank Om Jain &amp; Associates. All rights reserved.</div>
+          </div>
+          <div className="footer-links">
+            <Link href="/#services">Services</Link>
+            <Link href="/#team">Team</Link>
+            <Link href="/blog">Blog</Link>
+            <Link href="/#contact">Contact</Link>
+          </div>
         </div>
       </footer>
       <a href="https://wa.me/919131325035?text=Hello%20CA%20Mayank%2C%20I%20would%20like%20to%20discuss%20a%20financial%20matter." target="_blank" rel="noreferrer" className="float-wa" title="WhatsApp CA Mayank">

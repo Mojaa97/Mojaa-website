@@ -5,11 +5,11 @@ import Footer from '../components/Footer'
 
 const faqs = [
   {
-    q: 'What NRI and FEMA services does MOJAA provide?',
+    q: 'What NRI and FEMA services do you provide?',
     a: 'Residential status determination under FEMA and the Income Tax Act, NRE/NRO/FCNR account structuring, property purchase and sale compliance, repatriation support, DTAA planning, and Indian ITR filing for NRIs.',
   },
   {
-    q: 'Can MOJAA help with repatriating money from India to abroad?',
+    q: 'Can you help with repatriating money from India to abroad?',
     a: 'Yes. We handle the full repatriation process from NRO accounts and property sale proceeds, including the Form 15CA/15CB certification required by banks before funds can move out of India.',
   },
   {
@@ -33,7 +33,7 @@ const faqs = [
     a: 'Yes, this is one of our most frequent NRI engagements. We issue the Form 15CB certification your bank requires before processing an outward remittance above the applicable threshold.',
   },
   {
-    q: 'Can NRIs engage MOJAA remotely from abroad?',
+    q: 'Can NRIs engage Mayank Om Jain & Associates remotely from abroad?',
     a: 'Yes. Most of our NRI clients are engaged entirely remotely — document review, calls, and filings are handled without requiring you to be physically present in India.',
   },
 ]
@@ -52,7 +52,7 @@ const structuredData = {
     {
       '@type': 'WebPage',
       '@id': 'https://www.mojaa.in/nri-fema#webpage',
-      name: 'NRI and FEMA Advisory | MOJAA',
+      name: 'NRI and FEMA Advisory | Mayank Om Jain & Associates',
       url: 'https://www.mojaa.in/nri-fema',
       description: 'NRI and FEMA advisory for cross-border tax, property transactions, DTAA, and compliance planning.',
       inLanguage: 'en',
@@ -89,7 +89,7 @@ export default function NRIFEMA() {
         <Link href="/" style={{ color: 'var(--teal)', fontWeight: 600 }}>← Back to Home</Link>
         <h1 style={{ marginTop: '20px' }}>NRI & FEMA Advisory</h1>
         <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#334155' }}>
-          MOJAA supports NRIs and overseas Indians with compliance-focused advice across FEMA, cross-border taxation, DTAA, and property or investment-related planning.
+          We support NRIs and overseas Indians with compliance-focused advice across FEMA, cross-border taxation, DTAA, and property or investment-related planning.
         </p>
 
         <section id="quick-answer" style={{ marginTop: '32px', padding: '24px', background: '#f8fafc', borderRadius: '12px' }}>

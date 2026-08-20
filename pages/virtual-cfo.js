@@ -5,7 +5,7 @@ import Footer from '../components/Footer'
 
 const faqs = [
   {
-    q: 'What does MOJAA’s Virtual CFO service actually include each month?',
+    q: 'What does the Virtual CFO service actually include each month?',
     a: 'A recurring cycle of closed and reconciled books, monthly MIS reporting, cash flow tracking, and a review call walking you through what moved and why. Budgeting, board decks, and fundraise support sit on top of that base cadence as needed.',
   },
   {
@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: 'Do you work with startups outside specific sectors?',
-    a: 'Yes. Our team has run Virtual CFO-style engagements across 100+ startups spanning healthcare, SaaS, FMCG, EdTech, and fintech. Financial fundamentals transfer across sectors more than founders expect.',
+    a: 'Yes. Our team has run 200+ engagements spanning 13+ sectors — healthcare, SaaS, FMCG, EdTech, and fintech among them. Financial fundamentals transfer across sectors more than founders expect.',
   },
   {
     q: 'Is the Virtual CFO engagement remote, or does it require in-person work?',
@@ -52,7 +52,7 @@ const structuredData = {
     {
       '@type': 'WebPage',
       '@id': 'https://www.mojaa.in/virtual-cfo#webpage',
-      name: 'Virtual CFO Services | MOJAA',
+      name: 'Virtual CFO Services | Mayank Om Jain & Associates',
       url: 'https://www.mojaa.in/virtual-cfo',
       description: 'Virtual CFO services for founders and growing businesses, covering MIS, cash flow, budgeting, board reporting, and financial control.',
       inLanguage: 'en',
@@ -89,7 +89,7 @@ export default function VirtualCFO() {
         <Link href="/" style={{ color: 'var(--teal)', fontWeight: 600 }}>← Back to Home</Link>
         <h1 style={{ marginTop: '20px' }}>Virtual CFO Services</h1>
         <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#334155' }}>
-          MOJAA helps founders and growing businesses bring structure to finance without building a full in-house team. Our Virtual CFO support covers reporting, controls, cashflow visibility, budgeting, investor readiness, and decision support.
+          We help founders and growing businesses bring structure to finance without building a full in-house team. Our Virtual CFO support covers reporting, controls, cashflow visibility, budgeting, investor readiness, and decision support.
         </p>
 
         <section id="quick-answer" style={{ marginTop: '32px', padding: '24px', background: '#f8fafc', borderRadius: '12px' }}>

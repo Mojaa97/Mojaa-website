@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import { getSortedPostsData } from '../lib/posts'
@@ -11,9 +11,153 @@ export async function getStaticProps() {
   return { props: { allPostsData } }
 }
 
+const services = [
+  { num: '01', title: 'Audit & Assurance', desc: 'Statutory, tax, internal, and GST audits. Risk-focused, independent, and delivered on time.' },
+  { num: '02', title: 'Direct & Indirect Taxation', desc: 'ITR filing, tax planning, capital gains, advance tax, GST registration and returns, NRI taxation, DTAA, and assessment representation.' },
+  { num: '03', title: 'Startup & Transaction Advisory', desc: 'Incorporation, DPIIT recognition, MSME registration, financial projections, fundraise readiness, and ESOP structuring.' },
+  { num: '04', title: 'Due Diligence & Valuation', desc: 'Buy-side and sell-side financial due diligence, business valuation, share valuation under Income Tax and FEMA.' },
+  { num: '05', title: 'Virtual CFO Services', desc: 'MIS reporting, cash flow management, budgeting, board deck support, working capital optimization, and financial controls.' },
+  { num: '06', title: 'FEMA & NRI Compliance', desc: 'FDI/ODI compliance, FC-GPR, DTAA advisory, transfer pricing, cross-border structuring, and NRI taxation.' },
+  { num: '07', title: 'Corporate Secretarial & ROC Compliance', desc: 'Annual ROC filings, director KYC, share allotment, change of directors, registered office changes, statutory registers.' },
+  { num: '08', title: 'Bookkeeping & Offshore Accounting', desc: 'Tally, Zoho Books, QuickBooks, Xero. Monthly close, financial statement preparation, and offshore accounting for international clients.' },
+  { num: '09', title: 'Corporate Restructuring', desc: 'Mergers, demergers, conversions, and entity restructuring aligned with tax and regulatory requirements.' },
+  { num: '10', title: 'SHA & Founder Agreement Drafting', desc: 'Founder equity splits, vesting terms, exit clauses, and shareholder rights documented before disputes start.' },
+  { num: '11', title: 'Term Sheet & Investment Documentation', desc: 'Reviewing term sheets and preparing investment documentation from the finance and compliance side.' },
+  { num: '12', title: 'Bank Loans & MSME Funding Support', desc: 'Project reports, CMA data, and loan documentation for bank loans and MSME funding.' },
+  { num: '13', title: 'Government Grants & Scheme Assistance', desc: 'Startup India recognition, MSME schemes, and subsidy applications.' },
+  { num: '14', title: 'Spice Board Certification', desc: 'CRES and related registrations for spice exporters and processors.' },
+  { num: '15', title: 'FSSAI Registration & Licensing', desc: 'Registration and licensing support for food and beverage businesses.' },
+]
+
+const roofNodes = [
+  { t: 'Audit', desc: 'Statutory, tax, internal and GST audits — independent and on time.', who: 'Businesses needing statutory or lender-mandated audits.', rel: ['Tax', 'Corp Secretarial'] },
+  { t: 'Tax', desc: 'ITR filing, tax planning, capital gains, advance tax, GST, NRI taxation and DTAA.', who: 'Founders, traders, NRIs, HNIs.', rel: ['Audit', 'FEMA'] },
+  { t: 'Startup Advisory', desc: 'Incorporation, DPIIT recognition, MSME registration, fundraise readiness, ESOP structuring.', who: 'Founders from idea to fundraise.', rel: ['Virtual CFO', 'Due Diligence'] },
+  { t: 'Due Diligence', desc: 'Buy-side and sell-side diligence, business and share valuation.', who: 'Businesses raising, selling, or acquiring.', rel: ['Tax', 'Term Sheets'] },
+  { t: 'Virtual CFO', desc: 'MIS, cash flow, budgeting, board reporting, working capital optimisation.', who: 'Businesses past early-stage, scaling operations.', rel: ['Accounting', 'Startup Advisory'] },
+  { t: 'FEMA', desc: 'FDI/ODI compliance, FC-GPR, DTAA advisory, cross-border structuring, NRI taxation.', who: 'NRIs, foreign investors, cross-border businesses.', rel: ['Tax', 'Due Diligence'] },
+  { t: 'Corp Secretarial', desc: 'ROC filings, director KYC, share allotment, statutory registers.', who: 'Every registered company, every year.', rel: ['Audit', 'Restructuring'] },
+  { t: 'Accounting', desc: 'Tally, Zoho Books, QuickBooks, Xero — monthly close and offshore accounting.', who: 'Any business needing clean books.', rel: ['Virtual CFO', 'Tax'] },
+  { t: 'Restructuring', desc: 'Mergers, demergers, conversions, and entity restructuring.', who: 'Businesses reorganising or consolidating entities.', rel: ['Corp Secretarial', 'Due Diligence'] },
+  { t: 'SHA Drafting', desc: 'Founder equity splits, vesting terms, exit clauses, and shareholder rights.', who: 'Founders bringing on co-founders or investors.', rel: ['Term Sheets', 'Startup Advisory'] },
+  { t: 'Term Sheets', desc: 'Term sheet review and investment documentation support.', who: 'Founders closing an investment round.', rel: ['SHA Drafting', 'Due Diligence'] },
+  { t: 'MSME Loans', desc: 'Project reports, CMA data, and loan documentation for bank loans and MSME funding.', who: 'MSMEs and businesses raising debt.', rel: ['Govt Schemes', 'Virtual CFO'] },
+  { t: 'Govt Schemes', desc: 'Startup India recognition, MSME schemes, and subsidy applications.', who: 'Startups and MSMEs seeking grants or schemes.', rel: ['MSME Loans', 'Startup Advisory'] },
+  { t: 'Spice Board', desc: 'CRES and related registrations for spice exporters and processors.', who: 'Spice exporters and processors.', rel: ['FSSAI', 'Tax'] },
+  { t: 'FSSAI', desc: 'Registration and licensing support for food and beverage businesses.', who: 'Food and beverage businesses.', rel: ['Spice Board', 'Accounting'] },
+]
+
+const scenarios = [
+  { label: "I'm raising funding", chain: ['Financial statements', 'Due diligence', 'Valuation', 'Term sheet review', 'Shareholder agreement', 'Investment documentation', 'FEMA', 'Execution'] },
+  { label: "I'm taking a loan", chain: ['Business financials', 'CMA data', 'Project report', 'Working capital analysis', 'Documentation', 'Bank submission'] },
+  { label: "I'm starting a company", chain: ['Structuring', 'Incorporation', 'DPIIT / MSME registration', 'GST registration', 'Accounting setup', 'Compliance calendar'] },
+  { label: "I'm expanding", chain: ['MIS reporting', 'Cash flow planning', 'Tax structuring', 'Working capital', 'Multi-state GST compliance'] },
+  { label: "I'm bringing in an investor", chain: ['Valuation', 'Due diligence', 'Term sheet', 'Shareholder agreement', 'FEMA (FC-GPR)', 'Tax implications'] },
+  { label: "I'm an NRI investing in India", chain: ['FEMA', 'DTAA', 'NRE/NRO structuring', 'Transaction compliance', 'Tax filing'] },
+  { label: 'I need better financial control', chain: ['Bookkeeping cleanup', 'MIS setup', 'Budgeting', 'Virtual CFO', 'Board reporting'] },
+  { label: 'I need to fix my compliance', chain: ['Compliance audit', 'GST reconciliation', 'ROC filings', 'Director KYC', 'Assessment representation'] },
+]
+
+const stages = [
+  { n: '01', t: 'Idea', desc: "Before you register anything, structure decides your tax and liability position for years.", caps: ['Entity structuring', 'Founder agreements', 'Startup advisory'] },
+  { n: '02', t: 'Incorporate', desc: 'Getting registered correctly the first time avoids costly restructuring later.', caps: ['Incorporation', 'DPIIT recognition', 'MSME registration', 'GST registration'] },
+  { n: '03', t: 'Operate', desc: 'The unglamorous work that keeps a business compliant and audit-ready every month.', caps: ['Bookkeeping & accounting', 'GST returns', 'TDS compliance', 'Direct tax filing'] },
+  { n: '04', t: 'Fund', desc: "Whether it's a bank loan or an investor cheque, funding runs on documentation.", caps: ['CMA data', 'Valuation', 'Due diligence', 'Investment documentation', 'FEMA'] },
+  { n: '05', t: 'Scale', desc: 'Growth without financial visibility is how businesses lose control of cash, margins, and compliance all at once.', caps: ['Virtual CFO', 'MIS & board reporting', 'Multi-entity structuring', 'Investor & lender relations'] },
+]
+
+const audiences = [
+  { title: 'Startups', desc: 'Funding, structuring, and compliance support from idea to fundraise.', tags: ['Startup Advisory', 'SHA Drafting', 'Fundraise Readiness'] },
+  { title: 'MSMEs', desc: 'Bank loans, government schemes, GST, and day-to-day accounting.', tags: ['MSME Loans', 'Govt Schemes', 'GST'] },
+  { title: 'Food & Beverage Businesses', desc: 'FSSAI registration, Spice Board certification, and compliance for F&B operations.', tags: ['FSSAI', 'Spice Board'] },
+  { title: 'NRIs & HNIs', desc: 'FEMA, DTAA, and cross-border tax planning.', tags: ['FEMA', 'DTAA', 'Cross-Border Tax'] },
+  { title: 'Traders & Freelancers', desc: 'Simple, accurate tax and GST filing.', tags: ['Tax Filing', 'GST'] },
+]
+
+const whyBlocks = [
+  { n: '01', t: 'Proactive, not reactive.', p: 'We flag issues before they become problems. Compliance deadlines, tax exposures, regulatory changes — we inform you first, not after.', chips: ['Deadline', 'Alert', 'Action'] },
+  { n: '02', t: 'Founders understand us.', p: 'We speak the language of unit economics, MIS, cap tables and investor decks — not just balance sheets. Built for modern business leaders.' },
+  { n: '03', t: 'One roof, every service.', p: 'From FSSAI registration to fundraise readiness, all 15 service areas sit under one team. No referrals, no gaps, no coordination overhead for you.', chips: ['Audit', 'Tax', 'FSSAI', 'CFO', 'One team'] },
+  { n: '04', t: 'Investment banking DNA.', p: "CA Vivek Jain's M&A and IPO background gives the team a capital markets lens that pure compliance firms don't have." },
+  { n: '05', t: 'Technology-first delivery.', p: 'Tally, Zoho Books, QuickBooks, Xero — plus AI-augmented workflows. Faster, more accurate, better documented work.', chips: ['Tally', 'Zoho Books', 'QuickBooks', 'Xero'] },
+  { n: '06', t: 'Direct partner access.', p: 'No junior handling your file without oversight. CA Mayank Jain and CA Vivek Jain are personally involved in every engagement — you speak to the people actually doing the work.', chips: ['You', 'CA directly'] },
+]
+
+const scenarioCards = [
+  { quote: '"We need a bank loan."', chain: ['Business data', 'CMA data', 'Project report', 'Financial analysis', 'Documentation', 'Bank submission'] },
+  { quote: '"We\'re preparing for investment."', chain: ['Financial statements', 'Due diligence', 'Valuation', 'Term sheet', 'SHA', 'Investment documentation'] },
+  { quote: '"I\'m an NRI investing in India."', chain: ['FEMA', 'Tax', 'DTAA', 'Transaction structuring', 'Compliance'] },
+  { quote: '"We\'re scaling quickly."', chain: ['Accounting', 'MIS', 'Cash flow', 'Virtual CFO', 'Tax', 'Financial controls'] },
+]
+
+const numbers = [
+  { n: '200+', l: 'Startup Engagements' },
+  { n: '13+', l: 'Sectors Served' },
+  { n: '5', l: 'IPOs on the Team’s Track Record' },
+  { n: '₹12,300 Cr+', l: 'Capital Markets Deals' },
+]
+
+const faqs = [
+  { q: 'What does Mayank Om Jain & Associates actually specialize in?', a: 'Fifteen connected service areas — audit, tax, startup and transaction advisory, due diligence, Virtual CFO, FEMA and NRI compliance, corporate secretarial, bookkeeping, corporate restructuring, SHA and founder agreement drafting, term sheet review, MSME loans and funding support, government scheme assistance, and FSSAI/Spice Board certification — delivered by one team instead of being scattered across referrals.' },
+  { q: 'Do you work with businesses outside India?', a: 'Yes. We regularly support NRIs, overseas Indians, and international clients needing offshore accounting or FEMA-compliant cross-border structuring.' },
+  { q: 'How are you different from a traditional CA firm?', a: "We're built around how founders actually operate — MIS, cap tables, investor decks — not just annual compliance. CA Vivek Jain's investment banking background also brings a capital markets lens most compliance firms don't have." },
+  { q: "Can you help before I've even incorporated my company?", a: "Yes. Structure decides your tax and liability position for years, so we're often involved before incorporation — not just after." },
+  { q: 'What does a typical engagement look like?', a: "It starts with a conversation about what's actually happening in your business, then we scope the specific service areas it touches. Most clients end up engaging us across more than one area over time." },
+  { q: 'How quickly can we get started?', a: 'Most engagements begin within a week of an initial call. We respond to every enquiry within 24 business hours.' },
+]
+
+function useReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll('.reveal, .reveal-stagger')
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in')
+          obs.unobserve(e.target)
+        }
+      })
+    }, { threshold: 0.1 })
+    els.forEach((el) => obs.observe(el))
+    return () => obs.disconnect()
+  }, [])
+}
+
 export default function Home({ allPostsData }) {
-  const [activeService, setActiveService] = useState(0)
-  const [formState, setFormState] = useState('idle') // idle | submitting | success | error
+  const [formState, setFormState] = useState('idle')
+  const [activeScenario, setActiveScenario] = useState(0)
+  const [chainShown, setChainShown] = useState(false)
+  const [activeRoof, setActiveRoof] = useState(0)
+  const [activeStage, setActiveStage] = useState(0)
+  const [capsShown, setCapsShown] = useState(false)
+  const [openFaq, setOpenFaq] = useState(0)
+  const [roofPaused, setRoofPaused] = useState(false)
+  const [stagePaused, setStagePaused] = useState(false)
+
+  useReveal()
+
+  useEffect(() => {
+    setChainShown(false)
+    const t = setTimeout(() => setChainShown(true), 30)
+    return () => clearTimeout(t)
+  }, [activeScenario])
+
+  useEffect(() => {
+    setCapsShown(false)
+    const t = setTimeout(() => setCapsShown(true), 30)
+    return () => clearTimeout(t)
+  }, [activeStage])
+
+  useEffect(() => {
+    if (roofPaused) return
+    const t = setTimeout(() => setActiveRoof((r) => (r + 1) % roofNodes.length), 4000)
+    return () => clearTimeout(t)
+  }, [activeRoof, roofPaused])
+
+  useEffect(() => {
+    if (stagePaused) return
+    const t = setTimeout(() => setActiveStage((s) => (s + 1) % stages.length), 4500)
+    return () => clearTimeout(t)
+  }, [activeStage, stagePaused])
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -44,258 +188,467 @@ export default function Home({ allPostsData }) {
         '@id': 'https://www.mojaa.in/#mayank-jain',
         name: 'CA Mayank Jain',
         jobTitle: 'Chartered Accountant',
-        alumniOf: {
-          '@type': 'CollegeOrUniversity',
-          name: 'ICAI',
-        },
+        alumniOf: { '@type': 'CollegeOrUniversity', name: 'ICAI' },
         sameAs: ['https://www.linkedin.com/in/jainmayank13/'],
         knowsAbout: ['Startup Advisory', 'Virtual CFO', 'FEMA', 'GST', 'Income Tax'],
-        affiliation: {
-          '@id': 'https://www.mojaa.in/#organization',
-        },
+        affiliation: { '@id': 'https://www.mojaa.in/#organization' },
       },
       {
         '@type': 'Person',
         '@id': 'https://www.mojaa.in/#vivek-jain',
         name: 'CA Vivek Jain',
         jobTitle: 'Chartered Accountant',
-        alumniOf: {
-          '@type': 'CollegeOrUniversity',
-          name: 'ICAI',
-        },
+        alumniOf: { '@type': 'CollegeOrUniversity', name: 'ICAI' },
         sameAs: ['https://www.linkedin.com/in/jainmayank13/'],
         knowsAbout: ['M&A', 'Due Diligence', 'IPO', 'Capital Markets'],
-        affiliation: {
-          '@id': 'https://www.mojaa.in/#organization',
-        },
+        affiliation: { '@id': 'https://www.mojaa.in/#organization' },
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': 'https://www.mojaa.in/#faq',
+        mainEntity: faqs.map(({ q, a }) => ({
+          '@type': 'Question',
+          name: q,
+          acceptedAnswer: { '@type': 'Answer', text: a },
+        })),
       },
     ],
   }
 
-  useEffect(() => {
-    const els = document.querySelectorAll('.fade-up')
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80)
-          obs.unobserve(e.target)
-        }
-      })
-    }, { threshold: 0.1 })
-    els.forEach(el => obs.observe(el))
-    return () => obs.disconnect()
-  }, [])
-
-  const services = [
-    { num: '01', title: 'Audit & Assurance', desc: 'Statutory, tax, internal, and GST audits. Risk-focused, independent, and delivered on time.' },
-    { num: '02', title: 'Direct Tax Advisory', desc: 'ITR filing, tax planning, capital gains, advance tax, NRI taxation, DTAA, and assessment representation.' },
-    { num: '03', title: 'GST & Indirect Tax', desc: 'Registration, monthly returns, ITC reconciliation, LUT filing, export advisory, and GST litigation support.' },
-    { num: '04', title: 'Startup & Business Advisory', desc: 'Incorporation, DPIIT recognition, MSME registration, financial projections, fundraise readiness, and ESOP structuring.' },
-    { num: '05', title: 'Virtual CFO Services', desc: 'MIS reporting, cash flow management, budgeting, board deck support, working capital optimization, and financial controls.' },
-    { num: '06', title: 'Due Diligence & Valuation', desc: 'Buy-side and sell-side financial due diligence, business valuation, share valuation under Income Tax and FEMA.' },
-    { num: '07', title: 'FEMA & International', desc: 'FDI / ODI compliance, FC-GPR, Form 145/146, DTAA advisory, transfer pricing, cross-border structuring.' },
-    { num: '08', title: 'Corporate Secretarial', desc: 'Annual ROC filings, director KYC, share allotment, change of directors, registered office changes, statutory registers.' },
-    { num: '09', title: 'Bookkeeping & Accounting', desc: 'Tally, Zoho Books, QuickBooks, Xero. Monthly close, financial statement preparation, payroll, and management reporting.' },
-    { num: '10', title: 'Offshore Accounting', desc: 'End-to-end bookkeeping and financial reporting for international clients aligned with global accounting standards.' },
-  ]
+  const roof = roofNodes[activeRoof]
+  const roofCount = roofNodes.length
 
   return (
     <>
       <Head>
         <title>Mayank Om Jain & Associates | Chartered Accountants</title>
-        <meta name="description" content="Mayank Om Jain & Associates — Chartered Accountants, India. Startup advisory, Virtual CFO, Tax, GST, FEMA/NRI. Strategic financial partner for founders, HNIs, and growing businesses." />
+        <meta name="description" content="Mayank Om Jain & Associates — a full-service Chartered Accountancy firm for startups, MSMEs, NRIs, HNIs, traders, and food businesses. Audit, tax, Virtual CFO, FEMA, funding, and compliance — all under one roof." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </Head>
 
       <Nav />
 
       {/* HERO */}
-      <section className="hero" id="hero">
-        <div className="hero-grid-bg" />
-        <div className="hero-glow" />
-        <div className="hero-content">
-          <div className="hero-eyebrow">Chartered Accountants · India</div>
-          <h1>Not Just Compliance.<br /><em>Strategic Financial</em><br />Partnership.</h1>
-          <p className="hero-desc">We work with startup founders, HNIs, NRIs, and growing businesses — building the financial foundation that enables confident decisions, clean compliance, and investment-ready growth.</p>
-          <div className="hero-actions">
-            <Link href="#contact" className="btn-primary">Start a Conversation</Link>
-            <Link href="#services" className="btn-outline">Explore Services</Link>
+      <section className="hero dark" id="hero">
+        <div className="wrap hero-grid">
+          <span className="hero-eyebrow">Chartered Accountants · Strategic Advisors</span>
+          <h1>Your business doesn&rsquo;t make decisions <em>only at year&#8209;end.</em></h1>
+          <div className="sub-h">So why should your CA only show up at year-end? Mayank Om Jain &amp; Associates works with founders, businesses, NRIs and professionals throughout the year — across tax, funding, compliance and finance.</div>
+          <div className="hero-ctas">
+            <Link href="#contact" className="btn btn-primary">Talk to an Expert</Link>
+            <Link href="#services" className="btn btn-ghost">See what we handle</Link>
           </div>
-          <div className="hero-stats">
-            <div className="stat-item"><div className="stat-num">100<span>+</span></div><div className="stat-label">Startup Engagements</div></div>
-            <div className="stat-item"><div className="stat-num">7<span>+</span></div><div className="stat-label">Years Experience</div></div>
-            <div className="stat-item"><div className="stat-num">13<span>+</span></div><div className="stat-label">Sectors Served</div></div>
-            <div className="stat-item"><div className="stat-num">10<span>+</span></div><div className="stat-label">Service Areas</div></div>
+        </div>
+      </section>
+
+      {/* HERO STATS + ORBIT (solid bg, below the banner photo) */}
+      <section className="hero-below">
+        <div className="hero-stats">
+          <div><b>200+</b><span>Startup Engagements</span></div>
+          <div><b>7+</b><span>Years Experience</span></div>
+          <div><b>13+</b><span>Sectors Served</span></div>
+          <div><b>15</b><span>Service Areas</span></div>
+        </div>
+        <div className="wrap" style={{ paddingTop: '64px', paddingBottom: '64px' }}>
+          <div className="orbit-visual-wrap">
+            <div className="orbit-wrap">
+              <div className="orbit-ring r2" />
+              <div className="orbit-ring r1" />
+              <div className="orbit-core">BUSINESS</div>
+              <div className="orbit-node" style={{ top: '6%', left: '48%' }}>Tax</div>
+              <div className="orbit-node" style={{ top: '22%', left: '78%' }}>Funding</div>
+              <div className="orbit-node" style={{ top: '60%', left: '85%' }}>Compliance</div>
+              <div className="orbit-node" style={{ top: '85%', left: '55%' }}>Cash Flow</div>
+              <div className="orbit-node" style={{ top: '78%', left: '12%' }}>Investment</div>
+              <div className="orbit-node" style={{ top: '38%', left: '2%' }}>Documentation</div>
+              <div className="orbit-node" style={{ top: '10%', left: '20%' }}>Growth</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ONE DECISION */}
+      <section className="section-pad" id="decision">
+        <div className="wrap">
+          <div className="decision-head reveal">
+            <div className="badge-row"><span className="icon-badge">&#9670;</span><span className="eyebrow">Our Method</span></div>
+            <h2 className="section-heading">One business decision can create ten financial decisions.</h2>
+            <p style={{ marginTop: '16px', color: 'var(--ink-soft)', fontSize: '15.5px' }}>Pick what&rsquo;s actually happening in your business. We&rsquo;ll show you what it touches.</p>
+          </div>
+
+          <div className="scenario-grid reveal">
+            {scenarios.map((s, i) => (
+              <button
+                key={s.label}
+                className={`scenario-chip${activeScenario === i ? ' active' : ''}`}
+                onClick={() => setActiveScenario(i)}
+                type="button"
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="chain-stage reveal">
+            <span className="chain-label">{scenarios[activeScenario].label}</span>
+            <div className="chain-track">
+              {scenarios[activeScenario].chain.map((item, i) => (
+                <span key={item} style={{ display: 'contents' }}>
+                  {i > 0 && <span className={`chain-arrow${chainShown ? ' show' : ''}`} style={{ transitionDelay: `${i * 0.08}s` }}>&#8594;</span>}
+                  <span className={`chain-item${chainShown ? ' show' : ''}`} style={{ transitionDelay: `${i * 0.08}s` }}>{item}</span>
+                </span>
+              ))}
+            </div>
+            <div className="chain-footer">
+              <p>One conversation. Multiple connected pieces.</p>
+              <Link href="#contact" className="btn btn-primary">Contact us</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ONE ROOF */}
+      <section className="section-pad dark" id="roof">
+        <div className="wrap">
+          <div className="reveal" style={{ maxWidth: '640px', marginBottom: '50px' }}>
+            <div className="badge-row"><span className="icon-badge">&#9678;</span><span className="eyebrow">One Roof, Every Service</span></div>
+            <h2 className="section-heading" style={{ color: '#fff' }}>One firm. More of what your business needs.</h2>
+          </div>
+          <div className="roof-layout">
+            <div
+              className="roof-wheel reveal"
+              onMouseEnter={() => setRoofPaused(true)}
+              onMouseLeave={() => setRoofPaused(false)}
+            >
+              <div className="roof-center">Our<br />Firm</div>
+              {roofNodes.map((node, i) => {
+                const angle = (i / roofCount) * 2 * Math.PI - Math.PI / 2
+                const x = 50 + 40 * Math.cos(angle)
+                const y = 50 + 40 * Math.sin(angle)
+                return (
+                  <div
+                    key={node.t}
+                    className={`roof-node${activeRoof === i ? ' active' : ''}`}
+                    style={{ left: `${x}%`, top: `${y}%`, transform: 'translate(-50%,-50%)' }}
+                    onClick={() => setActiveRoof(i)}
+                  >
+                    {node.t}
+                  </div>
+                )
+              })}
+            </div>
+            <div className="roof-panel reveal">
+              <span className="rp-tag">{roof.who}</span>
+              <h3>{roof.t}</h3>
+              <p>{roof.desc}</p>
+              <div className="roof-related">
+                {roof.rel.map((r) => <span key={r}>{r}</span>)}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section className="section-pad" id="services">
+        <div className="wrap">
+          <div className="reveal" style={{ maxWidth: '640px' }}>
+            <div className="badge-row"><span className="icon-badge">15</span><span className="eyebrow">Our Services</span></div>
+            <h2 className="section-heading">15 service areas. <em>One trusted partner.</em></h2>
+            <p className="section-sub" style={{ marginTop: '16px' }}>End-to-end financial services delivered under one roof. No referrals, no hand-offs — every engagement managed directly by our team.</p>
+          </div>
+          <div className="services-grid reveal-stagger">
+            {services.map((s) => (
+              <div className="service-card" key={s.num}>
+                <span className="service-num">{s.num}</span>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* LIFECYCLE */}
+      <section className="section-pad light-soft">
+        <div className="wrap">
+          <div className="reveal" style={{ maxWidth: '680px', marginBottom: '50px' }}>
+            <div className="badge-row"><span className="icon-badge">&#8599;</span><span className="eyebrow">The Business Lifecycle</span></div>
+            <h2 className="section-heading">We can be involved before the decision — not just after it.</h2>
+          </div>
+          <div className="reveal" onMouseEnter={() => setStagePaused(true)} onMouseLeave={() => setStagePaused(false)}>
+            <div className="stage-track">
+              {stages.map((s, i) => (
+                <button
+                  key={s.n}
+                  className={`stage-btn${activeStage === i ? ' active' : ''}`}
+                  onClick={() => setActiveStage(i)}
+                  type="button"
+                >
+                  <span className="n">{s.n}</span>{s.t}
+                  {activeStage === i && !stagePaused && <span className="stage-progress" key={activeStage} />}
+                </button>
+              ))}
+            </div>
+            <div className="stage-panel">
+              <div className="sp-left">
+                <h3>{stages[activeStage].t}</h3>
+                <p>{stages[activeStage].desc}</p>
+              </div>
+              <div className="sp-caps">
+                {stages[activeStage].caps.map((c, i) => (
+                  <span key={c} className={`sp-cap${capsShown ? ' show' : ''}`} style={{ transitionDelay: `${i * 0.06}s` }}>{c}</span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* WHO WE SERVE */}
-      <section className="serve-bg" id="serve">
-        <div className="section-tag">Who We Serve</div>
-        <h2 className="section-heading">Built for <em>every stage</em> of your journey.</h2>
-        <p className="section-sub">From pre-incorporation to scale-up, from individual tax filing to NRI investment compliance — we are your one-roof financial partner.</p>
-        <div className="serve-grid">
-          {[
-            { icon: <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>, title: 'Startup Founders', desc: 'Incorporation to fundraise readiness. SOW-backed engagements covering compliance, MIS, Virtual CFO, and investor-ready reporting.' },
-            { icon: <><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></>, title: 'NRIs & HNIs', desc: 'FEMA, DTAA, NRE/NRO planning, property transactions, and cross-border tax structuring for Non-Resident Indians and high-net-worth individuals.' },
-            { icon: <><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></>, title: 'Growing Businesses', desc: 'SMEs and established enterprises needing robust audit, tax planning, GST compliance, and structured financial reporting systems.' },
-            { icon: <><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></>, title: 'Freelancers & Solopreneurs', desc: 'Simplified tax filing, GST registration, entity structuring advice, and compliance clarity for independent professionals.' },
-            { icon: <><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></>, title: 'Traders & Investors', desc: 'Capital gains computation, F&O tax treatment, advance tax planning, ITR filing, and portfolio-level tax efficiency strategies.' },
-            { icon: <><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></>, title: 'Service Providers', desc: 'GST on services, TDS compliance, professional fee structuring, and sector-specific advisory for consultants and service businesses.' },
-          ].map((c, i) => (
-            <div className="serve-card fade-up" key={i}>
-              <div className="serve-icon"><svg viewBox="0 0 24 24">{c.icon}</svg></div>
-              <h3>{c.title}</h3><p>{c.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SERVICES */}
-      <section id="services">
-        <div className="services-intro">
-          <div>
-            <div className="section-tag">Our Services</div>
-            <h2 className="section-heading">Ten service areas.<br /><em>One trusted partner.</em></h2>
+      <section className="section-pad" id="serve">
+        <div className="wrap">
+          <div className="reveal" style={{ maxWidth: '640px' }}>
+            <div className="badge-row"><span className="icon-badge">&#10003;</span><span className="eyebrow">Who We Serve</span></div>
+            <h2 className="section-heading">Built for <em>every stage</em> of your journey.</h2>
+            <p className="section-sub" style={{ marginTop: '16px' }}>From pre-incorporation to scale-up, from FSSAI licensing to NRI investment compliance — we are your one-roof financial partner.</p>
           </div>
-          <p className="section-sub">End-to-end financial services delivered under one roof. No referrals, no hand-offs — every engagement managed directly by our team.</p>
-        </div>
-        <div className="services-grid">
-          {services.map((s, i) => (
-            <div key={i} className={`service-item${activeService === i ? ' active' : ''}`} onClick={() => setActiveService(i)}>
-              <div className="service-num">{s.num}</div>
-              <h3>{s.title}</h3>
-              <p>{s.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* TEAM */}
-      <section className="team-bg" id="team">
-        <div className="section-tag" style={{color:'var(--teal)'}}>Our Team</div>
-        <h2 className="section-heading" style={{color:'#fff'}}>The people behind <em>the practice.</em></h2>
-        <div className="team-grid">
-          {/* Mayank */}
-          <div className="team-card fade-up">
-            <Image src="/mayank.jpeg" alt="CA Mayank Jain" width={600} height={340} className="team-photo" />
-            <div className="team-info">
-              <div className="team-tag">Founder</div>
-              <div className="team-name">CA Mayank Jain</div>
-              <div className="team-title">Chartered Accountant · ICAI, November 2022</div>
-              <p className="team-bio">Chartered Accountant with 7+ years of experience spanning financial analysis, due diligence, startup advisory, and Virtual CFO-style engagements across 13+ sectors. Also serves as a consultant at Alchemy Business Intelligence & Insights, bringing institutional-grade financial thinking to growing businesses.</p>
-              <div className="team-creds">
-                <div className="team-cred">AICA Level 1 — AI Fundamentals, ICAI</div>
-                <div className="team-cred">100+ Startup Engagements · Healthcare, SaaS, FMCG, EdTech, Fintech & more</div>
-                <div className="team-cred">Prior: Banshi Jain & Associates · 2017–2024</div>
-              </div>
-            </div>
-          </div>
-          {/* Vivek */}
-          <div className="team-card fade-up">
-            <Image src="/vivek.jpeg" alt="CA Vivek Jain" width={600} height={340} className="team-photo" />
-            <div className="team-info">
-              <div className="team-tag">Associate</div>
-              <div className="team-name">CA Vivek Jain</div>
-              <div className="team-title">Chartered Accountant · Investment Banking & M&A</div>
-              <p className="team-bio">Distinguished background in investment banking and M&A advisory. Has worked with Intensive Fiscal Services, D.K. Surana Family Office, and Chhajed & Doshi CA Mumbai. Part of 5 landmark IPOs including Vishal Mega Mart (₹8,000 Cr) and Waaree Energies (₹4,300 Cr). Joined MOJAA in December 2025.</p>
-              <div className="team-highlights">
-                <span className="team-highlight-tag">Investment Banking</span>
-                <span className="team-highlight-tag">M&A Advisory</span>
-                <span className="team-highlight-tag">5 IPOs</span>
-                <span className="team-highlight-tag">Due Diligence</span>
-                <span className="team-highlight-tag">Capital Markets</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* WHY MOJAA */}
-      <section id="why">
-        <div className="section-tag">Why MOJAA</div>
-        <h2 className="section-heading">Not a commodity firm.<br /><em>A strategic partner.</em></h2>
-        <div className="why-grid">
-          {[
-            { n:'01', t:'Proactive, Not Reactive', p:'We flag issues before they become problems. Compliance deadlines, tax exposures, regulatory changes — we inform you first, not after.' },
-            { n:'02', t:'Founders Understand Us', p:'We speak the language of unit economics, MIS, cap tables, and investor decks — not just balance sheets. Built for modern business leaders.' },
-            { n:'03', t:'One Roof, Every Service', p:'From GST registration to IPO readiness, all 10 service areas under one team. No referrals, no gaps, no coordination overhead for you.' },
-            { n:'04', t:'Investment Banking DNA', p:"CA Vivek Jain's M&A and IPO background gives our team a capital markets lens that pure compliance firms simply do not have." },
-            { n:'05', t:'Technology-First Delivery', p:'Tally, Zoho, QuickBooks, Xero — and AI-augmented workflows. We deliver faster, more accurate, and better documented work.' },
-            { n:'06', t:'Direct Partner Access', p:'No juniors handling your file without oversight. CA Mayank Jain and CA Vivek Jain are personally involved in every engagement.' },
-          ].map((w,i) => (
-            <div className="why-card fade-up" key={i}>
-              <div className="why-num">{w.n}</div>
-              <h3>{w.t}</h3><p>{w.p}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* BLOG PREVIEW */}
-      {allPostsData.length > 0 && (
-        <section className="blog-bg" id="blog">
-          <div className="section-tag">Insights</div>
-          <h2 className="section-heading">From the <em>MOJAA desk.</em></h2>
-          <p className="section-sub">Tax, compliance, startup law, and financial strategy — explained plainly for founders and business leaders.</p>
-          <div className="blog-grid">
-            {allPostsData.map(({ id, date, title, excerpt }) => (
-              <div className="blog-card" key={id}>
-                <div className="blog-card-body">
-                  <div className="blog-date">{date}</div>
-                  <h3>{title}</h3>
-                  <p>{excerpt}</p>
-                  <Link href={`/blog/${id}`} className="blog-read-more">Read More →</Link>
+          <div className="audience-grid reveal-stagger">
+            {audiences.map((a) => (
+              <div className="audience-card" key={a.title}>
+                <h3>{a.title}</h3>
+                <p>{a.desc}</p>
+                <div className="ac-tags">
+                  {a.tags.map((t) => <span key={t}>{t}</span>)}
                 </div>
               </div>
             ))}
           </div>
-          <div style={{marginTop:'40px', textAlign:'center'}}>
-            <Link href="/blog" className="btn-primary" style={{display:'inline-block'}}>View All Posts</Link>
+        </div>
+      </section>
+
+      {/* FOUNDER */}
+      <section className="section-pad light-soft">
+        <div className="wrap founder-grid">
+          <div className="reveal founder-photo">
+            <Image src="/mayank.jpeg" alt="CA Mayank Jain, Founder of Mayank Om Jain & Associates" width={600} height={700} style={{ width: '100%', height: 'auto' }} />
+            <div className="fp-badge">Chartered Accountant · ICAI, November 2022</div>
+          </div>
+          <div className="reveal">
+            <div className="founder-name">CA Mayank Jain — Founder</div>
+            <h2>You shouldn&rsquo;t have to explain your business five times.</h2>
+            <p className="desc">Chartered Accountant with over 7 years of experience in financial advisory, audit, and taxation, across 200+ engagements spanning 13+ sectors — helping businesses build strong financial foundations rather than just meet compliance deadlines. He founded Mayank Om Jain &amp; Associates because most businesses don&rsquo;t need a firm that shows up once a year to file returns — they need a partner who is involved through the year, understands the business, and helps them make better financial and legal decisions. Also a consultant at Alchemy Business Intelligence &amp; Insights; previously at Banshi Jain &amp; Associates, 2017–2024.</p>
+            <div className="founder-numbers">
+              <div><b>7+</b><span>Years</span></div>
+              <div><b>200+</b><span>Engagements</span></div>
+              <div><b>13+</b><span>Sectors</span></div>
+              <div><b>15</b><span>Service Areas</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TEAM */}
+      <section className="section-pad" id="team">
+        <div className="wrap">
+          <div className="reveal" style={{ maxWidth: '640px' }}>
+            <div className="badge-row"><span className="icon-badge">2</span><span className="eyebrow">Our Team</span></div>
+            <h2 className="section-heading">The people behind <em>the practice.</em></h2>
+          </div>
+          <div className="team-grid reveal-stagger">
+            <div className="team-card">
+              <div className="team-photo-row">
+                <Image src="/mayank.jpeg" alt="CA Mayank Jain" width={76} height={76} />
+                <div>
+                  <div className="team-role">Founder</div>
+                  <h3>CA Mayank Jain</h3>
+                  <div className="cred">Chartered Accountant · ICAI, Nov 2022</div>
+                </div>
+              </div>
+              <p className="bio">7+ years and 200+ engagements across financial advisory, audit, and taxation. AICA Level 1 — AI Fundamentals, ICAI.</p>
+              <div className="team-tags">
+                <span>Financial Advisory</span><span>Tax</span><span>Startup Advisory</span><span>Virtual CFO</span><span>Due Diligence</span>
+              </div>
+            </div>
+            <div className="team-card">
+              <div className="team-photo-row">
+                <Image src="/vivek.jpeg" alt="CA Vivek Jain" width={76} height={76} />
+                <div>
+                  <div className="team-role">Associate</div>
+                  <h3>CA Vivek Jain</h3>
+                  <div className="cred">Investment Banking &amp; M&amp;A · Joined Dec 2025</div>
+                </div>
+              </div>
+              <p className="bio">Background spanning Intensive Fiscal Services, D.K. Surana Family Office and Chhajed &amp; Doshi CA Mumbai. Part of 5 landmark IPOs, including Vishal Mega Mart (₹8,000 Cr) and Waaree Energies (₹4,300 Cr).</p>
+              <div className="team-tags">
+                <span>Investment Banking</span><span>M&amp;A</span><span>Capital Markets</span><span>5 IPOs</span><span>Due Diligence</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHY CHOOSE US */}
+      <section className="section-pad light-soft" id="why">
+        <div className="wrap">
+          <div className="reveal" style={{ maxWidth: '640px', marginBottom: '10px' }}>
+            <div className="badge-row"><span className="icon-badge">&#9733;</span><span className="eyebrow">Why Choose Us</span></div>
+            <h2 className="section-heading">Not a commodity firm. <em>A strategic partner.</em></h2>
+          </div>
+
+          {whyBlocks.map((w) => (
+            <div className="why-block reveal" key={w.n}>
+              <div className="why-num">{w.n}</div>
+              <div>
+                <h3>{w.t}</h3>
+                <p>{w.p}</p>
+                {w.chips && (
+                  <div className="why-anim">
+                    {w.chips.map((c, i) => (
+                      <span key={c} style={{ display: 'contents' }}>
+                        {i > 0 && <span className="wa-arrow">&#8594;</span>}
+                        <span
+                          className="wa-node"
+                          style={i === w.chips.length - 1 && w.chips.length > 1 ? { borderColor: 'var(--teal-light)', background: 'rgba(79,163,150,.15)' } : undefined}
+                        >
+                          {c}
+                        </span>
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SCENARIOS */}
+      <section className="section-pad">
+        <div className="wrap">
+          <div className="reveal" style={{ maxWidth: '640px' }}>
+            <div className="badge-row"><span className="icon-badge">&#9654;</span><span className="eyebrow">In Practice</span></div>
+            <h2 className="section-heading">What this looks like in real life.</h2>
+            <p className="section-sub" style={{ marginTop: '16px' }}>Anonymised, illustrative scenarios — not client case studies.</p>
+          </div>
+          <div className="scenario-cards reveal-stagger">
+            {scenarioCards.map((s) => (
+              <div className="scenario-card" key={s.quote}>
+                <div className="sc-quote">{s.quote}</div>
+                <div className="sc-chain">
+                  {s.chain.map((c, i) => (
+                    <span key={c} style={{ display: 'contents' }}>
+                      {i > 0 && <span className="arrow">&#8594;</span>}
+                      <span className="node">{c}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* NUMBERS */}
+      <section className="section-pad dark">
+        <div className="wrap">
+          <div className="reveal" style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 10px' }}>
+            <span className="eyebrow" style={{ textAlign: 'center' }}>By The Numbers</span>
+          </div>
+        </div>
+        <div className="numbers-grid reveal-stagger">
+          {numbers.map((n) => (
+            <div className="number-cell" key={n.l}>
+              <b>{n.n}</b>
+              <span>{n.l}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* BLOG */}
+      {allPostsData.length > 0 && (
+        <section className="section-pad" id="blog">
+          <div className="wrap">
+            <div className="reveal" style={{ maxWidth: '640px' }}>
+              <div className="badge-row"><span className="icon-badge">&#9998;</span><span className="eyebrow">Insights</span></div>
+              <h2 className="section-heading">Useful answers to expensive questions.</h2>
+              <p className="section-sub" style={{ marginTop: '16px' }}>Tax, compliance, startup law and financial strategy — explained without unnecessary jargon.</p>
+            </div>
+            <div className="blog-grid reveal-stagger">
+              {allPostsData.map(({ id, date, title, excerpt }) => (
+                <Link className="blog-card" href={`/blog/${id}`} key={id}>
+                  <span className="blog-date">{date}</span>
+                  <h3>{title}</h3>
+                  <p>{excerpt}</p>
+                  <span className="rm">Read More &#8594;</span>
+                </Link>
+              ))}
+            </div>
+            <div style={{ marginTop: '40px', textAlign: 'center' }}>
+              <Link href="/blog" className="btn btn-primary">View All Posts</Link>
+            </div>
           </div>
         </section>
       )}
 
+      {/* FAQ */}
+      <section className="section-pad light-soft">
+        <div className="wrap" style={{ maxWidth: '840px' }}>
+          <div className="reveal" style={{ marginBottom: '20px' }}>
+            <div className="badge-row"><span className="icon-badge">?</span><span className="eyebrow">FAQ</span></div>
+            <h2 className="section-heading" style={{ fontSize: 'clamp(26px,3.4vw,36px)' }}>Questions, answered directly.</h2>
+          </div>
+          <div className="reveal">
+            {faqs.map(({ q, a }, i) => (
+              <div className={`faq-item${openFaq === i ? ' open' : ''}`} key={q}>
+                <button className="faq-q" onClick={() => setOpenFaq(openFaq === i ? -1 : i)} type="button">
+                  {q}<span className="plus">+</span>
+                </button>
+                <div className="faq-a" style={{ maxHeight: openFaq === i ? '400px' : '0' }}>
+                  <p>{a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CONTACT */}
-      <section className="contact-bg" id="contact">
-        <div className="section-tag" style={{color:'var(--teal)'}}>Get In Touch</div>
-        <h2 className="section-heading" style={{color:'#fff'}}>Let&apos;s build your<br /><em>financial foundation.</em></h2>
-        <div className="contact-grid">
-          <div className="contact-info">
-            <h3>Reach us directly.</h3>
-            <div className="contact-item">
-              <div className="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg></div>
-              <div><div className="contact-label">Mobile / WhatsApp</div><div className="contact-value"><a href="tel:+919131325035">+91 91313 25035</a></div></div>
+      <section className="section-pad contact-section" id="contact">
+        <div className="wrap contact-grid">
+          <div className="reveal">
+            <div className="badge-row"><span className="icon-badge">&#8594;</span><span className="eyebrow">Get In Touch</span></div>
+            <h2>Have a business decision coming up?</h2>
+            <p className="lede">Let&rsquo;s understand the financial, tax and compliance side before you make the move.</p>
+            <div className="reach-item">
+              <span className="rl">Mobile / WhatsApp</span>
+              <a href="tel:+919131325035">+91 91313 25035</a>
             </div>
-            <div className="contact-item">
-              <div className="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-              <div><div className="contact-label">Email</div><div className="contact-value"><a href="mailto:mayank@mojaa.in">mayank@mojaa.in</a></div></div>
+            <div className="reach-item">
+              <span className="rl">Email</span>
+              <a href="mailto:mayank@mojaa.in">mayank@mojaa.in</a>
             </div>
-            <div className="contact-item">
-              <div className="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-              <div><div className="contact-label">Location</div><div className="contact-value">India</div></div>
+            <div className="reach-item">
+              <span className="rl">Location</span>
+              <div>India</div>
             </div>
-            <div className="contact-item">
-              <div className="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-              <div><div className="contact-label">Response Time</div><div className="contact-value">Within 24 business hours</div></div>
+            <div className="reach-item">
+              <span className="rl">Response Time</span>
+              <div style={{ fontSize: '16px', color: 'var(--ink-on-dark-soft)' }}>Within 24 business hours</div>
             </div>
           </div>
-          <div>
+          <div className="reveal form-box">
             {formState === 'success' ? (
               <div className="contact-success">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="48" height="48"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="48" height="48"><circle cx="12" cy="12" r="10" /><polyline points="9 12 11 14 15 10" /></svg>
                 <h3>Message Sent!</h3>
-                <p>Thank you for reaching out. We&apos;ll get back to you within 24 business hours.</p>
+                <p>Thank you for reaching out. We&rsquo;ll get back to you within 24 business hours.</p>
               </div>
             ) : (
               <form
-                className="contact-form"
                 onSubmit={async (e) => {
                   e.preventDefault()
                   setFormState('submitting')
@@ -306,50 +659,44 @@ export default function Home({ allPostsData }) {
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify(data),
                     })
-                    if (res.ok) {
-                      setFormState('success')
-                    } else {
-                      setFormState('error')
-                    }
+                    setFormState(res.ok ? 'success' : 'error')
                   } catch {
                     setFormState('error')
                   }
                 }}
               >
+                <div className="form-row"><label>Full Name</label><input type="text" name="name" placeholder="Your name" required /></div>
+                <div className="form-row"><label>Mobile Number</label><input type="tel" name="mobile" placeholder="+91" required /></div>
+                <div className="form-row"><label>Email Address</label><input type="email" name="email" placeholder="you@company.com" required /></div>
                 <div className="form-row">
-                  <div className="form-group"><label>Full Name</label><input type="text" name="name" placeholder="Your name" required /></div>
-                  <div className="form-group"><label>Mobile Number</label><input type="tel" name="mobile" placeholder="+91 XXXXX XXXXX" required /></div>
-                </div>
-                <div className="form-group"><label>Email Address</label><input type="email" name="email" placeholder="you@company.com" required /></div>
-                <div className="form-group">
                   <label>I Need Help With</label>
                   <select name="service" required defaultValue="">
                     <option value="" disabled>Select a service area</option>
                     <option>Startup Advisory &amp; Incorporation</option>
                     <option>Virtual CFO Services</option>
-                    <option>GST Registration &amp; Compliance</option>
-                    <option>Income Tax &amp; Tax Planning</option>
-                    <option>NRI / FEMA / International Tax</option>
+                    <option>Direct &amp; Indirect Taxation</option>
+                    <option>NRI / FEMA Compliance</option>
                     <option>Due Diligence &amp; Valuation</option>
                     <option>Audit &amp; Assurance</option>
-                    <option>Corporate Secretarial</option>
-                    <option>Bookkeeping &amp; Accounting</option>
+                    <option>Corporate Secretarial &amp; ROC Compliance</option>
+                    <option>Bookkeeping &amp; Offshore Accounting</option>
+                    <option>Corporate Restructuring</option>
+                    <option>SHA &amp; Founder Agreement Drafting</option>
+                    <option>Term Sheet &amp; Investment Documentation</option>
+                    <option>Bank Loans &amp; MSME Funding Support</option>
+                    <option>Government Grants &amp; Scheme Assistance</option>
+                    <option>FSSAI Registration &amp; Licensing</option>
+                    <option>Spice Board Certification</option>
                     <option>Other — I will explain below</option>
                   </select>
                 </div>
-                <div className="form-group"><label>Brief Description (optional)</label><textarea name="message" placeholder="Tell us a bit about your requirement..."/></div>
+                <div className="form-row"><label>Brief Description (optional)</label><textarea name="message" rows="3" placeholder="What's going on?" /></div>
                 {formState === 'error' && (
-                  <p style={{color:'#f87171',marginBottom:'8px',fontSize:'14px'}}>Something went wrong. Please try WhatsApp or email us directly.</p>
+                  <p style={{ color: '#f87171', marginBottom: '12px', fontSize: '13px' }}>Something went wrong. Please try WhatsApp or email us directly.</p>
                 )}
-                <div className="form-submit">
-                  <button type="submit" className="btn-submit" disabled={formState === 'submitting'}>
-                    {formState === 'submitting' ? 'Sending...' : 'Send Message'}
-                  </button>
-                  <a href="https://wa.me/919131325035?text=Hello%20CA%20Mayank%2C%20I%20would%20like%20to%20discuss%20a%20financial%20matter." target="_blank" rel="noreferrer" className="whatsapp-btn">
-                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.555 4.128 1.528 5.866L.057 23.428a.5.5 0 0 0 .515.572l5.687-1.49A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.9 9.9 0 0 1-5.031-1.372l-.361-.214-3.735.979.997-3.643-.235-.374A9.86 9.86 0 0 1 2.1 12c0-5.468 4.432-9.9 9.9-9.9 5.468 0 9.9 4.432 9.9 9.9 0 5.468-4.432 9.9-9.9 9.9z"/></svg>
-                    WhatsApp
-                  </a>
-                </div>
+                <button type="submit" className="btn-submit" disabled={formState === 'submitting'}>
+                  {formState === 'submitting' ? 'Sending...' : 'Send Message'}
+                </button>
               </form>
             )}
           </div>

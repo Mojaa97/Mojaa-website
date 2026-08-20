@@ -17,29 +17,29 @@ export default function Blog({ allPostsData }) {
         <meta name="description" content="Tax, compliance, startup law, and financial strategy — explained plainly for founders and business leaders by CA Mayank Jain." />
       </Head>
       <Nav />
-      <section className="blog-bg" style={{paddingTop:'120px'}}>
-        <div className="section-tag">Insights</div>
-        <h2 className="section-heading">From the <em>MOJAA desk.</em></h2>
-        <p className="section-sub">Tax, compliance, startup law, and financial strategy — explained plainly for founders and business leaders.</p>
-        {allPostsData.length === 0 ? (
-          <div style={{marginTop:'56px', padding:'48px', background:'#fff', textAlign:'center', border:'1px solid var(--border)'}}>
-            <h3 style={{color:'var(--navy)', fontFamily:'Cormorant Garamond, serif', fontSize:'1.5rem', fontWeight:'400', marginBottom:'12px'}}>Blog posts coming soon.</h3>
-            <p style={{color:'var(--gray)', fontSize:'0.88rem'}}>Add markdown files to the <code style={{background:'var(--offwhite)', padding:'2px 6px', borderRadius:'2px'}}>posts/</code> folder to publish articles here.</p>
-          </div>
-        ) : (
-          <div className="blog-grid" style={{marginTop:'56px'}}>
-            {allPostsData.map(({ id, date, title, excerpt }) => (
-              <div className="blog-card" key={id}>
-                <div className="blog-card-body">
-                  <div className="blog-date">{date}</div>
+      <section className="section-pad blog-bg" style={{paddingTop:'140px'}}>
+        <div className="wrap">
+          <div className="badge-row"><span className="icon-badge">&#9998;</span><span className="eyebrow">Insights</span></div>
+          <h2 className="section-heading">From <em>our desk.</em></h2>
+          <p className="section-sub">Tax, compliance, startup law, and financial strategy — explained plainly for founders and business leaders.</p>
+          {allPostsData.length === 0 ? (
+            <div style={{marginTop:'56px', padding:'48px', background:'#fff', textAlign:'center', border:'1px solid var(--border)'}}>
+              <h3 style={{color:'var(--navy)', fontSize:'1.5rem', fontWeight:'700', marginBottom:'12px'}}>Blog posts coming soon.</h3>
+              <p style={{color:'var(--gray)', fontSize:'0.88rem'}}>Add markdown files to the <code style={{background:'var(--offwhite)', padding:'2px 6px', borderRadius:'2px'}}>posts/</code> folder to publish articles here.</p>
+            </div>
+          ) : (
+            <div className="blog-grid" style={{marginTop:'50px'}}>
+              {allPostsData.map(({ id, date, title, excerpt }) => (
+                <Link className="blog-card" href={`/blog/${id}`} key={id}>
+                  <span className="blog-date">{date}</span>
                   <h3>{title}</h3>
                   <p>{excerpt}</p>
-                  <Link href={`/blog/${id}`} className="blog-read-more">Read More →</Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+                  <span className="rm">Read More &#8594;</span>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
       </section>
       <Footer />
     </>
