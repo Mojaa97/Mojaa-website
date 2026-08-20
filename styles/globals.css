@@ -8,6 +8,12 @@ html {
 
 body {
   @apply bg-background text-on-background font-body-md antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-color: #0a0f1a;
+  color: #e9edf5;
 }
 
 a {
@@ -39,6 +45,9 @@ a {
 /* Ghost border: precise 1px definition instead of shadow */
 .ghost-border {
   border: 1px solid rgba(26, 38, 52, 0.1);
+}
+.dark .ghost-border {
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 /* Nav glass */
@@ -113,4 +122,19 @@ a {
   padding-left: 1.5rem;
   margin: 2rem 0;
   font-style: italic;
+}
+
+.dark .prose-mojaa h2,
+.dark .prose-mojaa h3 {
+  color: #e9edf5;
+}
+.dark .prose-mojaa strong {
+  color: #e9edf5;
+}
+.dark .prose-mojaa a {
+  color: #e9c176;
+}
+.dark .prose-mojaa blockquote {
+  border-color: #e9c176;
+  color: #e9edf5;
 }
