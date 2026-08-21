@@ -87,7 +87,7 @@ const scenarioCards = [
 
 const numbers = [
   { n: '200+', l: 'Startup Engagements' },
-  { n: '13+', l: 'Sectors Served' },
+  { n: '17+', l: 'Sectors Served' },
   { n: '5', l: 'IPOs on the Team’s Track Record' },
   { n: '₹12,300 Cr+', l: 'Capital Markets Deals' },
 ]
@@ -214,7 +214,7 @@ export default function Home({ allPostsData }) {
         <div className="wrap hero-grid">
           <span className="hero-eyebrow">Chartered Accountants · Strategic Advisors</span>
           <h1>Your business doesn&rsquo;t make decisions <em>only at year&#8209;end.</em></h1>
-          <div className="sub-h">So why should your CA only show up at year-end? Mayank Om Jain &amp; Associates works with founders, businesses, NRIs and professionals throughout the year across tax, funding, compliance and finance.</div>
+          <div className="sub-h">So why should your CA only show up at year-end? Mayank Om Jain &amp; Associates works with Founders, startups, businesses, MSMEs, NRIs, AIFs and Professionals throughout the year across tax, funding, compliance and finance.</div>
           <div className="hero-ctas">
             <Link href="#contact" className="btn btn-primary">Talk to an Expert</Link>
             <Link href="#services" className="btn btn-ghost">See what we handle</Link>
@@ -227,8 +227,8 @@ export default function Home({ allPostsData }) {
         <div className="hero-stats">
           <div><CountUp value="200+" /><span>Startup Engagements</span></div>
           <div><CountUp value="7+" /><span>Years Experience</span></div>
-          <div><CountUp value="13+" /><span>Sectors Served</span></div>
-          <div><CountUp value="15" /><span>Service Areas</span></div>
+          <div><CountUp value="17+" /><span>Sectors Served</span></div>
+          <div><CountUp value="15+" /><span>Service Areas</span></div>
         </div>
         <div className="wrap" style={{ paddingTop: '64px', paddingBottom: '64px' }}>
           <div className="capability-panel">
@@ -334,9 +334,9 @@ export default function Home({ allPostsData }) {
       <section className="section-pad" id="services">
         <div className="wrap">
           <div className="reveal" style={{ maxWidth: '640px' }}>
-            <div className="badge-row"><span className="icon-badge">15</span><span className="eyebrow">Our Services</span></div>
-            <h2 className="section-heading">15 service areas. <em>One trusted partner.</em></h2>
-            <p className="section-sub" style={{ marginTop: '16px' }}>End-to-end financial services delivered under one roof. No referrals, no hand-offs — every engagement managed directly by our team.</p>
+            <div className="badge-row"><span className="icon-badge">15+</span><span className="eyebrow">Our Services</span></div>
+            <h2 className="section-heading">15+ service areas. <em>One trusted partner.</em></h2>
+            <p className="section-sub" style={{ marginTop: '16px' }}>End-to-end financial services delivered under one roof. No referrals, no hand-offs every engagement managed directly by our team.</p>
           </div>
           <div className="services-grid reveal-stagger">
             {services.map((s) => (
@@ -417,17 +417,16 @@ export default function Home({ allPostsData }) {
         <div className="wrap founder-grid">
           <div className="reveal founder-photo">
             <Image src="/mayank.jpeg" alt="CA Mayank Jain, Founder of Mayank Om Jain & Associates" width={600} height={700} style={{ width: '100%', height: 'auto' }} />
-            <div className="fp-badge">Chartered Accountant · ICAI, November 2022</div>
           </div>
           <div className="reveal">
             <div className="founder-name">CA Mayank Jain — Founder</div>
             <h2>You shouldn&rsquo;t have to explain your business five times.</h2>
-            <p className="desc">Chartered Accountant with over 7 years of experience in financial advisory, audit, and taxation, across 200+ engagements spanning 13+ sectors — helping businesses build strong financial foundations rather than just meet compliance deadlines. He founded Mayank Om Jain &amp; Associates because most businesses don&rsquo;t need a firm that shows up once a year to file returns — they need a partner who is involved through the year, understands the business, and helps them make better financial and legal decisions. Also a consultant at Alchemy Business Intelligence &amp; Insights; previously at Banshi Jain &amp; Associates, 2017–2024.</p>
+            <p className="desc">Chartered Accountant with over 7 years of experience in financial advisory, audit, and taxation, across 200+ engagements spanning 17+ sectors — helping businesses build strong financial foundations rather than just meet compliance deadlines. He founded Mayank Om Jain &amp; Associates because most businesses don&rsquo;t need a firm that shows up once a year to file returns — they need a partner who is involved through the year, understands the business, and helps them make better financial and legal decisions. Also a consultant at Alchemy Business Intelligence &amp; Insights; previously at Banshi Jain &amp; Associates, 2017–2024.</p>
             <div className="founder-numbers">
               <div><CountUp value="7+" /><span>Years</span></div>
               <div><CountUp value="200+" /><span>Engagements</span></div>
-              <div><CountUp value="13+" /><span>Sectors</span></div>
-              <div><CountUp value="15" /><span>Service Areas</span></div>
+              <div><CountUp value="17+" /><span>Sectors</span></div>
+              <div><CountUp value="15+" /><span>Service Areas</span></div>
             </div>
           </div>
         </div>
@@ -538,7 +537,7 @@ export default function Home({ allPostsData }) {
       <section className="section-pad dark">
         <div className="wrap">
           <div className="reveal" style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 10px' }}>
-            <span className="eyebrow" style={{ textAlign: 'center' }}>By The Numbers</span>
+            <span className="eyebrow" style={{ textAlign: 'center' }}></span>
           </div>
         </div>
         <div className="numbers-grid reveal-stagger">
