@@ -1,7 +1,17 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useState } from 'react'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import { useReveal } from '../lib/useReveal'
+
+const points = [
+  { t: 'Monthly MIS & Management Reporting', d: 'A closed reporting cycle every month — not numbers reconstructed after the fact.' },
+  { t: 'Cash Flow Forecasting', d: 'Forward-looking cash flow and working capital planning, not just a rear-view P&L.' },
+  { t: 'Budgeting & Variance Analysis', d: 'Budgets set, tracked, and explained when actuals move away from plan.' },
+  { t: 'Financial Controls', d: 'Reporting discipline and controls that hold up to investor or lender scrutiny.' },
+  { t: 'Investor & Board Readiness', d: 'Board decks, investor updates, and fundraise data rooms prepared and defensible.' },
+]
 
 const faqs = [
   {
@@ -76,6 +86,9 @@ const structuredData = {
 }
 
 export default function VirtualCFO() {
+  useReveal()
+  const [openFaq, setOpenFaq] = useState(0)
+
   return (
     <>
       <Head>
@@ -84,51 +97,84 @@ export default function VirtualCFO() {
         <link rel="canonical" href="https://www.mojaa.in/virtual-cfo" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </Head>
+
       <Nav />
-      <main style={{ maxWidth: '900px', margin: '0 auto', padding: '80px 20px 60px' }}>
-        <Link href="/" style={{ color: 'var(--teal)', fontWeight: 600 }}>← Back to Home</Link>
-        <h1 style={{ marginTop: '20px' }}>Virtual CFO Services</h1>
-        <p style={{ fontSize: '1.05rem', lineHeight: 1.7, color: '#334155' }}>
-          We help founders and growing businesses bring structure to finance without building a full in-house team. Our Virtual CFO support covers reporting, controls, cashflow visibility, budgeting, investor readiness, and decision support.
-        </p>
 
-        <section id="quick-answer" style={{ marginTop: '32px', padding: '24px', background: '#f8fafc', borderRadius: '12px' }}>
-          <h2 style={{ marginTop: 0 }}>Quick Answer</h2>
-          <p style={{ margin: 0, lineHeight: 1.7 }}>
-            A Virtual CFO gives startups and SMEs strategic finance support, including MIS reporting, cash flow planning, budgeting, and board-ready insights, without the cost of a full-time finance leader.
-          </p>
-        </section>
+      <section className="page-hero">
+        <div className="wrap" style={{ maxWidth: '720px' }}>
+          <Link href="/services" className="page-hero-back">&larr; All Services</Link>
+          <span className="hero-eyebrow">Growth & Transaction Advisory</span>
+          <h1>Virtual CFO Services</h1>
+          <p>Strategic finance support for founders and growing businesses — MIS, cash flow, budgeting, and board-ready reporting, without the cost of a full-time finance leader.</p>
+          <p className="page-hero-meta"><b>Best for </b>Founders and businesses that have outgrown a bookkeeper but aren't ready for a full-time CFO.</p>
+          <div className="hero-ctas" style={{ justifyContent: 'center', marginTop: '24px' }}>
+            <Link href="/#contact" className="btn btn-primary">Talk to an Expert</Link>
+          </div>
+        </div>
+      </section>
 
-        <section style={{ marginTop: '32px' }}>
-          <h2>What we support</h2>
-          <ul style={{ lineHeight: 1.8 }}>
-            <li>Monthly MIS and management reporting</li>
-            <li>Cash flow forecasting and working capital planning</li>
-            <li>Budgeting and variance analysis</li>
-            <li>Financial controls and reporting discipline</li>
-            <li>Investor readiness and board-level support</li>
-          </ul>
-        </section>
+      <section className="section-pad" id="quick-answer">
+        <div className="wrap">
+          <div className="reveal" style={{ maxWidth: '640px' }}>
+            <div className="badge-row"><span className="icon-badge">?</span><span className="eyebrow">Quick Answer</span></div>
+            <h2 className="section-heading">What a Virtual CFO actually does.</h2>
+            <p className="section-sub" style={{ marginTop: '16px' }}>A Virtual CFO gives startups and SMEs strategic finance support — MIS reporting, cash flow planning, budgeting, and board-ready insights — without the cost of a full-time finance leader.</p>
+          </div>
+        </div>
+      </section>
 
-        <section style={{ marginTop: '48px' }}>
-          <h2>Frequently asked questions</h2>
-          {faqs.map(({ q, a }, i) => (
-            <details
-              key={i}
-              style={{
-                borderBottom: '1px solid var(--border)',
-                borderTop: i === 0 ? '1px solid var(--border)' : 'none',
-                padding: '16px 0',
-              }}
-            >
-              <summary style={{ fontWeight: 600, color: 'var(--navy)', cursor: 'pointer', fontSize: '1rem' }}>
-                {q}
-              </summary>
-              <p style={{ margin: '12px 0 0', color: '#334155', lineHeight: 1.7, fontSize: '0.95rem' }}>{a}</p>
-            </details>
-          ))}
-        </section>
-      </main>
+      <section className="section-pad light-soft">
+        <div className="wrap">
+          <div className="reveal" style={{ maxWidth: '640px' }}>
+            <div className="badge-row"><span className="icon-badge">{points.length}</span><span className="eyebrow">Core Services</span></div>
+            <h2 className="section-heading">What We Support</h2>
+          </div>
+          <div className="point-grid reveal-stagger">
+            {points.map((pt, i) => (
+              <div className="point-card" key={pt.t}>
+                <span className="point-index">{String(i + 1).padStart(2, '0')}</span>
+                <h4>{pt.t}</h4>
+                <p>{pt.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad">
+        <div className="wrap" style={{ maxWidth: '840px' }}>
+          <div className="reveal" style={{ marginBottom: '20px' }}>
+            <div className="badge-row"><span className="icon-badge">?</span><span className="eyebrow">FAQ</span></div>
+            <h2 className="section-heading" style={{ fontSize: 'clamp(26px,3.4vw,36px)' }}>Questions, answered directly.</h2>
+          </div>
+          <div className="reveal">
+            {faqs.map(({ q, a }, i) => (
+              <div className={`faq-item${openFaq === i ? ' open' : ''}`} key={q}>
+                <button className="faq-q" onClick={() => setOpenFaq(openFaq === i ? -1 : i)} type="button">
+                  {q}<span className="plus">+</span>
+                </button>
+                <div className="faq-a" style={{ maxHeight: openFaq === i ? '400px' : '0' }}>
+                  <p>{a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-pad dark">
+        <div className="wrap">
+          <div className="reveal" style={{ textAlign: 'center', maxWidth: '580px', margin: '0 auto' }}>
+            <h2 className="section-heading" style={{ color: '#fff' }}>Ready to bring in a Virtual CFO?</h2>
+            <p className="section-sub" style={{ margin: '16px auto 32px', color: 'var(--ink-on-dark-soft)' }}>Tell us what's going on with your business — we'll scope exactly what's needed.</p>
+            <div className="hero-ctas" style={{ justifyContent: 'center' }}>
+              <Link href="/#contact" className="btn btn-primary">Talk to an Expert</Link>
+              <Link href="/services" className="btn btn-ghost">View All Services</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </>
   )

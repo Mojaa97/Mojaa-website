@@ -4,29 +4,24 @@ import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import CountUp from '../components/CountUp'
 import { getSortedPostsData } from '../lib/posts'
+import { services } from '../lib/services'
+import { useReveal } from '../lib/useReveal'
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData().slice(0, 3)
   return { props: { allPostsData } }
 }
 
-const services = [
-  { num: '01', title: 'Audit & Assurance', desc: 'Statutory, tax, internal, and GST audits. Risk-focused, independent, and delivered on time.' },
-  { num: '02', title: 'Direct & Indirect Taxation', desc: 'ITR filing, tax planning, capital gains, advance tax, GST registration and returns, NRI taxation, DTAA, and assessment representation.' },
-  { num: '03', title: 'Startup & Transaction Advisory', desc: 'Incorporation, DPIIT recognition, MSME registration, financial projections, fundraise readiness, and ESOP structuring.' },
-  { num: '04', title: 'Due Diligence & Valuation', desc: 'Buy-side and sell-side financial due diligence, business valuation, share valuation under Income Tax and FEMA.' },
-  { num: '05', title: 'Virtual CFO Services', desc: 'MIS reporting, cash flow management, budgeting, board deck support, working capital optimization, and financial controls.' },
-  { num: '06', title: 'FEMA & NRI Compliance', desc: 'FDI/ODI compliance, FC-GPR, DTAA advisory, transfer pricing, cross-border structuring, and NRI taxation.' },
-  { num: '07', title: 'Corporate Secretarial & ROC Compliance', desc: 'Annual ROC filings, director KYC, share allotment, change of directors, registered office changes, statutory registers.' },
-  { num: '08', title: 'Bookkeeping & Offshore Accounting', desc: 'Tally, Zoho Books, QuickBooks, Xero. Monthly close, financial statement preparation, and offshore accounting for international clients.' },
-  { num: '09', title: 'Corporate Restructuring', desc: 'Mergers, demergers, conversions, and entity restructuring aligned with tax and regulatory requirements.' },
-  { num: '10', title: 'SHA & Founder Agreement Drafting', desc: 'Founder equity splits, vesting terms, exit clauses, and shareholder rights documented before disputes start.' },
-  { num: '11', title: 'Term Sheet & Investment Documentation', desc: 'Reviewing term sheets and preparing investment documentation from the finance and compliance side.' },
-  { num: '12', title: 'Bank Loans & MSME Funding Support', desc: 'Project reports, CMA data, and loan documentation for bank loans and MSME funding.' },
-  { num: '13', title: 'Government Grants & Scheme Assistance', desc: 'Startup India recognition, MSME schemes, and subsidy applications.' },
-  { num: '14', title: 'Spice Board Certification', desc: 'CRES and related registrations for spice exporters and processors.' },
-  { num: '15', title: 'FSSAI Registration & Licensing', desc: 'Registration and licensing support for food and beverage businesses.' },
+const capabilities = [
+  { label: 'Tax', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="3" width="16" height="18" rx="2" /><circle cx="9.5" cy="9.5" r="1.3" /><circle cx="14.5" cy="14.5" r="1.3" /><path d="M15 9l-6 6" /></svg> },
+  { label: 'Funding', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="9" r="6" /><circle cx="15" cy="15" r="6" /></svg> },
+  { label: 'Compliance', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" /><path d="M9 12l2 2 4-4" /></svg> },
+  { label: 'Cash Flow', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 18V9M10 18V5M16 18v-7M20 18V3" /></svg> },
+  { label: 'Investment', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 17l5-5 4 4 7-7" /><path d="M15 9h5v5" /></svg> },
+  { label: 'Documentation', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z" /><path d="M14 3v5h5M9 13h6M9 17h6" /></svg> },
+  { label: 'Growth', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 21v-9" /><path d="M12 12C12 8 9 6 5 6c0 4 3 6 7 6z" /><path d="M12 12c0-3 2-5 6-5 0 3-2 5-6 5z" /></svg> },
 ]
 
 const roofNodes = [
@@ -105,22 +100,6 @@ const faqs = [
   { q: 'What does a typical engagement look like?', a: "It starts with a conversation about what's actually happening in your business, then we scope the specific service areas it touches. Most clients end up engaging us across more than one area over time." },
   { q: 'How quickly can we get started?', a: 'Most engagements begin within a week of an initial call. We respond to every enquiry within 24 business hours.' },
 ]
-
-function useReveal() {
-  useEffect(() => {
-    const els = document.querySelectorAll('.reveal, .reveal-stagger')
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in')
-          obs.unobserve(e.target)
-        }
-      })
-    }, { threshold: 0.1 })
-    els.forEach((el) => obs.observe(el))
-    return () => obs.disconnect()
-  }, [])
-}
 
 export default function Home({ allPostsData }) {
   const [formState, setFormState] = useState('idle')
@@ -235,7 +214,7 @@ export default function Home({ allPostsData }) {
         <div className="wrap hero-grid">
           <span className="hero-eyebrow">Chartered Accountants · Strategic Advisors</span>
           <h1>Your business doesn&rsquo;t make decisions <em>only at year&#8209;end.</em></h1>
-          <div className="sub-h">So why should your CA only show up at year-end? Mayank Om Jain &amp; Associates works with founders, businesses, NRIs and professionals throughout the year — across tax, funding, compliance and finance.</div>
+          <div className="sub-h">So why should your CA only show up at year-end? Mayank Om Jain &amp; Associates works with founders, businesses, NRIs and professionals throughout the year across tax, funding, compliance and finance.</div>
           <div className="hero-ctas">
             <Link href="#contact" className="btn btn-primary">Talk to an Expert</Link>
             <Link href="#services" className="btn btn-ghost">See what we handle</Link>
@@ -246,24 +225,24 @@ export default function Home({ allPostsData }) {
       {/* HERO STATS + ORBIT (solid bg, below the banner photo) */}
       <section className="hero-below">
         <div className="hero-stats">
-          <div><b>200+</b><span>Startup Engagements</span></div>
-          <div><b>7+</b><span>Years Experience</span></div>
-          <div><b>13+</b><span>Sectors Served</span></div>
-          <div><b>15</b><span>Service Areas</span></div>
+          <div><CountUp value="200+" /><span>Startup Engagements</span></div>
+          <div><CountUp value="7+" /><span>Years Experience</span></div>
+          <div><CountUp value="13+" /><span>Sectors Served</span></div>
+          <div><CountUp value="15" /><span>Service Areas</span></div>
         </div>
         <div className="wrap" style={{ paddingTop: '64px', paddingBottom: '64px' }}>
-          <div className="orbit-visual-wrap">
-            <div className="orbit-wrap">
-              <div className="orbit-ring r2" />
-              <div className="orbit-ring r1" />
-              <div className="orbit-core">BUSINESS</div>
-              <div className="orbit-node" style={{ top: '6%', left: '48%' }}>Tax</div>
-              <div className="orbit-node" style={{ top: '22%', left: '78%' }}>Funding</div>
-              <div className="orbit-node" style={{ top: '60%', left: '85%' }}>Compliance</div>
-              <div className="orbit-node" style={{ top: '85%', left: '55%' }}>Cash Flow</div>
-              <div className="orbit-node" style={{ top: '78%', left: '12%' }}>Investment</div>
-              <div className="orbit-node" style={{ top: '38%', left: '2%' }}>Documentation</div>
-              <div className="orbit-node" style={{ top: '10%', left: '20%' }}>Growth</div>
+          <div className="capability-panel">
+            <div className="capability-head">
+              <span className="capability-eyebrow">What we cover</span>
+              <h3>Every function your business runs on.</h3>
+            </div>
+            <div className="capability-grid">
+              {capabilities.map((c) => (
+                <div className="capability-card" key={c.label}>
+                  <span className="capability-icon">{c.icon}</span>
+                  <span className="capability-label">{c.label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -361,12 +340,16 @@ export default function Home({ allPostsData }) {
           </div>
           <div className="services-grid reveal-stagger">
             {services.map((s) => (
-              <div className="service-card" key={s.num}>
+              <Link href={s.href || `/services/${s.slug}`} className="service-card" key={s.num}>
                 <span className="service-num">{s.num}</span>
                 <h3>{s.title}</h3>
                 <p>{s.desc}</p>
-              </div>
+                <span className="service-card-cta">Learn more <span>&rarr;</span></span>
+              </Link>
             ))}
+          </div>
+          <div className="reveal" style={{ marginTop: '36px', textAlign: 'center' }}>
+            <Link href="/services" className="btn btn-ghost">View All Services</Link>
           </div>
         </div>
       </section>
@@ -441,10 +424,10 @@ export default function Home({ allPostsData }) {
             <h2>You shouldn&rsquo;t have to explain your business five times.</h2>
             <p className="desc">Chartered Accountant with over 7 years of experience in financial advisory, audit, and taxation, across 200+ engagements spanning 13+ sectors — helping businesses build strong financial foundations rather than just meet compliance deadlines. He founded Mayank Om Jain &amp; Associates because most businesses don&rsquo;t need a firm that shows up once a year to file returns — they need a partner who is involved through the year, understands the business, and helps them make better financial and legal decisions. Also a consultant at Alchemy Business Intelligence &amp; Insights; previously at Banshi Jain &amp; Associates, 2017–2024.</p>
             <div className="founder-numbers">
-              <div><b>7+</b><span>Years</span></div>
-              <div><b>200+</b><span>Engagements</span></div>
-              <div><b>13+</b><span>Sectors</span></div>
-              <div><b>15</b><span>Service Areas</span></div>
+              <div><CountUp value="7+" /><span>Years</span></div>
+              <div><CountUp value="200+" /><span>Engagements</span></div>
+              <div><CountUp value="13+" /><span>Sectors</span></div>
+              <div><CountUp value="15" /><span>Service Areas</span></div>
             </div>
           </div>
         </div>

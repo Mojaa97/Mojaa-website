@@ -10,7 +10,7 @@ export default function Footer() {
             <div className="footer-copy">© 2026 Mayank Om Jain &amp; Associates. All rights reserved.</div>
           </div>
           <div className="footer-links">
-            <Link href="/#services">Services</Link>
+            <Link href="/services">Services</Link>
             <Link href="/#team">Team</Link>
             <Link href="/blog">Blog</Link>
             <Link href="/#contact">Contact</Link>
