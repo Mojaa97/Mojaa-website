@@ -3,7 +3,7 @@ import path from 'path';
 import Nav from '../../components/Nav';
 import Footer from '../../components/Footer';
 
-export default function NRIFEMAComplianceGuide({ html }) {
+export default function ForeignInvestmentBankFreeze({ html }) {
   return (
     <>
       <Nav />
@@ -14,7 +14,7 @@ export default function NRIFEMAComplianceGuide({ html }) {
 }
 
 export async function getStaticProps() {
-  const filePath = path.join(process.cwd(), 'public', 'blog', 'nri-fema-compliance-guide', 'index.html');
+  const filePath = path.join(process.cwd(), 'public', 'blog', 'foreign-investment-bank-freeze', 'index.html');
   const html = fs.readFileSync(filePath, 'utf8');
   return { props: { html } };
 }

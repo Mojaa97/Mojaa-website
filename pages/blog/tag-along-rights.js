@@ -1,8 +1,16 @@
 import fs from 'fs';
 import path from 'path';
+import Nav from '../../components/Nav';
+import Footer from '../../components/Footer';
 
 export default function TagAlongRights({ html }) {
-  return <div dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <>
+      <Nav />
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+      <Footer />
+    </>
+  );
 }
 
 export async function getStaticProps() {
