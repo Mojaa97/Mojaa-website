@@ -25,14 +25,14 @@ const capabilities = [
 ]
 
 const roofNodes = [
-  { t: 'Audit', desc: 'Statutory, tax, internal and GST audits — independent and on time.', who: 'Businesses needing statutory or lender-mandated audits.', rel: ['Tax', 'Corp Secretarial'] },
+  { t: 'Audit', desc: 'Statutory, tax, internal and GST audits, independent and on time.', who: 'Businesses needing statutory or lender-mandated audits.', rel: ['Tax', 'Corp Secretarial'] },
   { t: 'Tax', desc: 'ITR filing, tax planning, capital gains, advance tax, GST, NRI taxation and DTAA.', who: 'Founders, traders, NRIs, HNIs.', rel: ['Audit', 'FEMA'] },
   { t: 'Startup Advisory', desc: 'Incorporation, DPIIT recognition, MSME registration, fundraise readiness, ESOP structuring.', who: 'Founders from idea to fundraise.', rel: ['Virtual CFO', 'Due Diligence'] },
   { t: 'Due Diligence', desc: 'Buy-side and sell-side diligence, business and share valuation.', who: 'Businesses raising, selling, or acquiring.', rel: ['Tax', 'Term Sheets'] },
   { t: 'Virtual CFO', desc: 'MIS, cash flow, budgeting, board reporting, working capital optimisation.', who: 'Businesses past early-stage, scaling operations.', rel: ['Accounting', 'Startup Advisory'] },
   { t: 'FEMA', desc: 'FDI/ODI compliance, FC-GPR, DTAA advisory, cross-border structuring, NRI taxation.', who: 'NRIs, foreign investors, cross-border businesses.', rel: ['Tax', 'Due Diligence'] },
   { t: 'Corp Secretarial', desc: 'ROC filings, director KYC, share allotment, statutory registers.', who: 'Every registered company, every year.', rel: ['Audit', 'Restructuring'] },
-  { t: 'Accounting', desc: 'Tally, Zoho Books, QuickBooks, Xero — monthly close and offshore accounting.', who: 'Any business needing clean books.', rel: ['Virtual CFO', 'Tax'] },
+  { t: 'Accounting', desc: 'Tally, Zoho Books, QuickBooks, Xero: monthly close and offshore accounting.', who: 'Any business needing clean books.', rel: ['Virtual CFO', 'Tax'] },
   { t: 'Restructuring', desc: 'Mergers, demergers, conversions, and entity restructuring.', who: 'Businesses reorganising or consolidating entities.', rel: ['Corp Secretarial', 'Due Diligence'] },
   { t: 'SHA Drafting', desc: 'Founder equity splits, vesting terms, exit clauses, and shareholder rights.', who: 'Founders bringing on co-founders or investors.', rel: ['Term Sheets', 'Startup Advisory'] },
   { t: 'Term Sheets', desc: 'Term sheet review and investment documentation support.', who: 'Founders closing an investment round.', rel: ['SHA Drafting', 'Due Diligence'] },
@@ -62,20 +62,27 @@ const stages = [
 ]
 
 const audiences = [
-  { title: 'Startups', desc: 'Funding, structuring, and compliance support from idea to fundraise.', tags: ['Startup Advisory', 'SHA Drafting', 'Fundraise Readiness'] },
-  { title: 'MSMEs', desc: 'Bank loans, government schemes, GST, and day-to-day accounting.', tags: ['MSME Loans', 'Govt Schemes', 'GST'] },
-  { title: 'Food & Beverage Businesses', desc: 'FSSAI registration, Spice Board certification, and compliance for F&B operations.', tags: ['FSSAI', 'Spice Board'] },
-  { title: 'NRIs & HNIs', desc: 'FEMA, DTAA, and cross-border tax planning.', tags: ['FEMA', 'DTAA', 'Cross-Border Tax'] },
-  { title: 'Traders & Freelancers', desc: 'Simple, accurate tax and GST filing.', tags: ['Tax Filing', 'GST'] },
+  { slug: 'startup-founders', title: 'Startup Founders', desc: 'Pre-launch to Series A: incorporation, GST, MIS, cap table, and fundraise prep under one roof.', tags: ['Incorporation', 'DPIIT', 'Virtual CFO'] },
+  { slug: 'venture-backed-startups', title: 'Venture-Backed & Scaling Startups', desc: 'Series A–C. Internal due diligence, cap table cleanup, and board-ready reporting before investors ask.', tags: ['Due Diligence', 'Cap Table', 'Board Reporting'] },
+  { slug: 'growing-smes', title: 'Growing Businesses & SMEs', desc: '₹50L–₹10Cr revenue. Fractional CFO leadership, tax planning, and financial strategy beyond compliance.', tags: ['Virtual CFO', 'Tax Planning'] },
+  { slug: 'nri-investors', title: 'NRI Investors & Founders', desc: 'FEMA compliance, DTAA benefits, and cross-border tax planning for overseas-based income and investment.', tags: ['FEMA', 'DTAA', 'NRE/NRO'] },
+  { slug: 'freelancers', title: 'Freelancers & Independent Professionals', desc: 'Entity structuring, GST strategy, and ITR optimization for consultants, coaches, and advisors.', tags: ['ITR', 'GST', 'Structuring'] },
+  { slug: 'traders-investors', title: 'Traders & Active Investors', desc: 'Precise capital gains computation for stock, F&O, crypto, and property, defensible in audit.', tags: ['Capital Gains', 'F&O Tax'] },
+  { slug: 'service-providers', title: 'Service Providers & Consultants', desc: 'GST and TDS handled correctly for architects, contractors, and agencies with variable cash flow.', tags: ['GST', 'TDS'] },
+  { slug: 'msme-businesses', title: 'MSME Businesses', desc: 'Artisans, manufacturers, and exporters: audit, GST reconciliation, and lender-ready financials.', tags: ['MSME', 'Export Compliance'] },
+  { slug: 'incubation-centres', title: 'Incubation Centres & Accelerators', desc: 'Portfolio-wide compliance audits, batch valuation, and fundraise-readiness certification.', tags: ['Portfolio Audits', 'Valuation'] },
+  { slug: 'saas-digital', title: 'SaaS & Digital Businesses', desc: 'MRR/ARR tracking, export GST structuring, and investor-grade SaaS metrics.', tags: ['MRR/ARR', 'DPIIT'] },
+  { slug: 'd2c-ecommerce', title: 'D2C & E-Commerce', desc: 'Inventory accounting, marketplace reconciliation, and working capital management.', tags: ['Inventory', 'Marketplace Accounting'] },
+  { slug: 'edtech', title: 'EdTech & Service-Based', desc: 'Deferred revenue accounting and cohort-level MIS for subscription and course-based businesses.', tags: ['Deferred Revenue', 'Cohort MIS'] },
 ]
 
 const whyBlocks = [
-  { n: '01', t: 'Proactive, not reactive.', p: 'We flag issues before they become problems. Compliance deadlines, tax exposures, regulatory changes — we inform you first, not after.', chips: ['Deadline', 'Alert', 'Action'] },
-  { n: '02', t: 'Founders understand us.', p: 'We speak the language of unit economics, MIS, cap tables and investor decks — not just balance sheets. Built for modern business leaders.' },
-  { n: '03', t: 'One roof, every service.', p: 'From FSSAI registration to fundraise readiness, all 15 service areas sit under one team. No referrals, no gaps, no coordination overhead for you.', chips: ['Audit', 'Tax', 'FSSAI', 'CFO', 'One team'] },
-  { n: '04', t: 'Investment banking DNA.', p: "CA Vivek Jain's M&A and IPO background gives the team a capital markets lens that pure compliance firms don't have." },
-  { n: '05', t: 'Technology-first delivery.', p: 'Tally, Zoho Books, QuickBooks, Xero — plus AI-augmented workflows. Faster, more accurate, better documented work.', chips: ['Tally', 'Zoho Books', 'QuickBooks', 'Xero'] },
-  { n: '06', t: 'Direct partner access.', p: 'No junior handling your file without oversight. CA Mayank Jain and CA Vivek Jain are personally involved in every engagement — you speak to the people actually doing the work.', chips: ['You', 'CA directly'] },
+  { n: '01', t: 'Proactive compliance calendar.', p: "We flag deadlines 4–6 weeks in advance and build them into your financial operations. DPIIT's 10-year incorporation window, the ₹100 Cr Section 80-IAC turnover cap, and GSTR-9 timelines are tracked into your monthly MIS, not treated as afterthoughts.", chips: ['DPIIT', '80-IAC', 'GSTR-9'] },
+  { n: '02', t: 'Founder-centric financial language.', p: 'Runway, burn rate, unit economics, cap table dilution: we report in the language founders actually use. Your monthly MIS includes cash flow forecasts, budget vs. actuals and customer concentration, formatted for board and investor conversations.', chips: ['Runway', 'Burn Rate', 'MIS'] },
+  { n: '03', t: 'Integrated service delivery.', p: 'All 15 service areas (audit, tax, GST, startup advisory, Virtual CFO, FEMA, due diligence, corporate secretarial, bookkeeping) sit under one SOW and one team. Your MIS aligns with your statutory books, so due diligence never surfaces a surprise.', chips: ['One SOW', 'One team'] },
+  { n: '04', t: 'Investment banking DNA.', p: "CA Vivek Jain's investment banking background includes 5 IPO transactions, Vishal Mega Mart (₹8,000 Cr) and Waaree Energies (₹4,300 Cr) among them. We structure your cap table and financial model with the scrutiny an institutional investor applies later.", chips: ['5 IPOs', '₹12,300 Cr+'] },
+  { n: '05', t: 'Technology-enabled systems.', p: 'Bookkeeping runs on integrated accounting software, not spreadsheets, with a 7-day standard month-end close. Financial models stay formula-linked to actuals, and compliance filings follow standardised checklists so nothing is missed.', chips: ['Tally', 'Zoho Books', 'QuickBooks', 'Xero'] },
+  { n: '06', t: 'Direct CA accountability.', p: 'Your engagement is owned personally by CA Mayank Jain or CA Vivek Jain. They sign the SOW, review your MIS, and handle your tax and term sheet conversations directly. We take on limited engagements by design, to guarantee that access.', chips: ['You', 'CA directly'] },
 ]
 
 const scenarioCards = [
@@ -85,18 +92,21 @@ const scenarioCards = [
   { quote: '"We\'re scaling quickly."', chain: ['Accounting', 'MIS', 'Cash flow', 'Virtual CFO', 'Tax', 'Financial controls'] },
 ]
 
-const numbers = [
-  { n: '200+', l: 'Startup Engagements' },
-  { n: '17+', l: 'Sectors Served' },
-  { n: '5', l: 'IPOs on the Team’s Track Record' },
-  { n: '₹12,300 Cr+', l: 'Capital Markets Deals' },
+const testimonials = [
+  { name: 'Anushka Agarwal', role: '', service: 'Income Tax Return', company: 'Leading Venture Capital Fund', location: 'Mumbai', quote: "I'm honestly so glad I found them. The entire process has been super smooth, and the team is incredibly proactive — they remind me of things before I even have to ask. For the first time, I genuinely don't stress about my taxes because I know everything's taken care of." },
+  { name: 'Rahul Borhade', role: 'Director, Co-founder', service: 'Virtual CFO Services', company: 'Food & Beverage Industry', location: 'Thane', quote: 'Working with Mayank Jain has been a great experience. His proper guidance, support, and valuable insights have helped us understand and execute things with much more clarity. Truly appreciate his dedication and look forward to working together on many more successful projects.' },
+  { name: 'Rudraksh Borana', role: 'Founder', service: 'GST and Litigation', company: 'Digital Marketing Agency', location: 'Chennai', quote: 'You are supportive, friendly, and very forward in approach.' },
+  { name: 'Aarush Chotaliya', role: 'Director, Founder', service: 'Virtual CFO and Funding Services', company: 'Deep Tech Startup', location: 'Mumbai', quote: "Mayank has been a genuine partner in how we think about our finances, not just someone who shows up for compliance. His guidance on structuring and planning ahead has given us clarity we didn't have before, and that's made a real difference as we've grown." },
+  { name: 'Apparao MLV', role: 'Director', service: 'Legal and Regulatory Consultancy', company: 'Health Tech Startup', location: 'Bengaluru', quote: 'Mayank has been very helpful in reviewing our investor term sheets and drafting the SSHA. His guidance and support throughout the process have been valuable, and we appreciate his professional and collaborative approach.' },
+  { name: 'Shailendra Shyamsukha', role: 'Founder', service: '', company: 'Food & Beverage Industry', location: 'Mumbai', quote: 'Mayank is a very reliable professional who always looks out for your best interest. He is a person who will find the answers and make the best out of every problem.' },
+  { name: 'Eldrin Fernandis', role: 'CHRO', service: 'Personal Income Tax Return', company: 'Leading Listed Entity', location: 'Mumbai', quote: "I had a great experience working with Mayank on my income tax returns. He was thorough, responsive, and took the time to understand everything properly while explaining the process clearly whenever I had questions. He made the entire experience smooth and stress-free, and I always felt that everything was being handled carefully and professionally. I'd happily recommend Mayank to anyone looking for a reliable and knowledgeable CA." },
 ]
 
 const faqs = [
-  { q: 'What does Mayank Om Jain & Associates actually specialize in?', a: 'Fifteen connected service areas — audit, tax, startup and transaction advisory, due diligence, Virtual CFO, FEMA and NRI compliance, corporate secretarial, bookkeeping, corporate restructuring, SHA and founder agreement drafting, term sheet review, MSME loans and funding support, government scheme assistance, and FSSAI/Spice Board certification — delivered by one team instead of being scattered across referrals.' },
+  { q: 'What does Mayank Om Jain & Associates actually specialize in?', a: 'Fifteen connected service areas, including audit, tax, startup and transaction advisory, due diligence, Virtual CFO, FEMA and NRI compliance, corporate secretarial, bookkeeping, corporate restructuring, SHA and founder agreement drafting, term sheet review, MSME loans and funding support, government scheme assistance, and FSSAI/Spice Board certification, delivered by one team instead of being scattered across referrals.' },
   { q: 'Do you work with businesses outside India?', a: 'Yes. We regularly support NRIs, overseas Indians, and international clients needing offshore accounting or FEMA-compliant cross-border structuring.' },
-  { q: 'How are you different from a traditional CA firm?', a: "We're built around how founders actually operate — MIS, cap tables, investor decks — not just annual compliance. CA Vivek Jain's investment banking background also brings a capital markets lens most compliance firms don't have." },
-  { q: "Can you help before I've even incorporated my company?", a: "Yes. Structure decides your tax and liability position for years, so we're often involved before incorporation — not just after." },
+  { q: 'How are you different from a traditional CA firm?', a: "We're built around how founders actually operate: MIS, cap tables, investor decks, not just annual compliance. CA Vivek Jain's investment banking background also brings a capital markets lens most compliance firms don't have." },
+  { q: "Can you help before I've even incorporated my company?", a: "Yes. Structure decides your tax and liability position for years, so we're often involved before incorporation, not just after." },
   { q: 'What does a typical engagement look like?', a: "It starts with a conversation about what's actually happening in your business, then we scope the specific service areas it touches. Most clients end up engaging us across more than one area over time." },
   { q: 'How quickly can we get started?', a: 'Most engagements begin within a week of an initial call. We respond to every enquiry within 24 business hours.' },
 ]
@@ -111,8 +121,61 @@ export default function Home({ allPostsData }) {
   const [openFaq, setOpenFaq] = useState(0)
   const [roofPaused, setRoofPaused] = useState(false)
   const [stagePaused, setStagePaused] = useState(false)
+  const [isTouchDevice, setIsTouchDevice] = useState(false)
+  const clientsSliderRef = useRef(null)
+  const [clientsPaused, setClientsPaused] = useState(false)
+  const scrollClients = (dir) => {
+    if (clientsSliderRef.current) {
+      clientsSliderRef.current.scrollBy({ left: dir * 360, behavior: 'smooth' })
+    }
+  }
+
+  useEffect(() => {
+    if (clientsPaused) return
+    const id = setInterval(() => {
+      const el = clientsSliderRef.current
+      if (!el) return
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 10
+      el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + 360, behavior: 'smooth' })
+    }, 3200)
+    return () => clearInterval(id)
+  }, [clientsPaused])
+
+  const testimonialsSliderRef = useRef(null)
+  const [testimonialsPaused, setTestimonialsPaused] = useState(false)
+  const testimonialsStep = () => {
+    const el = testimonialsSliderRef.current
+    const card = el?.querySelector('.testimonial-card')
+    if (!el || !card) return 380
+    const gap = parseFloat(getComputedStyle(el).columnGap || getComputedStyle(el).gap || '22')
+    return card.getBoundingClientRect().width + gap
+  }
+  const scrollTestimonials = (dir) => {
+    if (testimonialsSliderRef.current) {
+      testimonialsSliderRef.current.scrollBy({ left: dir * testimonialsStep(), behavior: 'smooth' })
+    }
+  }
+
+  useEffect(() => {
+    if (testimonialsPaused) return
+    const id = setInterval(() => {
+      const el = testimonialsSliderRef.current
+      if (!el) return
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 10
+      el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + testimonialsStep(), behavior: 'smooth' })
+    }, 3600)
+    return () => clearInterval(id)
+  }, [testimonialsPaused])
 
   useReveal()
+
+  useEffect(() => {
+    setIsTouchDevice(window.matchMedia('(pointer: coarse)').matches)
+  }, [])
+
+  const guardAppLink = (e) => {
+    if (!isTouchDevice) e.preventDefault()
+  }
 
   useEffect(() => {
     setChainShown(false)
@@ -201,7 +264,7 @@ export default function Home({ allPostsData }) {
     <>
       <Head>
         <title>Mayank Om Jain & Associates | Chartered Accountants</title>
-        <meta name="description" content="Mayank Om Jain & Associates — a full-service Chartered Accountancy firm for startups, MSMEs, NRIs, HNIs, traders, and food businesses. Audit, tax, Virtual CFO, FEMA, funding, and compliance — all under one roof." />
+        <meta name="description" content="Mayank Om Jain & Associates: a full-service Chartered Accountancy firm for startups, MSMEs, NRIs, HNIs, traders, and food businesses. Audit, tax, Virtual CFO, FEMA, funding, and compliance, all under one roof." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
@@ -359,7 +422,7 @@ export default function Home({ allPostsData }) {
         <div className="wrap">
           <div className="reveal" style={{ maxWidth: '680px', marginBottom: '50px' }}>
             <div className="badge-row"><span className="icon-badge">&#8599;</span><span className="eyebrow">The Business Lifecycle</span></div>
-            <h2 className="section-heading">We can be involved before the decision — not just after it.</h2>
+            <h2 className="section-heading">We can be involved before the decision, not just after it.</h2>
           </div>
           <div className="reveal" onMouseEnter={() => setStagePaused(true)} onMouseLeave={() => setStagePaused(false)}>
             <div className="stage-track">
@@ -391,23 +454,35 @@ export default function Home({ allPostsData }) {
       </section>
 
       {/* WHO WE SERVE */}
-      <section className="section-pad" id="serve">
+      <section className="section-pad" id="clients">
         <div className="wrap">
           <div className="reveal" style={{ maxWidth: '640px' }}>
-            <div className="badge-row"><span className="icon-badge">&#10003;</span><span className="eyebrow">Who We Serve</span></div>
+            <div className="badge-row"><span className="icon-badge">&#10003;</span><span className="eyebrow">Our Clients</span></div>
             <h2 className="section-heading">Built for <em>every stage</em> of your journey.</h2>
-            <p className="section-sub" style={{ marginTop: '16px' }}>From pre-incorporation to scale-up, from FSSAI licensing to NRI investment compliance — we are your one-roof financial partner.</p>
+            <p className="section-sub" style={{ marginTop: '16px' }}>We work with specific types of businesses and individuals where financial strategy directly impacts growth. Here&rsquo;s who we&rsquo;re best suited for.</p>
           </div>
-          <div className="audience-grid reveal-stagger">
-            {audiences.map((a) => (
-              <div className="audience-card" key={a.title}>
-                <h3>{a.title}</h3>
-                <p>{a.desc}</p>
-                <div className="ac-tags">
-                  {a.tags.map((t) => <span key={t}>{t}</span>)}
-                </div>
-              </div>
-            ))}
+          <div
+            className="clients-slider-wrap reveal"
+            onMouseEnter={() => setClientsPaused(true)}
+            onMouseLeave={() => setClientsPaused(false)}
+            onTouchStart={() => setClientsPaused(true)}
+          >
+            <button type="button" className="slider-arrow prev" onClick={() => scrollClients(-1)} aria-label="Previous">&#8592;</button>
+            <div className="clients-slider" ref={clientsSliderRef}>
+              {audiences.map((a) => (
+                <Link className="audience-card" href={`/our-clients#${a.slug}`} key={a.slug}>
+                  <h3>{a.title}</h3>
+                  <p>{a.desc}</p>
+                  <div className="ac-tags">
+                    {a.tags.map((t) => <span key={t}>{t}</span>)}
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <button type="button" className="slider-arrow next" onClick={() => scrollClients(1)} aria-label="Next">&#8594;</button>
+          </div>
+          <div style={{ marginTop: '40px', textAlign: 'center' }}>
+            <Link href="/our-clients" className="btn btn-primary">See How We Work With Each</Link>
           </div>
         </div>
       </section>
@@ -416,18 +491,19 @@ export default function Home({ allPostsData }) {
       <section className="section-pad light-soft">
         <div className="wrap founder-grid">
           <div className="reveal founder-photo">
-            <Image src="/mayank.jpeg" alt="CA Mayank Jain, Founder of Mayank Om Jain & Associates" width={600} height={700} style={{ width: '100%', height: 'auto' }} />
+            <Image src="/mayank-jain.png" alt="CA Mayank Jain, Founder of Mayank Om Jain & Associates" width={600} height={700} style={{ width: '100%', height: 'auto' }} />
           </div>
           <div className="reveal">
-            <div className="founder-name">CA Mayank Jain — Founder</div>
+            <div className="founder-name">CA Mayank Jain, Founder</div>
             <h2>You shouldn&rsquo;t have to explain your business five times.</h2>
-            <p className="desc">Chartered Accountant with over 7 years of experience in financial advisory, audit, and taxation, across 200+ engagements spanning 17+ sectors — helping businesses build strong financial foundations rather than just meet compliance deadlines. He founded Mayank Om Jain &amp; Associates because most businesses don&rsquo;t need a firm that shows up once a year to file returns — they need a partner who is involved through the year, understands the business, and helps them make better financial and legal decisions. Also a consultant at Alchemy Business Intelligence &amp; Insights; previously at Banshi Jain &amp; Associates, 2017–2024.</p>
+            <p className="desc">Chartered Accountant with over 7 years of experience in financial advisory, audit, and taxation, across 200+ engagements spanning 17+ sectors, helping businesses build strong financial foundations rather than just meet compliance deadlines. He founded Mayank Om Jain &amp; Associates because most businesses don&rsquo;t need a firm that shows up once a year to file returns. They need a partner who is involved through the year, understands the business, and helps them make better financial and legal decisions. Also a consultant at Alchemy Business Intelligence &amp; Insights; previously at Banshi Jain &amp; Associates, 2017–2024.</p>
             <div className="founder-numbers">
               <div><CountUp value="7+" /><span>Years</span></div>
               <div><CountUp value="200+" /><span>Engagements</span></div>
               <div><CountUp value="17+" /><span>Sectors</span></div>
               <div><CountUp value="15+" /><span>Service Areas</span></div>
             </div>
+            <Link href="/about-mayank" className="btn btn-ghost" style={{ marginTop: '28px' }}>Read Full Bio</Link>
           </div>
         </div>
       </section>
@@ -442,17 +518,18 @@ export default function Home({ allPostsData }) {
           <div className="team-grid reveal-stagger">
             <div className="team-card">
               <div className="team-photo-row">
-                <Image src="/mayank.jpeg" alt="CA Mayank Jain" width={76} height={76} />
+                <Image src="/mayank-jain.png" alt="CA Mayank Jain" width={76} height={76} />
                 <div>
                   <div className="team-role">Founder</div>
                   <h3>CA Mayank Jain</h3>
                   <div className="cred">Chartered Accountant · ICAI, Nov 2022</div>
                 </div>
               </div>
-              <p className="bio">7+ years and 200+ engagements across financial advisory, audit, and taxation. AICA Level 1 — AI Fundamentals, ICAI.</p>
+              <p className="bio">7+ years and 200+ engagements across financial advisory, audit, and taxation. AICA Level 1 (AI Fundamentals), ICAI.</p>
               <div className="team-tags">
                 <span>Financial Advisory</span><span>Tax</span><span>Startup Advisory</span><span>Virtual CFO</span><span>Due Diligence</span>
               </div>
+              <Link href="/about-mayank" className="rm" style={{ marginTop: '16px', display: 'inline-block' }}>Read Full Bio &#8594;</Link>
             </div>
             <div className="team-card">
               <div className="team-photo-row">
@@ -476,7 +553,7 @@ export default function Home({ allPostsData }) {
       <section className="section-pad light-soft" id="why">
         <div className="wrap">
           <div className="reveal" style={{ maxWidth: '640px', marginBottom: '10px' }}>
-            <div className="badge-row"><span className="icon-badge">&#9733;</span><span className="eyebrow">Why Choose Us</span></div>
+            <div className="badge-row"><span className="icon-badge">&#9733;</span><span className="eyebrow">Our Expertise</span></div>
             <h2 className="section-heading">Not a commodity firm. <em>A strategic partner.</em></h2>
           </div>
 
@@ -513,7 +590,7 @@ export default function Home({ allPostsData }) {
           <div className="reveal" style={{ maxWidth: '640px' }}>
             <div className="badge-row"><span className="icon-badge">&#9654;</span><span className="eyebrow">In Practice</span></div>
             <h2 className="section-heading">What this looks like in real life.</h2>
-            <p className="section-sub" style={{ marginTop: '16px' }}>Anonymised, illustrative scenarios — not client case studies.</p>
+            <p className="section-sub" style={{ marginTop: '16px' }}>Anonymised, illustrative scenarios, not client case studies.</p>
           </div>
           <div className="scenario-cards reveal-stagger">
             {scenarioCards.map((s) => (
@@ -533,20 +610,39 @@ export default function Home({ allPostsData }) {
         </div>
       </section>
 
-      {/* NUMBERS */}
-      <section className="section-pad dark">
+      {/* TESTIMONIALS */}
+      <section className="section-pad light-soft">
         <div className="wrap">
-          <div className="reveal" style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 10px' }}>
-            <span className="eyebrow" style={{ textAlign: 'center' }}></span>
+          <div className="reveal" style={{ maxWidth: '640px' }}>
+            <div className="badge-row"><span className="icon-badge">&#9733;</span><span className="eyebrow">Client Reviews</span></div>
+            <h2 className="section-heading">What clients say.</h2>
           </div>
-        </div>
-        <div className="numbers-grid reveal-stagger">
-          {numbers.map((n) => (
-            <div className="number-cell" key={n.l}>
-              <b>{n.n}</b>
-              <span>{n.l}</span>
+          <div
+            className="clients-slider-wrap reveal"
+            onMouseEnter={() => setTestimonialsPaused(true)}
+            onMouseLeave={() => setTestimonialsPaused(false)}
+            onTouchStart={() => setTestimonialsPaused(true)}
+          >
+            <button type="button" className="slider-arrow prev" onClick={() => scrollTestimonials(-1)} aria-label="Previous">&#8592;</button>
+            <div className="clients-slider testimonial-slider" ref={testimonialsSliderRef}>
+              {testimonials.map((t) => (
+                <div className="testimonial-card" key={t.name}>
+                  <svg className="tc-quote-mark" viewBox="0 0 32 24" fill="currentColor"><path d="M9.6 0C4.3 3.2 0 9.1 0 15.5 0 20.5 3.3 24 7.8 24c3.9 0 6.8-3 6.8-6.8 0-3.6-2.5-6.2-5.8-6.2-.6 0-1.1.1-1.3.2C7.9 7.4 10.8 3.9 14.6 1.8L9.6 0zm18 0C22.3 3.2 18 9.1 18 15.5c0 5 3.3 8.5 7.8 8.5 3.9 0 6.8-3 6.8-6.8 0-3.6-2.5-6.2-5.8-6.2-.6 0-1.1.1-1.3.2C25.9 7.4 28.8 3.9 32.6 1.8L27.6 0z"/></svg>
+                  <p className="tc-quote">{t.quote}</p>
+                  <div className="tc-person">
+                    <div className="tc-avatar">{t.name.split(' ').map((w) => w[0]).join('').slice(0, 2)}</div>
+                    <div>
+                      <div className="tc-name">{t.name}</div>
+                      {(t.role || t.service || t.company || t.location) && (
+                        <div className="tc-role">{[t.role, t.service, t.company, t.location].filter(Boolean).join(' · ')}</div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+            <button type="button" className="slider-arrow next" onClick={() => scrollTestimonials(1)} aria-label="Next">&#8594;</button>
+          </div>
         </div>
       </section>
 
@@ -557,7 +653,7 @@ export default function Home({ allPostsData }) {
             <div className="reveal" style={{ maxWidth: '640px' }}>
               <div className="badge-row"><span className="icon-badge">&#9998;</span><span className="eyebrow">Insights</span></div>
               <h2 className="section-heading">Useful answers to expensive questions.</h2>
-              <p className="section-sub" style={{ marginTop: '16px' }}>Tax, compliance, startup law and financial strategy — explained without unnecessary jargon.</p>
+              <p className="section-sub" style={{ marginTop: '16px' }}>Tax, compliance, startup law and financial strategy, explained without unnecessary jargon.</p>
             </div>
             <div className="blog-grid reveal-stagger">
               {allPostsData.map(({ id, date, title, excerpt }) => (
@@ -607,11 +703,11 @@ export default function Home({ allPostsData }) {
             <p className="lede">Let&rsquo;s understand the financial, tax and compliance side before you make the move.</p>
             <div className="reach-item">
               <span className="rl">Mobile / WhatsApp</span>
-              <a href="tel:+919131325035">+91 91313 25035</a>
+              <a href="tel:+919131325035" onClick={guardAppLink}>+91 91313 25035</a>
             </div>
             <div className="reach-item">
               <span className="rl">Email</span>
-              <a href="mailto:mayank@mojaa.in">mayank@mojaa.in</a>
+              <a href="mailto:mayank@mojaa.in" onClick={guardAppLink}>mayank@mojaa.in</a>
             </div>
             <div className="reach-item">
               <span className="rl">Location</span>
@@ -669,7 +765,7 @@ export default function Home({ allPostsData }) {
                     <option>Government Grants &amp; Scheme Assistance</option>
                     <option>FSSAI Registration &amp; Licensing</option>
                     <option>Spice Board Certification</option>
-                    <option>Other — I will explain below</option>
+                    <option>Other (I will explain below)</option>
                   </select>
                 </div>
                 <div className="form-row"><label>Brief Description (optional)</label><textarea name="message" rows="3" placeholder="What's going on?" /></div>

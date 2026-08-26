@@ -14,14 +14,14 @@ export default function Blog({ allPostsData }) {
     <>
       <Head>
         <title>Blog & Insights | Mayank Om Jain & Associates</title>
-        <meta name="description" content="Tax, compliance, startup law, and financial strategy — explained plainly for founders and business leaders by CA Mayank Jain." />
+        <meta name="description" content="Tax, compliance, startup law, and financial strategy, explained plainly for founders and business leaders by CA Mayank Jain." />
       </Head>
       <Nav />
       <section className="section-pad blog-bg" style={{paddingTop:'140px'}}>
         <div className="wrap">
           <div className="badge-row"><span className="icon-badge">&#9998;</span><span className="eyebrow">Insights</span></div>
           <h2 className="section-heading">From <em>our desk.</em></h2>
-          <p className="section-sub">Tax, compliance, startup law, and financial strategy — explained plainly for founders and business leaders.</p>
+          <p className="section-sub">Tax, compliance, startup law, and financial strategy, explained plainly for founders and business leaders.</p>
           {allPostsData.length === 0 ? (
             <div style={{marginTop:'56px', padding:'48px', background:'#fff', textAlign:'center', border:'1px solid var(--border)'}}>
               <h3 style={{color:'var(--navy)', fontSize:'1.5rem', fontWeight:'700', marginBottom:'12px'}}>Blog posts coming soon.</h3>

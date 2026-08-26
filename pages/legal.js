@@ -89,7 +89,7 @@ export default function Legal() {
             <h2 className="section-heading">How We Handle Your Information</h2>
           </div>
           <div className="legal-copy reveal">
-            <p>Information you submit through our contact form — name, email, phone number, service of interest, and message — is used only to respond to your enquiry and to provide the services you request. It is not sold, rented, or shared with third parties, except where necessary to deliver a service you have engaged us for, or where required by law.</p>
+            <p>Information you submit through our contact form (name, email, phone number, service of interest, and message) is used only to respond to your enquiry and to provide the services you request. It is not sold, rented, or shared with third parties, except where necessary to deliver a service you have engaged us for, or where required by law.</p>
             <p>If you have questions about how your information is used, or would like it removed from our records, write to us through the contact form and we will act on your request.</p>
           </div>
         </div>

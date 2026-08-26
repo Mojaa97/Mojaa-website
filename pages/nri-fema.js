@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     q: 'Can NRIs engage Mayank Om Jain & Associates remotely from abroad?',
-    a: 'Yes. Most of our NRI clients are engaged entirely remotely — document review, calls, and filings are handled without requiring you to be physically present in India.',
+    a: 'Yes. Most of our NRI clients are engaged entirely remotely: document review, calls, and filings are handled without requiring you to be physically present in India.',
   },
 ]
 

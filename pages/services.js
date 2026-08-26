@@ -21,7 +21,7 @@ const structuredData = {
       '@id': 'https://www.mojaa.in/services#webpage',
       name: 'Services | Mayank Om Jain & Associates',
       url: 'https://www.mojaa.in/services',
-      description: '15 service areas spanning audit, taxation, startup advisory, virtual CFO, FEMA/NRI compliance, and specialised licensing — delivered by one team.',
+      description: '15 service areas spanning audit, taxation, startup advisory, virtual CFO, FEMA/NRI compliance, and specialised licensing, delivered by one team.',
       inLanguage: 'en',
       publisher: { '@id': 'https://www.mojaa.in/#organization' },
     },
@@ -51,7 +51,7 @@ export default function Services() {
     <>
       <Head>
         <title>Services | Mayank Om Jain & Associates</title>
-        <meta name="description" content="15 service areas spanning audit, taxation, startup advisory, virtual CFO, FEMA/NRI compliance, and specialised licensing — delivered by one team, under one roof." />
+        <meta name="description" content="15 service areas spanning audit, taxation, startup advisory, virtual CFO, FEMA/NRI compliance, and specialised licensing, delivered by one team, under one roof." />
         <link rel="canonical" href="https://www.mojaa.in/services" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </Head>
@@ -60,9 +60,9 @@ export default function Services() {
 
       <section className="page-hero">
         <div className="wrap" style={{ maxWidth: '720px' }}>
-          <span className="hero-eyebrow">15 Service Areas · One Team</span>
+          <span className="hero-eyebrow">15+ Service Areas · One Platform</span>
           <h1>Our services deliver on every front.</h1>
-          <p>From incorporation to fundraise, from monthly bookkeeping to FEMA compliance — every service your business needs sits under one roof, managed directly by our team. No referrals, no hand-offs.</p>
+          <p>From incorporation to fundraise, from monthly bookkeeping to FEMA compliance, every service your business needs sits under one roof, managed directly by our team. No referrals, no hand-offs.</p>
           <div className="hero-ctas" style={{ justifyContent: 'center' }}>
             <Link href="/#contact" className="btn btn-primary">Talk to an Expert</Link>
           </div>
@@ -99,7 +99,7 @@ export default function Services() {
           <div className="reveal" style={{ textAlign: 'center', maxWidth: '580px', margin: '0 auto' }}>
             <span className="eyebrow" style={{ textAlign: 'center', display: 'block', marginBottom: '18px' }}>Get In Touch</span>
             <h2 className="section-heading" style={{ color: '#fff' }}>Not sure which service you need?</h2>
-            <p className="section-sub" style={{ margin: '16px auto 32px', color: 'var(--ink-on-dark-soft)' }}>Tell us what's going on with your business — we'll point you to the right service, or a combination of them.</p>
+            <p className="section-sub" style={{ margin: '16px auto 32px', color: 'var(--ink-on-dark-soft)' }}>Tell us what's going on with your business, and we'll point you to the right service, or a combination of them.</p>
             <Link href="/#contact" className="btn btn-primary">Talk to an Expert</Link>
           </div>
         </div>

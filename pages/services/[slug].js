@@ -136,7 +136,7 @@ export default function ServiceDetail({ service }) {
         <div className="wrap">
           <div className="reveal" style={{ textAlign: 'center', maxWidth: '580px', margin: '0 auto' }}>
             <h2 className="section-heading">Ready to talk about {service.title.toLowerCase()}?</h2>
-            <p className="section-sub" style={{ margin: '16px auto 32px' }}>Tell us what's going on with your business — we'll scope exactly what's needed.</p>
+            <p className="section-sub" style={{ margin: '16px auto 32px' }}>Tell us what's going on with your business, and we'll scope exactly what's needed.</p>
             <div className="hero-ctas" style={{ justifyContent: 'center' }}>
               <Link href="/#contact" className="btn btn-primary">Talk to an Expert</Link>
               <Link href="/services" className="btn btn-ghost">View All Services</Link>
