@@ -131,7 +131,9 @@ export default function Home({ allPostsData }) {
   }
 
   useEffect(() => {
-    if (clientsPaused) return
+    // On touch devices, native swipe + CSS scroll-snap handles this better than a JS-driven
+    // scrollTo, which mobile browsers don't always re-snap after — leaving cards resting mid-scroll.
+    if (clientsPaused || isTouchDevice) return
     const id = setInterval(() => {
       const el = clientsSliderRef.current
       if (!el) return
@@ -139,7 +141,7 @@ export default function Home({ allPostsData }) {
       el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + 360, behavior: 'smooth' })
     }, 3200)
     return () => clearInterval(id)
-  }, [clientsPaused])
+  }, [clientsPaused, isTouchDevice])
 
   const testimonialsSliderRef = useRef(null)
   const [testimonialsPaused, setTestimonialsPaused] = useState(false)
@@ -157,7 +159,7 @@ export default function Home({ allPostsData }) {
   }
 
   useEffect(() => {
-    if (testimonialsPaused) return
+    if (testimonialsPaused || isTouchDevice) return
     const id = setInterval(() => {
       const el = testimonialsSliderRef.current
       if (!el) return
@@ -165,7 +167,7 @@ export default function Home({ allPostsData }) {
       el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + testimonialsStep(), behavior: 'smooth' })
     }, 3600)
     return () => clearInterval(id)
-  }, [testimonialsPaused])
+  }, [testimonialsPaused, isTouchDevice])
 
   useReveal()
 
@@ -685,8 +687,10 @@ export default function Home({ allPostsData }) {
                 <button className="faq-q" onClick={() => setOpenFaq(openFaq === i ? -1 : i)} type="button">
                   {q}<span className="plus">+</span>
                 </button>
-                <div className="faq-a" style={{ maxHeight: openFaq === i ? '400px' : '0' }}>
-                  <p>{a}</p>
+                <div className="faq-a-grid" style={{ gridTemplateRows: openFaq === i ? '1fr' : '0fr' }}>
+                  <div className="faq-a">
+                    <p>{a}</p>
+                  </div>
                 </div>
               </div>
             ))}

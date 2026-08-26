@@ -95,9 +95,11 @@ export default function FAQ() {
                     <button className="faq-q faq-page-q" onClick={() => toggle(key)} type="button">
                       {f.q}<span className="plus">+</span>
                     </button>
-                    <div className="faq-a faq-page-a" style={{ maxHeight: isOpen ? '4000px' : '0' }}>
-                      <span className="faq-target">{f.who}</span>
-                      {f.a.map((p, pIdx) => renderParagraph(p, pIdx))}
+                    <div className="faq-a-grid" style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}>
+                      <div className="faq-a faq-page-a">
+                        <span className="faq-target">{f.who}</span>
+                        {f.a.map((p, pIdx) => renderParagraph(p, pIdx))}
+                      </div>
                     </div>
                   </div>
                 )
