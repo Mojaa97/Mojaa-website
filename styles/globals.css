@@ -23,7 +23,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -323,10 +323,10 @@ nav {
 .point-card p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; }
 
 /* ---------- LIFECYCLE ---------- */
-.stage-track { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 16px; margin-bottom: 8px; scrollbar-width: thin; }
+.stage-track { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 16px; margin-bottom: 8px; scrollbar-width: thin; }
 .stage-track::-webkit-scrollbar { height: 5px; }
 .stage-track::-webkit-scrollbar-thumb { background: var(--grey); }
-.stage-btn { flex: 0 0 auto; font-weight: 700; font-size: 13px; letter-spacing: .04em; padding: 16px 24px; border: 1px solid var(--grey); background: #fff; cursor: pointer; color: var(--ink-soft); white-space: nowrap; transition: all .25s; position: relative; }
+.stage-btn { flex: 0 0 auto; scroll-snap-align: start; font-weight: 700; font-size: 13px; letter-spacing: .04em; padding: 16px 24px; border: 1px solid var(--grey); background: #fff; cursor: pointer; color: var(--ink-soft); white-space: nowrap; transition: all .25s; position: relative; }
 .stage-btn .n { font-weight: 700; color: var(--teal); margin-right: 6px; }
 .stage-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
 .stage-btn.active .n { color: var(--teal-light); }
@@ -456,7 +456,8 @@ nav {
 .faq-q { width: 100%; text-align: left; background: none; border: none; cursor: pointer; padding: 26px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 18px; font-weight: 700; color: var(--ink); }
 .faq-q .plus { font-size: 22px; color: var(--teal); transition: transform .3s; flex-shrink: 0; }
 .faq-item.open .plus { transform: rotate(45deg); }
-.faq-a { max-height: 0; overflow: hidden; transition: max-height .4s var(--ease); }
+.faq-a-grid { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s var(--ease); }
+.faq-a { overflow: hidden; min-height: 0; }
 .faq-a p { padding-bottom: 24px; color: var(--ink-soft); max-width: 640px; line-height: 1.7; }
 
 /* ---------- FAQ PAGE (sectioned) ---------- */
@@ -531,7 +532,7 @@ footer { background: var(--white); color: var(--ink-soft); padding: 50px 5%; dis
 .footer-copy { font-size: 0.75rem; color: var(--ink-soft); }
 .footer-secure { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 11.5px; font-weight: 600; color: var(--teal); letter-spacing: .02em; }
 .footer-secure svg { width: 13px; height: 13px; flex-shrink: 0; }
-.footer-links { display: flex; gap: 26px; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 12px 26px; }
 .footer-links a { font-size: 13px; color: var(--ink-soft); transition: color 0.2s; }
 .footer-links a:hover { color: var(--teal); }
 
