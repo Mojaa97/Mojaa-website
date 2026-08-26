@@ -207,13 +207,15 @@ export default function Home({ allPostsData }) {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'Organization',
+        '@type': ['AccountingService', 'Organization'],
         '@id': 'https://www.mojaa.in/#organization',
         name: 'Mayank Om Jain & Associates',
         url: 'https://www.mojaa.in',
         logo: 'https://www.mojaa.in/favicon.ico',
+        image: 'https://www.mojaa.in/favicon.ico',
         telephone: '+919131325035',
         email: 'mayank@mojaa.in',
+        priceRange: '$$',
         contactPoint: [
           {
             '@type': 'ContactPoint',
@@ -224,7 +226,7 @@ export default function Home({ allPostsData }) {
             availableLanguage: 'English',
           },
         ],
-        areaServed: 'India',
+        areaServed: { '@type': 'Country', name: 'India' },
         sameAs: ['https://www.linkedin.com/in/jainmayank13/'],
       },
       {
