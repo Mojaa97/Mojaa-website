@@ -17,7 +17,8 @@ export default function Blog({ allPostsData }) {
         <meta name="description" content="Tax, compliance, startup law, and financial strategy, explained plainly for founders and business leaders by CA Mayank Jain." />
       </Head>
       <Nav />
-      <section className="section-pad blog-bg" style={{paddingTop:'140px'}}>
+      <main>
+            <section className="section-pad blog-bg" style={{paddingTop:'140px'}}>
         <div className="wrap">
           <div className="badge-row"><span className="icon-badge">&#9998;</span><span className="eyebrow">Insights</span></div>
           <h2 className="section-heading">From <em>our desk.</em></h2>
@@ -41,6 +42,7 @@ export default function Blog({ allPostsData }) {
           )}
         </div>
       </section>
+      </main>
       <Footer />
     </>
   )

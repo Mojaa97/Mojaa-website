@@ -100,6 +100,7 @@ export default function VirtualCFO() {
 
       <Nav />
 
+      <main>
       <section className="page-hero">
         <div className="wrap" style={{ maxWidth: '720px' }}>
           <Link href="/services" className="page-hero-back">&larr; All Services</Link>
@@ -174,6 +175,7 @@ export default function VirtualCFO() {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </>

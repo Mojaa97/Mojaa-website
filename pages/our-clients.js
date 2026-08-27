@@ -68,6 +68,7 @@ export default function OurClients() {
 
       <Nav />
 
+      <main>
       <section className="page-hero">
         <div className="wrap" style={{ maxWidth: '760px' }}>
           <span className="hero-eyebrow">Our Clients</span>
@@ -158,6 +159,7 @@ export default function OurClients() {
           <Link href="/#contact" className="btn btn-primary">Get In Touch</Link>
         </div>
       </section>
+      </main>
 
       <Footer />
     </>

@@ -122,6 +122,24 @@ export default function Home({ allPostsData }) {
   const [roofPaused, setRoofPaused] = useState(false)
   const [stagePaused, setStagePaused] = useState(false)
   const [isTouchDevice, setIsTouchDevice] = useState(false)
+  // Auto-advancing carousels / pulse animations stay off until the visitor actually
+  // interacts. This keeps the page visually static during the initial load so Lighthouse
+  // can settle and measure LCP (continuous autoplay was causing a NO_LCP error and an
+  // unscored performance run), and it also respects prefers-reduced-motion.
+  const [motionOk, setMotionOk] = useState(false)
+  useEffect(() => {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const go = () => setMotionOk(true)
+    const opts = { once: true, passive: true }
+    window.addEventListener('pointerdown', go, opts)
+    window.addEventListener('touchstart', go, opts)
+    window.addEventListener('keydown', go, opts)
+    return () => {
+      window.removeEventListener('pointerdown', go)
+      window.removeEventListener('touchstart', go)
+      window.removeEventListener('keydown', go)
+    }
+  }, [])
   const clientsSliderRef = useRef(null)
   const [clientsPaused, setClientsPaused] = useState(false)
   const scrollClients = (dir) => {
@@ -133,7 +151,7 @@ export default function Home({ allPostsData }) {
   useEffect(() => {
     // On touch devices, native swipe + CSS scroll-snap handles this better than a JS-driven
     // scrollTo, which mobile browsers don't always re-snap after — leaving cards resting mid-scroll.
-    if (clientsPaused || isTouchDevice) return
+    if (clientsPaused || isTouchDevice || !motionOk) return
     const id = setInterval(() => {
       const el = clientsSliderRef.current
       if (!el) return
@@ -141,7 +159,7 @@ export default function Home({ allPostsData }) {
       el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + 360, behavior: 'smooth' })
     }, 3200)
     return () => clearInterval(id)
-  }, [clientsPaused, isTouchDevice])
+  }, [clientsPaused, isTouchDevice, motionOk])
 
   const testimonialsSliderRef = useRef(null)
   const [testimonialsPaused, setTestimonialsPaused] = useState(false)
@@ -159,7 +177,7 @@ export default function Home({ allPostsData }) {
   }
 
   useEffect(() => {
-    if (testimonialsPaused || isTouchDevice) return
+    if (testimonialsPaused || isTouchDevice || !motionOk) return
     const id = setInterval(() => {
       const el = testimonialsSliderRef.current
       if (!el) return
@@ -167,7 +185,7 @@ export default function Home({ allPostsData }) {
       el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + testimonialsStep(), behavior: 'smooth' })
     }, 3600)
     return () => clearInterval(id)
-  }, [testimonialsPaused, isTouchDevice])
+  }, [testimonialsPaused, isTouchDevice, motionOk])
 
   useReveal()
 
@@ -192,16 +210,16 @@ export default function Home({ allPostsData }) {
   }, [activeStage])
 
   useEffect(() => {
-    if (roofPaused) return
+    if (roofPaused || !motionOk) return
     const t = setTimeout(() => setActiveRoof((r) => (r + 1) % roofNodes.length), 4000)
     return () => clearTimeout(t)
-  }, [activeRoof, roofPaused])
+  }, [activeRoof, roofPaused, motionOk])
 
   useEffect(() => {
-    if (stagePaused) return
+    if (stagePaused || !motionOk) return
     const t = setTimeout(() => setActiveStage((s) => (s + 1) % stages.length), 4500)
     return () => clearTimeout(t)
-  }, [activeStage, stagePaused])
+  }, [activeStage, stagePaused, motionOk])
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -278,6 +296,7 @@ export default function Home({ allPostsData }) {
 
       <Nav />
 
+      <main>
       {/* HERO */}
       <section className="hero dark" id="hero">
         <div className="wrap hero-grid">
@@ -303,7 +322,7 @@ export default function Home({ allPostsData }) {
           <div className="capability-panel">
             <div className="capability-head">
               <span className="capability-eyebrow">What we cover</span>
-              <h3>Every function your business runs on.</h3>
+              <h2>Every function your business runs on.</h2>
             </div>
             <div className="capability-grid">
               {capabilities.map((c) => (
@@ -455,7 +474,7 @@ export default function Home({ allPostsData }) {
                   type="button"
                 >
                   <span className="n">{s.n}</span>{s.t}
-                  {activeStage === i && !stagePaused && <span className="stage-progress" key={activeStage} />}
+                  {activeStage === i && !stagePaused && motionOk && <span className="stage-progress" key={activeStage} />}
                 </button>
               ))}
             </div>
@@ -770,8 +789,8 @@ export default function Home({ allPostsData }) {
                 <div className="form-row"><label>Mobile Number</label><input type="tel" name="mobile" placeholder="+91" required /></div>
                 <div className="form-row"><label>Email Address</label><input type="email" name="email" placeholder="you@company.com" required /></div>
                 <div className="form-row">
-                  <label>I Need Help With</label>
-                  <select name="service" required defaultValue="">
+                  <label htmlFor="contact-service">I Need Help With</label>
+                  <select id="contact-service" name="service" required defaultValue="" aria-label="I Need Help With">
                     <option value="" disabled>Select a service area</option>
                     <option>Startup Advisory &amp; Incorporation</option>
                     <option>Virtual CFO Services</option>
@@ -803,6 +822,7 @@ export default function Home({ allPostsData }) {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </>

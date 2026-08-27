@@ -72,6 +72,7 @@ export default function Careers() {
 
       <Nav />
 
+      <main>
       <section className="page-hero">
         <div className="wrap" style={{ maxWidth: '720px' }}>
           <span className="hero-eyebrow">Careers</span>
@@ -141,6 +142,7 @@ export default function Careers() {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </>

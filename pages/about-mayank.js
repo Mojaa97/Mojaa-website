@@ -125,6 +125,7 @@ export default function AboutMayank() {
 
       <Nav />
 
+      <main>
       <section className="page-hero">
         <div className="wrap" style={{ maxWidth: '760px' }}>
           <span className="hero-eyebrow">Founder</span>
@@ -267,6 +268,7 @@ export default function AboutMayank() {
           <Link href="/#contact" className="btn btn-primary">Get In Touch</Link>
         </div>
       </section>
+      </main>
 
       <Footer />
     </>
