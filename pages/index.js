@@ -271,6 +271,8 @@ export default function Home({ allPostsData }) {
         <meta name="description" content="Mayank Om Jain & Associates: a full-service Chartered Accountancy firm for startups, MSMEs, NRIs, HNIs, traders, and food businesses. Audit, tax, Virtual CFO, FEMA, funding, and compliance, all under one roof." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preload" as="image" href="/hero-banner.webp" media="(min-width: 768px)" />
+        <link rel="preload" as="image" href="/hero-banner-mobile.webp" media="(max-width: 767px)" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </Head>
 
@@ -326,14 +328,29 @@ export default function Home({ allPostsData }) {
 
           <div className="scenario-grid reveal">
             {scenarios.map((s, i) => (
-              <button
-                key={s.label}
-                className={`scenario-chip${activeScenario === i ? ' active' : ''}`}
-                onClick={() => setActiveScenario(i)}
-                type="button"
-              >
-                {s.label}
-              </button>
+              <div className="scenario-item" key={s.label}>
+                <button
+                  className={`scenario-chip${activeScenario === i ? ' active' : ''}`}
+                  onClick={() => setActiveScenario(i)}
+                  type="button"
+                  aria-expanded={activeScenario === i}
+                >
+                  <span>{s.label}</span>
+                  <span className="sc-caret" aria-hidden="true">&#9662;</span>
+                </button>
+                {activeScenario === i && (
+                  <div className="scenario-chain-mobile">
+                    <div className="chain-track">
+                      {s.chain.map((item, j) => (
+                        <span key={item} style={{ display: 'contents' }}>
+                          {j > 0 && <span className="chain-arrow show">&#8594;</span>}
+                          <span className="chain-item show">{item}</span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             ))}
           </div>
 
@@ -495,7 +512,7 @@ export default function Home({ allPostsData }) {
       <section className="section-pad light-soft">
         <div className="wrap founder-grid">
           <div className="reveal founder-photo">
-            <Image src="/mayank-jain.png" alt="CA Mayank Jain, Founder of Mayank Om Jain & Associates" width={600} height={700} style={{ width: '100%', height: 'auto' }} />
+            <Image src="/mayank-jain.webp" alt="CA Mayank Jain, Founder of Mayank Om Jain & Associates" width={600} height={700} sizes="(max-width: 900px) 100vw, 460px" style={{ width: '100%', height: 'auto' }} />
           </div>
           <div className="reveal">
             <div className="founder-name">CA Mayank Jain, Founder</div>
@@ -522,7 +539,7 @@ export default function Home({ allPostsData }) {
           <div className="team-grid reveal-stagger">
             <div className="team-card">
               <div className="team-photo-row">
-                <Image src="/mayank-jain.png" alt="CA Mayank Jain" width={76} height={76} />
+                <Image src="/mayank-jain.webp" alt="CA Mayank Jain" width={76} height={76} />
                 <div>
                   <div className="team-role">Founder</div>
                   <h3>CA Mayank Jain</h3>
@@ -537,7 +554,7 @@ export default function Home({ allPostsData }) {
             </div>
             <div className="team-card">
               <div className="team-photo-row">
-                <Image src="/vivek.jpeg" alt="CA Vivek Jain" width={76} height={76} />
+                <Image src="/vivek.webp" alt="CA Vivek Jain" width={76} height={76} />
                 <div>
                   <div className="team-role">Associate</div>
                   <h3>CA Vivek Jain</h3>
