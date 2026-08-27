@@ -1,10 +1,31 @@
 import '../styles/globals.css'
-import Head from 'next/head'
 import Script from 'next/script'
+import { Inter, Playfair_Display } from 'next/font/google'
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+  fallback: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+})
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  fallback: ['Georgia', 'serif'],
+})
 
 export default function App({ Component, pageProps }) {
   return (
     <>
+      <style jsx global>{`
+        :root {
+          --font-sans: ${inter.style.fontFamily};
+          --font-serif-display: ${playfair.style.fontFamily};
+        }
+      `}</style>
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-J2BPDNSJS8"
         strategy="afterInteractive"
@@ -17,11 +38,6 @@ export default function App({ Component, pageProps }) {
           gtag('config', 'G-J2BPDNSJS8');
         `}
       </Script>
-      <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
-      </Head>
       <Component {...pageProps} />
     </>
   )

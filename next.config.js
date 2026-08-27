@@ -23,8 +23,9 @@ const securityHeaders = [
       "default-src 'self'",
       // 'unsafe-eval' is required by Next.js's dev-mode webpack HMR runtime; not included in production builds.
       `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''} https://www.googletagmanager.com https://www.google-analytics.com`,
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      "font-src 'self' https://fonts.gstatic.com",
+      // Fonts are self-hosted via next/font (no runtime Google Fonts request).
+      "style-src 'self' 'unsafe-inline'",
+      "font-src 'self'",
       "img-src 'self' data: https:",
       `connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com${isDev ? ' ws:' : ''}`,
       "frame-ancestors 'none'",
@@ -38,7 +39,8 @@ const securityHeaders = [
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    unoptimized: true
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 2678400,
   },
   async headers() {
     return [

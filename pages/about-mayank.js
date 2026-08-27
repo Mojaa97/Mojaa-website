@@ -139,7 +139,7 @@ export default function AboutMayank() {
         <div className="wrap">
           <div className="reveal founder-grid">
             <div className="founder-photo">
-              <Image src="/mayank-jain.png" alt="CA Mayank Jain, Founder of Mayank Om Jain & Associates" width={600} height={700} style={{ width: '100%', height: 'auto' }} />
+              <Image src="/mayank-jain.webp" alt="CA Mayank Jain, Founder of Mayank Om Jain & Associates" width={600} height={700} sizes="(max-width: 900px) 100vw, 460px" priority style={{ width: '100%', height: 'auto' }} />
             </div>
             <div>
               <div className="badge-row"><span className="icon-badge">1</span><span className="eyebrow">Overview</span></div>
