@@ -58,6 +58,7 @@ export default function Services() {
 
       <Nav />
 
+      <main>
       <section className="page-hero">
         <div className="wrap" style={{ maxWidth: '720px' }}>
           <span className="hero-eyebrow">15+ Service Areas · One Platform</span>
@@ -104,6 +105,7 @@ export default function Services() {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </>

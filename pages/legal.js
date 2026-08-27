@@ -41,6 +41,7 @@ export default function Legal() {
 
       <Nav />
 
+      <main>
       <section className="page-hero">
         <div className="wrap" style={{ maxWidth: '720px' }}>
           <span className="hero-eyebrow">Legal</span>
@@ -94,6 +95,7 @@ export default function Legal() {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </>

@@ -19,7 +19,7 @@ export default function Nav() {
         <li><Link href="/faq" onClick={() => setOpen(false)}>FAQ</Link></li>
         <li><Link href="/#contact" className="btn nav-cta" onClick={() => setOpen(false)}>Contact Us</Link></li>
       </ul>
-      <button className="hamburger" onClick={() => setOpen(!open)} aria-label="Menu">
+      <button className="hamburger" onClick={() => setOpen(!open)} aria-label="Menu" aria-expanded={open}>
         <span/><span/><span/>
       </button>
     </nav>
