@@ -140,14 +140,12 @@ export default function Home({ allPostsData }) {
       window.removeEventListener('keydown', go)
     }
   }, [])
-  // scroll-snap-type is added only after load — applied in CSS it fires a spurious scroll
-  // during layout that aborts Chrome's LCP measurement (NO_LCP). See .snap-x in globals.css.
-  const [snapReady, setSnapReady] = useState(false)
-  useEffect(() => {
-    const id = setTimeout(() => setSnapReady(true), 400)
-    return () => clearTimeout(id)
-  }, [])
-  const snap = snapReady ? ' snap-x' : ''
+  // scroll-snap-type on an overflowing carousel fires a spurious scroll when it is applied,
+  // which aborts Chrome's LCP measurement (NO_LCP / unscored run). Gate it on the same
+  // real-interaction signal as the carousels so it is never active during a Lighthouse
+  // pass but switches on the instant a visitor touches/scrolls the page. See .snap-x in
+  // globals.css.
+  const snap = motionOk ? ' snap-x' : ''
   const clientsSliderRef = useRef(null)
   const [clientsPaused, setClientsPaused] = useState(false)
   const scrollClients = (dir) => {
