@@ -140,6 +140,14 @@ export default function Home({ allPostsData }) {
       window.removeEventListener('keydown', go)
     }
   }, [])
+  // scroll-snap-type is added only after load — applied in CSS it fires a spurious scroll
+  // during layout that aborts Chrome's LCP measurement (NO_LCP). See .snap-x in globals.css.
+  const [snapReady, setSnapReady] = useState(false)
+  useEffect(() => {
+    const id = setTimeout(() => setSnapReady(true), 400)
+    return () => clearTimeout(id)
+  }, [])
+  const snap = snapReady ? ' snap-x' : ''
   const clientsSliderRef = useRef(null)
   const [clientsPaused, setClientsPaused] = useState(false)
   const scrollClients = (dir) => {
@@ -289,8 +297,14 @@ export default function Home({ allPostsData }) {
         <meta name="description" content="Mayank Om Jain & Associates: a full-service Chartered Accountancy firm for startups, MSMEs, NRIs, HNIs, traders, and food businesses. Audit, tax, Virtual CFO, FEMA, funding, and compliance, all under one roof." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="preload" as="image" href="/hero-banner.webp" media="(min-width: 768px)" />
-        <link rel="preload" as="image" href="/hero-banner-mobile.webp" media="(max-width: 767px)" />
+        <link
+          rel="preload"
+          as="image"
+          href="/hero-banner-mobile.webp"
+          imageSrcSet="/hero-banner-mobile.webp 800w, /hero-banner.webp 1600w"
+          imageSizes="100vw"
+          fetchpriority="high"
+        />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </Head>
 
@@ -299,6 +313,18 @@ export default function Home({ allPostsData }) {
       <main>
       {/* HERO */}
       <section className="hero dark" id="hero">
+        <img
+          className="hero-bg"
+          src="/hero-banner-mobile.webp"
+          srcSet="/hero-banner-mobile.webp 800w, /hero-banner.webp 1600w"
+          sizes="100vw"
+          width={800}
+          height={1000}
+          alt=""
+          aria-hidden="true"
+          fetchpriority="high"
+          decoding="async"
+        />
         <div className="wrap hero-grid">
           <span className="hero-eyebrow">Chartered Accountants · Strategic Advisors</span>
           <h1>Your business doesn&rsquo;t make decisions <em>only at year&#8209;end.</em></h1>
@@ -465,7 +491,7 @@ export default function Home({ allPostsData }) {
             <h2 className="section-heading">We can be involved before the decision, not just after it.</h2>
           </div>
           <div className="reveal" onMouseEnter={() => setStagePaused(true)} onMouseLeave={() => setStagePaused(false)}>
-            <div className="stage-track">
+            <div className={`stage-track${snap}`}>
               {stages.map((s, i) => (
                 <button
                   key={s.n}
@@ -508,7 +534,7 @@ export default function Home({ allPostsData }) {
             onTouchStart={() => setClientsPaused(true)}
           >
             <button type="button" className="slider-arrow prev" onClick={() => scrollClients(-1)} aria-label="Previous">&#8592;</button>
-            <div className="clients-slider" ref={clientsSliderRef}>
+            <div className={`clients-slider${snap}`} ref={clientsSliderRef}>
               {audiences.map((a) => (
                 <Link className="audience-card" href={`/our-clients#${a.slug}`} key={a.slug}>
                   <h3>{a.title}</h3>
@@ -664,7 +690,7 @@ export default function Home({ allPostsData }) {
             onTouchStart={() => setTestimonialsPaused(true)}
           >
             <button type="button" className="slider-arrow prev" onClick={() => scrollTestimonials(-1)} aria-label="Previous">&#8592;</button>
-            <div className="clients-slider testimonial-slider" ref={testimonialsSliderRef}>
+            <div className={`clients-slider testimonial-slider${snap}`} ref={testimonialsSliderRef}>
               {testimonials.map((t) => (
                 <div className="testimonial-card" key={t.name}>
                   <svg className="tc-quote-mark" viewBox="0 0 32 24" fill="currentColor"><path d="M9.6 0C4.3 3.2 0 9.1 0 15.5 0 20.5 3.3 24 7.8 24c3.9 0 6.8-3 6.8-6.8 0-3.6-2.5-6.2-5.8-6.2-.6 0-1.1.1-1.3.2C7.9 7.4 10.8 3.9 14.6 1.8L9.6 0zm18 0C22.3 3.2 18 9.1 18 15.5c0 5 3.3 8.5 7.8 8.5 3.9 0 6.8-3 6.8-6.8 0-3.6-2.5-6.2-5.8-6.2-.6 0-1.1.1-1.3.2C25.9 7.4 28.8 3.9 32.6 1.8L27.6 0z"/></svg>

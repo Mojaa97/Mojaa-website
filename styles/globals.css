@@ -42,6 +42,12 @@ section { position: relative; }
 .dark { background: var(--navy); color: #fff; }
 .light-soft { background: var(--offwhite); }
 
+/* Applied by JS a moment after load. scroll-snap-type on a horizontal carousel fires a
+   spurious scroll during initial layout, which stops Chrome's LCP detection before any
+   content paints (NO_LCP / unscored performance run). Adding it post-load keeps the
+   swipe-snap feel without breaking the metric. */
+.snap-x { scroll-snap-type: x proximity; }
+
 /* ---------- reveal ---------- */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
 .reveal.in { opacity: 1; transform: translateY(0); }
@@ -114,15 +120,20 @@ nav {
 /* ---------- HERO ---------- */
 .hero {
   min-height: auto; color: var(--ink); position: relative; overflow: hidden; text-align: center; padding: 180px 5% 100px;
-  background-image: linear-gradient(180deg, rgba(6,14,26,.74) 0%, rgba(6,14,26,.58) 45%, rgba(6,14,26,.86) 100%), url('/hero-banner-mobile.webp');
-  background-size: cover;
-  background-position: center;
+  background-color: #060e1a;
 }
-@media (min-width: 768px) {
-  .hero {
-    background-image: linear-gradient(180deg, rgba(6,14,26,.74) 0%, rgba(6,14,26,.58) 45%, rgba(6,14,26,.86) 100%), url('/hero-banner.webp');
-  }
+/* Real <img> rather than a CSS background so it is a proper Largest Contentful Paint
+   candidate (a gradient-layered background-image was not qualifying, giving NO_LCP). */
+.hero-bg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  z-index: 0; border: 0; pointer-events: none;
 }
+.hero::after {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(6,14,26,.74) 0%, rgba(6,14,26,.58) 45%, rgba(6,14,26,.86) 100%);
+}
+.hero > .wrap { position: relative; z-index: 2; }
 .hero-grid { max-width: 640px; margin: 0; text-align: left; }
 .hero-eyebrow { display: inline-block; font-size: 12.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 22px; }
 .hero h1 { font-family: var(--serif-display); font-size: clamp(36px, 5.4vw, 64px); font-weight: 700; letter-spacing: -0.01em; line-height: 1.12; color: #fff; margin-bottom: 22px; }
@@ -218,9 +229,7 @@ nav {
   .roof-center { position: static !important; left: auto !important; top: auto !important; transform: none !important; display: flex !important; margin: 0 auto 16px !important; }
 }
 .roof-node:hover, .roof-node.active { background: var(--teal); border-color: var(--teal); }
-.roof-node.active { animation: roofNodePulse 4s ease-in-out 2; }
-@keyframes roofNodePulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(63,187,168,0.45); } 50% { box-shadow: 0 0 0 7px rgba(63,187,168,0); } }
-@media (prefers-reduced-motion: reduce) { .roof-node.active { animation: none; } }
+.roof-node.active { box-shadow: 0 0 0 3px rgba(63,187,168,0.35); }
 .roof-line { position: absolute; top: 50%; left: 50%; height: 1px; background: rgba(255,255,255,0.12); transform-origin: 0 0; pointer-events: none; }
 .roof-panel { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 38px; min-height: 280px; }
 .roof-panel h3 { font-size: 24px; color: #fff; margin-bottom: 6px; }
@@ -348,7 +357,7 @@ nav {
 .point-card p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.6; }
 
 /* ---------- LIFECYCLE ---------- */
-.stage-track { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 16px; margin-bottom: 8px; scrollbar-width: thin; }
+.stage-track { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 16px; margin-bottom: 8px; scrollbar-width: thin; }
 .stage-track::-webkit-scrollbar { height: 5px; }
 .stage-track::-webkit-scrollbar-thumb { background: var(--grey); }
 .stage-btn { flex: 0 0 auto; scroll-snap-align: start; font-weight: 700; font-size: 13px; letter-spacing: .04em; padding: 16px 24px; border: 1px solid var(--grey); background: #fff; cursor: pointer; color: var(--ink-soft); white-space: nowrap; transition: all .25s; position: relative; }
@@ -376,7 +385,7 @@ nav {
 .ac-tags span { font-size: 11px; background: var(--offwhite); color: var(--ink-soft); padding: 5px 10px; border-radius: 100px; transition: all .3s; }
 
 .clients-slider-wrap { display: flex; align-items: center; gap: 14px; margin-top: 50px; }
-.clients-slider { display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 6px 6px 16px; -ms-overflow-style: none; scrollbar-width: none; }
+.clients-slider { display: flex; gap: 22px; overflow-x: auto; scroll-behavior: smooth; padding: 6px 6px 16px; -ms-overflow-style: none; scrollbar-width: none; }
 .clients-slider::-webkit-scrollbar { display: none; }
 .clients-slider .audience-card { flex: 0 0 320px; scroll-snap-align: start; }
 @media (max-width: 600px) { .clients-slider .audience-card { flex-basis: 82vw; } }
