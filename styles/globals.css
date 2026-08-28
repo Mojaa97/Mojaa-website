@@ -119,7 +119,10 @@ nav {
 
 /* ---------- HERO ---------- */
 .hero {
-  min-height: auto; color: var(--ink); position: relative; overflow: hidden; text-align: center; padding: 180px 5% 100px;
+  /* An explicit min-height gives the section a definite box before the text lays out, so
+     the absolutely-positioned .hero-bg <img> can paint as soon as it downloads instead of
+     waiting on font/text layout (was adding ~1.8s of LCP "element render delay"). */
+  min-height: 560px; color: var(--ink); position: relative; overflow: hidden; text-align: center; padding: 180px 5% 100px;
   background-color: #060e1a;
 }
 /* Real <img> rather than a CSS background so it is a proper Largest Contentful Paint

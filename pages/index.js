@@ -291,18 +291,18 @@ export default function Home({ allPostsData }) {
   return (
     <>
       <Head>
-        <title>Mayank Om Jain & Associates | Chartered Accountants</title>
-        <meta name="description" content="Mayank Om Jain & Associates: a full-service Chartered Accountancy firm for startups, MSMEs, NRIs, HNIs, traders, and food businesses. Audit, tax, Virtual CFO, FEMA, funding, and compliance, all under one roof." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
         <link
           rel="preload"
           as="image"
           href="/hero-banner-mobile.webp"
-          imageSrcSet="/hero-banner-mobile.webp 800w, /hero-banner.webp 1600w"
+          imageSrcSet="/hero-banner-mobile.webp 720w, /hero-banner.webp 1600w"
           imageSizes="100vw"
           fetchpriority="high"
         />
+        <title>Mayank Om Jain & Associates | Chartered Accountants</title>
+        <meta name="description" content="Mayank Om Jain & Associates: a full-service Chartered Accountancy firm for startups, MSMEs, NRIs, HNIs, traders, and food businesses. Audit, tax, Virtual CFO, FEMA, funding, and compliance, all under one roof." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       </Head>
 
@@ -314,14 +314,13 @@ export default function Home({ allPostsData }) {
         <img
           className="hero-bg"
           src="/hero-banner-mobile.webp"
-          srcSet="/hero-banner-mobile.webp 800w, /hero-banner.webp 1600w"
+          srcSet="/hero-banner-mobile.webp 720w, /hero-banner.webp 1600w"
           sizes="100vw"
-          width={800}
-          height={1000}
+          width={720}
+          height={900}
           alt=""
           aria-hidden="true"
           fetchpriority="high"
-          decoding="async"
         />
         <div className="wrap hero-grid">
           <span className="hero-eyebrow">Chartered Accountants · Strategic Advisors</span>
