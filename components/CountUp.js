@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-export default function CountUp({ value, duration = 1400 }) {
+export default function CountUp({ value, duration = 800 }) {
   const str = String(value)
   const match = str.match(/^(\d+)(.*)$/)
   const target = match ? parseInt(match[1], 10) : 0
