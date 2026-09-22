@@ -1,6 +1,6 @@
 ---
 title: "DPIIT's 2026 Overhaul: Why Your Startup May Be Recognised for Longer Than You Think"
-date: "2026-09-19"
+date: "2026-09-20"
 excerpt: "The 2026 DPIIT notification raises turnover ceilings, introduces a formal Deep Tech category, and widens eligibility. Here is what founders need to know before planning the next stage of growth."
 author: "CA Mayank Jain"
 ---
