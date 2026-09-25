@@ -38,6 +38,11 @@ const securityHeaders = [
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Inlines the above-the-fold CSS into the HTML and loads the rest of globals.css
+  // without blocking first render (PageSpeed "Render-blocking requests").
+  experimental: {
+    optimizeCss: true,
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 2678400,
